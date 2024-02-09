@@ -27,11 +27,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <meta name="description" content="Nima Karami | Portfolio" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <CustomCursor />
+
       <AnimatePresence mode="wait" initial={false}>
         <main
           className={clsx(
-            'grow w-full h-full bg-neutral flex flex-col',
+            'w-full h-full bg-neutral flex flex-col',
             inter.variable,
             calSans.variable
           )}
@@ -44,6 +44,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             transition={{ duration: 0.5 }}
             className={clsx('w-full h-full')}
           >
+            <CustomCursor />
             <Component {...pageProps} />
           </motion.div>
         </main>

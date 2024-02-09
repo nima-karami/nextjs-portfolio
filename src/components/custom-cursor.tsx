@@ -48,11 +48,17 @@ const CustomCursor = () => {
       id="custom-cursor"
       aria-hidden="true"
       className={clsx(
-        'absolute z-[999] w-8 h-8 bg-transparent border-2 border-white rounded-full shadow-lg pointer-events-none '
+        'absolute z-[999] bg-transparent border-2 border-white rounded-full shadow-lg pointer-events-none '
       )}
-      style={{ translateX: -15, translateY: -15, x: position.x, y: position.y }}
+      style={{
+        translateX: '-50%',
+        translateY: '-50%',
+        x: position.x,
+        y: position.y,
+      }}
       animate={{
-        scale: hover ? 2 : 1,
+        width: hover ? 40 : 20,
+        height: hover ? 40 : 20,
       }}
     />
   );
