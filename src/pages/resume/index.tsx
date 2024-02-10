@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiCloudLightning } from 'react-icons/fi';
 
+import Navbar from '@/components/navbar';
+
 const resumeContent = [
   {
     logo: 'https://via.placeholder.com/150',
@@ -33,11 +35,14 @@ const resumeContent = [
 
 const ResumePage: React.FC = () => {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center gap-6 overflow-hidden bg-gradient-to-tl from-white via-slate-300/20 to-white">
-      {resumeContent.map((content, index) => (
-        <ShimmerBorderCard key={index} {...content} />
-      ))}
-    </div>
+    <>
+      <Navbar />
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-6 overflow-hidden bg-white">
+        {resumeContent.map((content, index) => (
+          <ShimmerBorderCard key={index} {...content} />
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -63,7 +68,7 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
       id="shimmer-card"
       className=" group relative mx-auto w-full max-w-xl overflow-hidden rounded-lg  p-0.5 transition-all duration-500 hover:scale-[1.01] "
     >
-      <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200 p-8 transition-colors duration-500 group-hover:bg-slate-100">
+      <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200 bg-slate-50/50 p-8 transition-colors duration-500 group-hover:bg-slate-100">
         {/* <FiCloudLightning className="relative z-10 mb-4 mt-2 rounded-full border-2 border-teal-400 bg-slate-100 p-4 text-7xl text-teal-500" /> */}
 
         <h1 className="relative z-10 mb-4 w-full text-center font-display text-3xl font-bold text-slate-800">
