@@ -1,7 +1,12 @@
+import Navbar from '@/components/navbar';
+
 const ContactPage: React.FC = () => {
   return (
     <div>
-      <h1>Contact Page</h1>
+      <Navbar />
+      <div className="mt-20">
+        <h1>Contact Page</h1>
+      </div>
     </div>
   );
 };

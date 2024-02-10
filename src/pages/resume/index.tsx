@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { motion } from 'framer-motion';
-import { FiCloudLightning } from 'react-icons/fi';
 
 import Navbar from '@/components/navbar';
+import ShimmerBorderCard from '@/components/shimmer-border-card';
 
-const resumeContent = [
+const experience = [
   {
     logo: 'https://via.placeholder.com/150',
     title: 'TimePlay',
@@ -13,7 +11,7 @@ const resumeContent = [
     date: '2022 - Present',
     description: `- Lead a team of 5 developers to build a new platform for TimePlay using React, Next.js, and TailwindCSS <br/> 
       - Built a new platform for TimePlay using React, Next.js, and TailwindCSS <br/>
-      - Lead a team of 5 developers to build a new platform for TimePlay using React, Next.js, and TailwindCSS <br/>`,
+      - Lead a team of 5 developers to build a new platform for TimePlay using React, Next.js, and TailwindCSS`,
   },
   {
     logo: 'https://via.placeholder.com/150',
@@ -33,14 +31,133 @@ const resumeContent = [
   },
 ];
 
+const education = [
+  {
+    logo: 'https://via.placeholder.com/150',
+    location: 'University of Waterloo',
+    degree: 'Master of Architecture',
+    description:
+      'Lead a team of 5 developers to build a new platform for TimePlay using React, Next.js, and TailwindCSS',
+  },
+];
+
+const aboutMe = {
+  logo: 'https://via.placeholder.com/150',
+  description: `I am a full-stack developer and UX designer with a passion for creating beautiful and functional web applications. I have experience working with a wide range of technologies and frameworks, and I am always looking to learn new things and improve my skills. I am a creative problem solver with a keen eye for detail, and I am always looking for new and exciting projects to work on.`,
+};
+
+const technologies = [
+  'React',
+  'Next.js',
+  'TailwindCSS',
+  'Node.js',
+  'Express',
+  'MongoDB',
+  'Figma',
+  'Adobe XD',
+  'Photoshop',
+  'Illustrator',
+  'After Effects',
+  'Premiere Pro',
+  'Blender',
+  'Unity',
+  'Unreal Engine',
+];
+
+const skills = [
+  { name: 'Leadership', level: 4 },
+  { name: 'Frontend Development', level: 5 },
+  { name: 'Backend Development', level: 4 },
+  { name: 'UX Design', level: 4 },
+  { name: '3D Modeling', level: 4 },
+];
+
 const ResumePage: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="flex h-screen w-screen flex-col items-center justify-center gap-6 overflow-hidden bg-white">
-        {resumeContent.map((content, index) => (
-          <ShimmerBorderCard key={index} {...content} />
-        ))}
+      <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden bg-gradient-to-b from-slate-100 via-slate-200 to-slate-100 px-20 pt-32">
+        <div className="flex justify-center gap-4">
+          <div className="flex w-1/2 flex-col gap-4">
+            <ShimmerBorderCard scaleOnHover>
+              <h1 className="relative z-10 mb-4 w-full font-display text-5xl font-bold text-slate-400">
+                Experience
+              </h1>
+              {experience.map((item, index) => (
+                <CardContent
+                  key={index}
+                  title={item.title}
+                  subtitle={item.position}
+                  date={item.date}
+                  description={item.description}
+                />
+              ))}
+            </ShimmerBorderCard>
+            <ShimmerBorderCard scaleOnHover>
+              {education.map((item, index) => (
+                <>
+                  <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+                    Education
+                  </h1>
+                  <CardContent
+                    key={index}
+                    title={item.location}
+                    subtitle={item.degree}
+                    description={item.description}
+                  />
+                </>
+              ))}
+            </ShimmerBorderCard>
+          </div>
+          <div className="flex w-1/2 flex-col gap-4">
+            <ShimmerBorderCard scaleOnHover>
+              <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+                About me
+              </h1>
+              <CardContent description={aboutMe.description} />
+            </ShimmerBorderCard>
+            <ShimmerBorderCard scaleOnHover>
+              <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+                Skills
+              </h1>
+              <div className="flex w-full flex-col gap-2">
+                {skills.map((item, index) => (
+                  <div
+                    key={index}
+                    className="items-between flex w-full justify-between gap-4"
+                  >
+                    <h2 className="font-sans text-sm font-bold uppercase text-slate-800">
+                      {item.name}
+                    </h2>
+                    <div className="h-4 w-40 rounded-full bg-slate-200">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${item.level * 20}%` }}
+                        transition={{ delay: 0.5, duration: 1 }}
+                        className="h-full rounded-full bg-teal-400"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ShimmerBorderCard>
+            <ShimmerBorderCard scaleOnHover>
+              <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+                Technologies
+              </h1>
+              <div className="flex flex-wrap gap-2">
+                {technologies.map((item, index) => (
+                  <div
+                    key={index}
+                    className="border-grey rounded-full border-2 px-4 py-2 text-sm text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </ShimmerBorderCard>
+          </div>
+        </div>
       </div>
     </>
   );
@@ -48,59 +165,43 @@ const ResumePage: React.FC = () => {
 
 export default ResumePage;
 
-type ShimmerBorderCardProps = {
-  logo: string;
-  title: string;
-  position: string;
-  date: string;
-  description: string;
+type CardContentProps = {
+  title?: string;
+  subtitle?: string;
+  date?: string;
+  description?: string;
 };
 
-const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
-  logo,
+const CardContent: React.FC<CardContentProps> = ({
   title,
-  position,
+  subtitle,
   date,
   description,
 }) => {
   return (
-    <div
-      id="shimmer-card"
-      className=" group relative mx-auto w-full max-w-xl overflow-hidden rounded-lg  p-0.5 transition-all duration-500 hover:scale-[1.01] "
-    >
-      <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200 bg-slate-50/50 p-8 transition-colors duration-500 group-hover:bg-slate-100">
-        {/* <FiCloudLightning className="relative z-10 mb-4 mt-2 rounded-full border-2 border-teal-400 bg-slate-100 p-4 text-7xl text-teal-500" /> */}
-
-        <h1 className="relative z-10 mb-4 w-full text-center font-display text-3xl font-bold text-slate-800">
+    <div className="flex flex-col">
+      {title && (
+        <h1 className="font-display text-xl font-bold text-slate-800">
           {title}
         </h1>
-        <h2 className="relative z-10  w-full text-center font-sans text-sm font-bold uppercase text-slate-800">
-          {position}
+      )}
+      {subtitle && (
+        <h2 className="font-sans text-sm font-bold uppercase text-slate-800">
+          {subtitle}
         </h2>
-        <h2 className="relative z-10 mb-4 w-full text-center font-sans text-sm   text-slate-400">
-          {date}
-        </h2>
-        <p className="relative z-10 px-4 font-sans text-sm leading-6 text-slate-400">
-          {description.split('<br/>').map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
+      )}
+      {date && <h2 className="font-sans text-sm text-slate-400">{date}</h2>}
+      {description && (
+        <p className="mb-6 mt-2 font-sans text-sm leading-6 text-slate-400">
+          {/* break description on <br/> */}
+          {description.split('<br/>').map((item, index) => (
+            <>
+              {item}
               <br />
-            </React.Fragment>
+            </>
           ))}
         </p>
-      </div>
-
-      <motion.div
-        initial={{ rotate: '0deg' }}
-        animate={{ rotate: '360deg' }}
-        style={{ scale: 1.75 }}
-        transition={{
-          repeat: Infinity,
-          duration: 3.5,
-          ease: 'linear',
-        }}
-        className="absolute inset-0 z-0 bg-gradient-to-br from-slate-200 via-slate-200/0 to-slate-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-      />
+      )}
     </div>
   );
 };
