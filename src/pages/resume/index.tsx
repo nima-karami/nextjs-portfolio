@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 
-import Navbar from '@/components/navbar';
 import ShimmerBorderCard from '@/components/shimmer-border-card';
 
 const experience = [
@@ -74,92 +73,89 @@ const skills = [
 
 const ResumePage: React.FC = () => {
   return (
-    <>
-      <Navbar />
-      <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden bg-gradient-to-b from-slate-100 via-slate-200 to-slate-100 px-20 pt-32">
-        <div className="flex justify-center gap-4">
-          <div className="flex w-1/2 flex-col gap-4">
-            <ShimmerBorderCard scaleOnHover>
-              <h1 className="relative z-10 mb-4 w-full font-display text-5xl font-bold text-slate-400">
-                Experience
-              </h1>
-              {experience.map((item, index) => (
+    <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden px-20 pt-32">
+      <div className="flex justify-center gap-4">
+        <div className="flex w-1/2 flex-col gap-4">
+          <ShimmerBorderCard scaleOnHover>
+            <h1 className="relative z-10 mb-4 w-full font-display text-5xl font-bold text-slate-400">
+              Experience
+            </h1>
+            {experience.map((item, index) => (
+              <CardContent
+                key={index}
+                title={item.title}
+                subtitle={item.position}
+                date={item.date}
+                description={item.description}
+              />
+            ))}
+          </ShimmerBorderCard>
+          <ShimmerBorderCard scaleOnHover>
+            {education.map((item, index) => (
+              <>
+                <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+                  Education
+                </h1>
                 <CardContent
                   key={index}
-                  title={item.title}
-                  subtitle={item.position}
-                  date={item.date}
+                  title={item.location}
+                  subtitle={item.degree}
                   description={item.description}
                 />
-              ))}
-            </ShimmerBorderCard>
-            <ShimmerBorderCard scaleOnHover>
-              {education.map((item, index) => (
-                <>
-                  <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
-                    Education
-                  </h1>
-                  <CardContent
-                    key={index}
-                    title={item.location}
-                    subtitle={item.degree}
-                    description={item.description}
-                  />
-                </>
-              ))}
-            </ShimmerBorderCard>
-          </div>
-          <div className="flex w-1/2 flex-col gap-4">
-            <ShimmerBorderCard scaleOnHover>
-              <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
-                About me
-              </h1>
-              <CardContent description={aboutMe.description} />
-            </ShimmerBorderCard>
-            <ShimmerBorderCard scaleOnHover>
-              <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
-                Skills
-              </h1>
-              <div className="flex w-full flex-col gap-2">
-                {skills.map((item, index) => (
-                  <div
-                    key={index}
-                    className="items-between flex w-full justify-between gap-4"
-                  >
-                    <h2 className="font-sans text-sm font-bold uppercase text-slate-800">
-                      {item.name}
-                    </h2>
-                    <div className="h-4 w-40 rounded-full bg-slate-200">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${item.level * 20}%` }}
-                        transition={{ delay: 0.5, duration: 1 }}
-                        className="h-full rounded-full bg-teal-400"
-                      />
-                    </div>
+              </>
+            ))}
+          </ShimmerBorderCard>
+        </div>
+        <div className="flex w-1/2 flex-col gap-4">
+          <ShimmerBorderCard scaleOnHover>
+            <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+              About me
+            </h1>
+            <CardContent description={aboutMe.description} />
+          </ShimmerBorderCard>
+          <ShimmerBorderCard scaleOnHover>
+            <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+              Skills
+            </h1>
+            <div className="flex w-full flex-col gap-2">
+              {skills.map((item, index) => (
+                <div
+                  key={index}
+                  className="items-between flex w-full justify-between gap-4"
+                >
+                  <h2 className="font-sans text-sm font-bold uppercase text-slate-800">
+                    {item.name}
+                  </h2>
+                  <div className="h-4 w-40 rounded-full bg-slate-200">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${item.level * 20}%` }}
+                      transition={{ delay: 0.5, duration: 1 }}
+                      className="h-full rounded-full bg-teal-400"
+                    />
                   </div>
-                ))}
-              </div>
-            </ShimmerBorderCard>
-            <ShimmerBorderCard scaleOnHover>
-              <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
-                Technologies
-              </h1>
-              <div className="flex flex-wrap gap-2">
-                {technologies.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border-grey rounded-full border-2 px-4 py-2 text-sm text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </ShimmerBorderCard>
-          </div>
+                </div>
+              ))}
+            </div>
+          </ShimmerBorderCard>
+          <ShimmerBorderCard scaleOnHover>
+            <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
+              Technologies
+            </h1>
+            <div className="flex flex-wrap gap-2">
+              {technologies.map((item, index) => (
+                <div
+                  key={index}
+                  className="border-grey rounded-full border-2 px-4 py-2 text-sm text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </ShimmerBorderCard>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

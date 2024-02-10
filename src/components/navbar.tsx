@@ -36,9 +36,9 @@ const Navbar: React.FC = () => {
                 key={index}
                 href={item.href}
                 className={clsx(
-                  ' hover:text-zinc-300',
+                  ' hover:text-teal-300',
                   pathname === item.href
-                    ? 'font-bold text-zinc-300'
+                    ? 'font-bold text-teal-300'
                     : 'text-zinc-400'
                 )}
               >
