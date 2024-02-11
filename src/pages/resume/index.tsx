@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import { motion } from 'framer-motion';
 
 import ShimmerBorderCard from '@/components/shimmer-border-card';
@@ -92,7 +94,7 @@ const ResumePage: React.FC = () => {
           </ShimmerBorderCard>
           <ShimmerBorderCard scaleOnHover>
             {education.map((item, index) => (
-              <>
+              <div key={index}>
                 <h1 className="relative z-10 mb-4 w-full  font-display text-5xl font-bold text-slate-400">
                   Education
                 </h1>
@@ -102,7 +104,7 @@ const ResumePage: React.FC = () => {
                   subtitle={item.degree}
                   description={item.description}
                 />
-              </>
+              </div>
             ))}
           </ShimmerBorderCard>
         </div>
@@ -191,10 +193,10 @@ const CardContent: React.FC<CardContentProps> = ({
         <p className="mb-6 mt-2 font-sans text-sm leading-6 text-slate-400">
           {/* break description on <br/> */}
           {description.split('<br/>').map((item, index) => (
-            <>
+            <Fragment key={index}>
               {item}
               <br />
-            </>
+            </Fragment>
           ))}
         </p>
       )}

@@ -5,11 +5,24 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
+import { Theme, useTheme } from '@/contexts/theme-context';
+import cn from '@/util/cn';
+
+type ThemeStyles = {
+  [key in Theme]: string;
+};
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(false);
   const [hover, setHover] = useState(false);
   const router = useRouter();
+
+  const { theme } = useTheme();
+  const styles: ThemeStyles = {
+    light: 'border-white',
+    dark: 'border-black',
+    candy: 'border-teal-500',
+  };
 
   const onMouseMove = (event: MouseEvent) => {
     setPosition({ x: event.clientX, y: event.clientY });
@@ -53,8 +66,9 @@ const CustomCursor = () => {
     <motion.div
       id="custom-cursor"
       aria-hidden="true"
-      className={clsx(
-        'pointer-events-none absolute z-[999] rounded-full border-2 border-white bg-transparent shadow-lg '
+      className={cn(
+        'pointer-events-none absolute z-[999] rounded-full border-2  bg-transparent shadow-lg ',
+        styles[theme]
       )}
       style={{
         translateX: '-50%',

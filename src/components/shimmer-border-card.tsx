@@ -3,7 +3,12 @@ import React, { PropsWithChildren, useRef } from 'react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
+import { Theme, useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
+
+type ThemeStyles = {
+  [key in Theme]: string;
+};
 
 type ShimmerBorderCardProps = {
   children: React.ReactNode;
@@ -16,6 +21,13 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
   scaleOnHover = false,
   className = '',
 }) => {
+  const { theme } = useTheme();
+  const styles: ThemeStyles = {
+    light: 'border-slate-200 bg-slate-50/50',
+    dark: 'border-slate-800 bg-slate-900/50',
+    candy: 'border-teal-500 bg-teal-500/50',
+  };
+
   return (
     <div
       id="shimmer-card"
@@ -26,7 +38,7 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
     >
       <div
         className={cn(
-          'relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200 bg-slate-50/50 p-8 backdrop-blur-lg transition-colors duration-500 group-hover:bg-slate-50',
+          'relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200 bg-slate-50/50 p-8 backdrop-blur-2xl transition-colors duration-500 group-hover:bg-slate-50',
           className
         )}
       >
