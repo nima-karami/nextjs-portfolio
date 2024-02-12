@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 import DynamicBg from './dynamic-bg';
 import Navbar from './navbar';
+import ThemeController from './theme-controller';
 
 const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       {navbarVisible && <Navbar />}
       {children}
       <DynamicBg />
+      <ThemeController />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef } from 'react';
+import React from 'react';
 
 import clsx from 'clsx';
 import { motion } from 'framer-motion';

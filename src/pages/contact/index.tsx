@@ -25,7 +25,7 @@ const contacts = [
 
 const ContactPage: React.FC = () => {
   return (
-    <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden px-20 pt-32">
+    <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden px-20 pb-20 pt-32">
       <div className="flex w-full justify-center gap-4">
         {contacts.map((item, index) => (
           <ShimmerBorderCard key={index} scaleOnHover>
