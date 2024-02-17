@@ -47,7 +47,7 @@ const education = [
   {
     logo: 'https://via.placeholder.com/150',
     location: 'University of Waterloo',
-    degree: 'Master of Architecture',
+    degree: 'MArch',
   },
 ];
 
@@ -102,13 +102,13 @@ const ResumePage: React.FC = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden px-20 pb-20 pt-32">
-      <div className="flex justify-center gap-4">
-        <div className="flex w-1/2 flex-col gap-4">
+    <div className="  flex h-full w-full gap-6 overflow-y-auto  px-8 sm:px-20 md:pt-12 lg:pt-16">
+      <div className=" mt-32 grid grid-cols-1 gap-4  lg:grid-cols-2 ">
+        <div className="flex  flex-col gap-4">
           <ShimmerBorderCard scaleOnHover>
             <h1
               className={cn(
-                'mb-4 w-full font-display text-5xl font-bold ',
+                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
                 h1Styles[theme]
               )}
             >
@@ -125,11 +125,11 @@ const ResumePage: React.FC = () => {
             ))}
           </ShimmerBorderCard>
         </div>
-        <div className="flex w-1/2 flex-col gap-4">
+        <div className="mb-4 flex flex-shrink-0 flex-col gap-4">
           <ShimmerBorderCard scaleOnHover>
             <h1
               className={cn(
-                'mb-4 w-full font-display text-5xl font-bold ',
+                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
                 h1Styles[theme]
               )}
             >
@@ -142,7 +142,7 @@ const ResumePage: React.FC = () => {
           <ShimmerBorderCard scaleOnHover>
             <h1
               className={cn(
-                'mb-4 w-full font-display text-5xl font-bold ',
+                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
                 h1Styles[theme]
               )}
             >
@@ -156,13 +156,13 @@ const ResumePage: React.FC = () => {
                 >
                   <h2
                     className={cn(
-                      'font-sans text-sm font-bold uppercase',
+                      'font-sans text-xs font-bold  uppercase sm:text-sm',
                       h2Styles[theme]
                     )}
                   >
                     {item.name}
                   </h2>
-                  <div className="h-4 w-40 rounded-full bg-slate-200">
+                  <div className="h-4 w-24 flex-shrink-0 rounded-full bg-slate-200 sm:w-40">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${item.level * 20}%` }}
@@ -177,7 +177,7 @@ const ResumePage: React.FC = () => {
           <ShimmerBorderCard scaleOnHover>
             <h1
               className={cn(
-                'mb-4 w-full font-display text-5xl font-bold ',
+                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
                 h1Styles[theme]
               )}
             >
@@ -187,27 +187,27 @@ const ResumePage: React.FC = () => {
               {technologies.map((item, index) => (
                 <div
                   key={index}
-                  className="border-grey rounded-full border-2 px-4 py-2 text-sm text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800"
+                  className="border-grey rounded-full border-2 px-4 py-2 font-sans text-xs text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800 sm:text-sm"
                 >
                   {item}
                 </div>
               ))}
             </div>
           </ShimmerBorderCard>
-          <ShimmerBorderCard scaleOnHover className="">
-            <div className="flex h-full w-full items-center justify-between">
+          <ShimmerBorderCard scaleOnHover className="mb-28">
+            <div className="flex h-full w-full flex-col items-center justify-between gap-4 sm:flex-row sm:gap-12">
               <h1
                 className={cn(
-                  'font-display text-5xl font-bold ',
+                  'font-display text-4xl font-bold md:text-5xl ',
                   h1Styles[theme]
                 )}
               >
                 Education
               </h1>
-              <div>
+              <div className="">
                 <h2
                   className={cn(
-                    'font-sans text-sm font-bold uppercase ',
+                    'text-center font-sans text-sm font-bold uppercase ',
                     h2Styles[theme]
                   )}
                 >
@@ -241,14 +241,19 @@ const CardContent: React.FC<CardContentProps> = ({
   return (
     <div className="flex flex-col">
       {title && (
-        <h2 className={cn('font-sans text-lg font-bold', h2Styles[theme])}>
+        <h2
+          className={cn(
+            'text-md font-sans font-bold sm:text-lg',
+            h2Styles[theme]
+          )}
+        >
           {title}
         </h2>
       )}
       {subtitle && (
         <h2
           className={cn(
-            'font-sans text-sm font-bold uppercase',
+            'font-sans text-xs font-bold uppercase sm:text-sm',
             h2Styles[theme]
           )}
         >

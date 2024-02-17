@@ -25,10 +25,10 @@ const contacts = [
 
 const ContactPage: React.FC = () => {
   return (
-    <div className="flex h-screen w-screen items-center justify-center gap-6 overflow-hidden px-20 pb-20 pt-32">
+    <div className="flex h-full w-full items-center justify-center gap-6 overflow-hidden px-8 pt-8 sm:px-20 sm:pb-20 sm:pt-32">
       <div className="flex w-full justify-center gap-4">
         {contacts.map((item, index) => (
-          <ShimmerBorderCard key={index} scaleOnHover>
+          <ShimmerBorderCard key={index} scaleOnHover className="max-sm:p-6">
             <CardContent title={item.title} logo={item.logo} href={item.href} />
           </ShimmerBorderCard>
         ))}
@@ -48,12 +48,12 @@ type CardContentProps = {
 const CardContent: React.FC<CardContentProps> = ({ logo, title, href }) => {
   return (
     <Link
-      className="text flex flex-col items-center justify-center gap-4 p-20 py-32 text-7xl"
+      className="text flex flex-col items-center justify-center gap-2 p-20 py-0 text-5xl sm:gap-4 sm:py-32 sm:text-7xl"
       href={href}
       target="_blank"
     >
-      <div className="flex items-center gap-4 text-slate-400">{logo}</div>
-      <h1 className="relative z-10 mb-4 w-full text-center font-sans text-sm font-bold  text-slate-400">
+      <div className="flex text-slate-400">{logo}</div>
+      <h1 className="w-full text-center font-sans text-sm font-bold  text-slate-400">
         {title}
       </h1>
     </Link>

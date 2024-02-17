@@ -24,8 +24,8 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
   const { theme } = useTheme();
   const styles: ThemeStyles = {
     light: 'border-slate-200 bg-slate-50/20',
-    dark: 'border-slate-800 bg-slate-900/50',
-    candy: 'border-teal-500 bg-teal-500/50',
+    dark: 'border-slate-800 bg-slate-900/30',
+    candy: 'border-teal-500 bg-slate-50/20',
   };
 
   return (

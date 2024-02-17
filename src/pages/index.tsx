@@ -34,8 +34,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden ">
-        <nav className="my-16 animate-fade-in">
+      <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden pb-12 sm:pb-0 ">
+        <nav className="my-8 animate-fade-in md:my-16">
           <ul className="flex items-center justify-center gap-4">
             {navigation.map((item) => (
               <Link
@@ -58,7 +58,7 @@ export default function Home() {
         />
         <h1
           className={cn(
-            'text-edge-outline z-10 animate-title whitespace-nowrap bg-clip-text font-display text-4xl text-transparent duration-1000 sm:text-6xl md:text-9xl ',
+            'text-edge-outline z-10 animate-title whitespace-nowrap bg-clip-text font-display text-5xl text-transparent duration-1000 sm:text-6xl md:text-9xl ',
             titleStyles[theme]
           )}
         >
@@ -66,7 +66,7 @@ export default function Home() {
         </h1>
 
         <div className="animate-glow hidden h-px w-screen animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block" />
-        <div className="my-16 animate-fade-in text-center">
+        <div className="my-8 animate-fade-in text-center md:my-16">
           <h2 className="font-sans text-sm text-zinc-400">
             Full Stack Developer | UX Designer
           </h2>

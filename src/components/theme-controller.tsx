@@ -19,7 +19,7 @@ const ThemeController: React.FC = () => {
   } = useTheme();
 
   return (
-    <ShimmerBorderCard className="fixed bottom-4 left-4 flex flex-row justify-between gap-2 p-3">
+    <ShimmerBorderCard className="fixed bottom-4 left-4 flex flex-row justify-between gap-2 p-4 max-sm:bottom-8 max-sm:left-8 max-sm:right-8 max-sm:px-16">
       <ControllerButton onClick={handleToggleAutoplayTheme}>
         {autoplay ? <IoPause /> : <IoPlay />}
       </ControllerButton>

@@ -6,8 +6,6 @@ import Head from 'next/head';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import CustomCursor from '@/components/custom-cursor';
-import DynamicBg from '@/components/dynamic-bg';
 import Layout from '@/components/layout';
 import { ThemeProvider } from '@/contexts/theme-context';
 import '@/styles/globals.css';
@@ -49,8 +47,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
                 transition={{ duration: 0.5 }}
                 className={clsx('h-full w-full')}
               >
-                <CustomCursor />
-
                 <Component {...pageProps} />
               </motion.div>
             </Layout>

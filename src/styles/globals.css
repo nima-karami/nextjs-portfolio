@@ -8,9 +8,12 @@
   }
 }
 
-html,
+html {
+  position: fixed;
+  inset: 0;
+}
 body {
-  min-height: 100dvh;
+  min-height: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -18,4 +21,10 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+#__next {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

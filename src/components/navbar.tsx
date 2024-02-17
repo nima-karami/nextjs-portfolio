@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-20 py-8 font-sans text-sm text-zinc-400 duration-500"
+      className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-8 py-8 font-sans text-sm text-zinc-400 duration-500 sm:px-20"
     >
       <ShimmerBorderCard className="px-6 py-4">
         <div className="flex w-full justify-between">
