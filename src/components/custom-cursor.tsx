@@ -40,6 +40,18 @@ const CustomCursor = () => {
     setHover(false);
   };
 
+  const onTouchStart = (event: TouchEvent) => {
+    console.log('touch');
+    setPosition({ x: event.touches[0].clientX, y: event.touches[0].clientY });
+    setHidden(false);
+  };
+
+  const onTouchEnd = () => {
+    console.log('touch end');
+    if (!hidden) setHidden(true);
+    if (hover) setHover(false);
+  };
+
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
     document.querySelectorAll('a, button').forEach(
@@ -54,6 +66,9 @@ const CustomCursor = () => {
     document
       .querySelector('html')
       ?.classList.add('cursor-none', 'overflow-hidden');
+
+    document.addEventListener('touchstart', onTouchStart);
+    document.addEventListener('touchend', onTouchEnd);
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
@@ -79,6 +94,7 @@ const CustomCursor = () => {
       animate={{
         width: hover ? 40 : 20,
         height: hover ? 40 : 20,
+        opacity: hidden ? 0 : 1,
       }}
     />
   );
