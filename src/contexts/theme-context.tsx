@@ -2,6 +2,8 @@ import { PropsWithChildren, createContext, useContext, useEffect } from 'react';
 
 import useLocalStorage from 'use-local-storage';
 
+import { Theme } from '@/util/types';
+
 type ThemeContextType = {
   theme: Theme;
   handleThemeChange: (theme: Theme) => void;
@@ -10,12 +12,6 @@ type ThemeContextType = {
   handleToggleAutoplayTheme: () => void;
   autoplay: boolean;
 };
-
-export enum Theme {
-  Light = 'light',
-  Dark = 'dark',
-  Candy = 'candy',
-}
 
 const ThemeContext = createContext({} as ThemeContextType);
 

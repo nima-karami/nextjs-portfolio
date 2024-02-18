@@ -6,6 +6,7 @@ import Markdown from 'markdown-to-jsx';
 import ShimmerBorderCard from '@/components/shimmer-border-card';
 import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
+import { ThemeStyles } from '@/util/types';
 
 const experience = [
   {
@@ -102,18 +103,11 @@ const ResumePage: React.FC = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="  flex h-full w-full gap-6 overflow-y-auto  px-8 sm:px-20 md:pt-12 lg:pt-16">
-      <div className=" mt-32 grid grid-cols-1 gap-4  lg:grid-cols-2 ">
-        <div className="flex  flex-col gap-4">
+    <div className="flex h-full w-full gap-6 overflow-y-auto px-8 sm:px-20 md:pt-12 lg:pt-16">
+      <div className="mt-32 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="flex flex-col gap-4">
           <ShimmerBorderCard scaleOnHover>
-            <h1
-              className={cn(
-                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
-                h1Styles[theme]
-              )}
-            >
-              Experience
-            </h1>
+            <CardTitle title="Experience" />
             {experience.map((item, index) => (
               <CardContent
                 key={index}
@@ -125,29 +119,15 @@ const ResumePage: React.FC = () => {
             ))}
           </ShimmerBorderCard>
         </div>
-        <div className="mb-4 flex flex-shrink-0 flex-col gap-4">
+        <div className="flex flex-col gap-4 max-lg:pb-28">
           <ShimmerBorderCard scaleOnHover>
-            <h1
-              className={cn(
-                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
-                h1Styles[theme]
-              )}
-            >
-              About me
-            </h1>
+            <CardTitle title="About Me" />
             <p className="font-sans text-sm text-slate-400">
               <Markdown>{aboutMe.description}</Markdown>
             </p>
           </ShimmerBorderCard>
           <ShimmerBorderCard scaleOnHover>
-            <h1
-              className={cn(
-                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
-                h1Styles[theme]
-              )}
-            >
-              Skills
-            </h1>
+            <CardTitle title="Skills" />
             <div className="flex w-full flex-col gap-2">
               {skills.map((item, index) => (
                 <div
@@ -175,14 +155,7 @@ const ResumePage: React.FC = () => {
             </div>
           </ShimmerBorderCard>
           <ShimmerBorderCard scaleOnHover>
-            <h1
-              className={cn(
-                'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
-                h1Styles[theme]
-              )}
-            >
-              Technologies
-            </h1>
+            <CardTitle title="Technologies" />
             <div className="flex flex-wrap gap-2">
               {technologies.map((item, index) => (
                 <div
@@ -194,16 +167,9 @@ const ResumePage: React.FC = () => {
               ))}
             </div>
           </ShimmerBorderCard>
-          <ShimmerBorderCard scaleOnHover className="mb-28">
+          <ShimmerBorderCard scaleOnHover className="">
             <div className="flex h-full w-full flex-col items-center justify-between gap-4 sm:flex-row sm:gap-12">
-              <h1
-                className={cn(
-                  'font-display text-4xl font-bold md:text-5xl ',
-                  h1Styles[theme]
-                )}
-              >
-                Education
-              </h1>
+              <CardTitle title="Education" className="mb-0 w-auto" />
               <div className="">
                 <h2
                   className={cn(
@@ -273,5 +239,32 @@ const CardContent: React.FC<CardContentProps> = ({
         </ul>
       )}
     </div>
+  );
+};
+
+type CardTitleProps = {
+  title: string;
+  className?: string;
+};
+
+const CardTitle: React.FC<CardTitleProps> = ({ title, className = '' }) => {
+  const { theme } = useTheme();
+
+  const styles: ThemeStyles = {
+    light: 'text-slate-400',
+    dark: 'text-slate-300',
+    candy: 'text-teal-500',
+  };
+
+  return (
+    <h1
+      className={cn(
+        'mb-4 w-full font-display text-4xl font-bold md:text-5xl ',
+        styles[theme],
+        className
+      )}
+    >
+      {title}
+    </h1>
   );
 };

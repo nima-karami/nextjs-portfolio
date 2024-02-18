@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
+
+import cn from '@/util/cn';
 
 import Logo from './logo';
 import ShimmerBorderCard from './shimmer-border-card';
@@ -35,8 +35,8 @@ const Navbar: React.FC = () => {
               <Link
                 key={index}
                 href={item.href}
-                className={clsx(
-                  ' hover:text-teal-300',
+                className={cn(
+                  ' cursor-none transition-all duration-500 hover:text-teal-300',
                   pathname === item.href
                     ? 'font-bold text-teal-300'
                     : 'text-zinc-400'

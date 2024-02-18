@@ -36,7 +36,7 @@ const CustomCursor = () => {
 
   const onMouseLeave = () => {
     console.log('leave');
-    setHidden(true);
+    setHidden(false);
     setHover(false);
   };
 
@@ -74,6 +74,8 @@ const CustomCursor = () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseenter', onMouseEnter);
       document.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
 

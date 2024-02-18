@@ -4,8 +4,9 @@ import localFont from 'next/font/local';
 import Head from 'next/head';
 
 import clsx from 'clsx';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
+import CustomCursor from '@/components/custom-cursor';
 import Layout from '@/components/layout';
 import { ThemeProvider } from '@/contexts/theme-context';
 import '@/styles/globals.css';
@@ -30,28 +31,17 @@ export default function App({ Component, pageProps, router }: AppProps) {
       </Head>
 
       <ThemeProvider>
-        <AnimatePresence mode="wait" initial={false}>
-          <main
-            className={clsx(
-              'bg-neutral flex h-full w-full flex-col ',
-              inter.variable,
-              calSans.variable
-            )}
-          >
-            <Layout>
-              <motion.div
-                key={router.route}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className={clsx('h-full w-full')}
-              >
-                <Component {...pageProps} />
-              </motion.div>
-            </Layout>
-          </main>
-        </AnimatePresence>
+        <main
+          className={clsx(
+            'bg-neutral flex h-full w-full flex-col ',
+            inter.variable,
+            calSans.variable
+          )}
+        >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </main>
       </ThemeProvider>
     </>
   );

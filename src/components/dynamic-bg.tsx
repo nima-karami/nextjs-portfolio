@@ -1,8 +1,6 @@
 import { Theme, useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
 
-import BackgroundWave from './background-wave';
-import Background_1 from './gradient-bg';
 import GradientBg from './gradient-bg';
 
 type ThemeStyles = {
@@ -19,8 +17,8 @@ const DynamicBg: React.FC = () => {
 
   const backgrounds: { [key in Theme]: React.ReactNode } = {
     light: <GradientBg />,
-    dark: <Background_1 />,
-    candy: <Background_1 />,
+    dark: <GradientBg />,
+    candy: <GradientBg />,
   };
 
   return (
