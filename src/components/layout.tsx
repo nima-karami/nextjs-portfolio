@@ -22,7 +22,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="flex h-full w-full flex-col overflow-hidden"
         >
           <CustomCursor />
