@@ -6,6 +6,8 @@ import {
   useState,
 } from 'react';
 
+import { useRouter } from 'next/router';
+
 import useLocalStorage from 'use-local-storage';
 
 import { Theme } from '@/util/types';
@@ -23,8 +25,8 @@ const ThemeContext = createContext({} as ThemeContextType);
 
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(Theme.Light);
-  const [autoplay, setAutoplay] = useLocalStorage<boolean>('autoplay', false);
-
+  const [autoplay, setAutoplay] = useLocalStorage<boolean>('autoplay', true);
+  const router = useRouter();
   const handleThemeChange = (theme: Theme) => {
     setTheme(theme);
   };
@@ -48,10 +50,18 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     if (autoplay) {
       const interval = setInterval(() => {
         handleNextTheme();
-      }, 3000);
+      }, 5000);
       return () => clearInterval(interval);
     }
   }, [autoplay, theme]);
+
+  useEffect(() => {
+    if (router.pathname === '/') {
+      setAutoplay(true);
+    } else {
+      setAutoplay(false);
+    }
+  }, [router.pathname]);
 
   return (
     <ThemeContext.Provider

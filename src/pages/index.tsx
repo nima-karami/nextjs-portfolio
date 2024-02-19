@@ -50,10 +50,7 @@ export default function Home() {
         </ul>
       </nav>
       <div className="animate-glow hidden h-px w-screen animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block" />
-      <Particles
-        className="absolute inset-0 -z-10 animate-fade-in"
-        quantity={200}
-      />
+
       <h1
         className={cn(
           'text-edge-outline z-10 animate-title whitespace-nowrap bg-clip-text font-display text-5xl text-transparent duration-1000 sm:text-6xl md:text-9xl ',
