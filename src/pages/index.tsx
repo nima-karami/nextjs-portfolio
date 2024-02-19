@@ -36,16 +36,17 @@ export default function Home() {
       <nav className="my-8 animate-fade-in px-2 md:my-16">
         <ul className="flex items-center justify-center gap-4">
           {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'font-sans text-sm duration-500 ',
-                navLinkStyles[theme]
-              )}
-            >
-              {item.name}
-            </Link>
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={cn(
+                  'font-sans text-sm duration-500 ',
+                  navLinkStyles[theme]
+                )}
+              >
+                {item.name}
+              </Link>
+            </li>
           ))}
         </ul>
       </nav>
