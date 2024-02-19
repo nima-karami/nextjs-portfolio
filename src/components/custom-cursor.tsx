@@ -20,8 +20,8 @@ const CustomCursor = () => {
   const { theme } = useTheme();
   const styles: ThemeStyles = {
     light: 'border-white',
-    dark: 'border-black',
-    candy: 'border-teal-500',
+    dark: 'border-teal-500',
+    candy: 'border-teal-800',
   };
 
   const onMouseMove = (event: MouseEvent) => {
@@ -77,7 +77,7 @@ const CustomCursor = () => {
       document.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('touchend', onTouchEnd);
     };
-  }, []);
+  }, [theme, router.route]);
 
   return (
     <motion.div

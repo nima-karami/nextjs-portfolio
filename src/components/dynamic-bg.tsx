@@ -11,7 +11,7 @@ const DynamicBg: React.FC = () => {
   const { theme } = useTheme();
   const styles: ThemeStyles = {
     light: 'bg-gradient-to-b from-slate-100 via-slate-200 to-slate-100',
-    dark: 'bg-gray-400',
+    dark: 'bg-neutral-900',
     candy: 'bg-gradient-to-b from-teal-100 via-teal-200 to-teal-100',
   };
 

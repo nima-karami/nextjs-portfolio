@@ -5,6 +5,8 @@ import { FaForwardStep, FaRotateLeft } from 'react-icons/fa6';
 import { IoPause, IoPlay } from 'react-icons/io5';
 
 import { useTheme } from '@/contexts/theme-context';
+import cn from '@/util/cn';
+import { ThemeStyles } from '@/util/types';
 
 import ShimmerBorderCard from './shimmer-border-card';
 
@@ -12,7 +14,6 @@ const ThemeController: React.FC = () => {
   const {
     theme,
     handleNextTheme,
-    handleThemeChange,
     handleToggleAutoplayTheme,
     handleResetTheme,
     autoplay,
@@ -44,9 +45,18 @@ const ControllerButton: React.FC<ControllerButtonProps> = ({
   children,
   onClick,
 }) => {
+  const { theme } = useTheme();
+  const styles: ThemeStyles = {
+    light: 'text-slate-400',
+    dark: 'text-neutral-300',
+    candy: 'text-teal-500',
+  };
   return (
     <button
-      className="rounded-full p-2 text-sm text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800"
+      className={cn(
+        'rounded-full p-2 text-sm transition-colors duration-500 hover:bg-white hover:text-slate-800',
+        styles[theme]
+      )}
       onClick={onClick}
     >
       {children}

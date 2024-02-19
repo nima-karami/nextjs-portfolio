@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
       <ShimmerBorderCard className="px-6 py-4">
         <div className="flex w-full justify-between">
           <Link href="/">
-            <Logo className="fill-slate-400" />
+            <Logo className="" />
           </Link>
           <div className="flex items-center gap-4">
             {navigation.map((item, index) => (

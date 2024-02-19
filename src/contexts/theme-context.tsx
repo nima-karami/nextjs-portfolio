@@ -1,4 +1,10 @@
-import { PropsWithChildren, createContext, useContext, useEffect } from 'react';
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import useLocalStorage from 'use-local-storage';
 
@@ -16,7 +22,7 @@ type ThemeContextType = {
 const ThemeContext = createContext({} as ThemeContextType);
 
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [theme, setTheme] = useLocalStorage<Theme>('theme', Theme.Light);
+  const [theme, setTheme] = useState<Theme>(Theme.Light);
   const [autoplay, setAutoplay] = useLocalStorage<boolean>('autoplay', false);
 
   const handleThemeChange = (theme: Theme) => {

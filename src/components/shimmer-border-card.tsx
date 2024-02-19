@@ -3,12 +3,9 @@ import React from 'react';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
-import { Theme, useTheme } from '@/contexts/theme-context';
+import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
-
-type ThemeStyles = {
-  [key in Theme]: string;
-};
+import { ThemeStyles } from '@/util/types';
 
 type ShimmerBorderCardProps = {
   children: React.ReactNode;
@@ -23,9 +20,15 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
 }) => {
   const { theme } = useTheme();
   const styles: ThemeStyles = {
-    light: 'border-slate-200 bg-slate-50/20',
-    dark: 'border-slate-800 bg-slate-900/30',
-    candy: 'border-teal-500 bg-slate-50/20',
+    light: 'border-slate-200 bg-slate-50/20 group-hover:bg-slate-50',
+    dark: 'border-neutral-800 bg-neutral-900/80 group-hover:bg-neutral-900',
+    candy: 'border-teal-50 bg-slate-50/20',
+  };
+
+  const shimmerStyles: ThemeStyles = {
+    light: 'bg-gradient-to-br from-slate-50 to-slate-100',
+    dark: 'bg-gradient-to-br from-neutral-800 to-neutral-900',
+    candy: 'bg-gradient-to-br from-teal-50 via-teal-200/0 to-teal-50 ',
   };
 
   return (
@@ -38,7 +41,7 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
     >
       <div
         className={cn(
-          'relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200  p-8 backdrop-blur-2xl transition-colors duration-500 group-hover:bg-slate-50',
+          'relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] border border-slate-200  p-8 backdrop-blur-2xl transition-colors duration-500 ',
           styles[theme],
           className
         )}
@@ -55,7 +58,10 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
           duration: 3.5,
           ease: 'linear',
         }}
-        className="absolute inset-0 z-0 bg-gradient-to-br from-teal-200 via-teal-200/0 to-teal-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className={cn(
+          'absolute inset-0 z-0 bg-gradient-to-br  opacity-0 transition-opacity duration-500 group-hover:opacity-100',
+          shimmerStyles[theme]
+        )}
       />
     </div>
   );

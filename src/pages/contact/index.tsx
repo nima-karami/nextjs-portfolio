@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 import ShimmerBorderCard from '@/components/shimmer-border-card';
+import { useTheme } from '@/contexts/theme-context';
+import cn from '@/util/cn';
 import { ThemeStyles } from '@/util/types';
 
 const contacts = [
@@ -47,20 +49,24 @@ type CardContentProps = {
 };
 
 const CardContent: React.FC<CardContentProps> = ({ logo, title, href }) => {
+  const { theme } = useTheme();
   const styles: ThemeStyles = {
-    light: 'border-white',
-    dark: 'border-black',
-    candy: 'border-teal-500',
+    light: 'text-slate-400',
+    dark: 'text-neutral-300',
+    candy: 'text-teal-800',
   };
 
   return (
     <Link
-      className="text flex flex-col items-center justify-center gap-2 p-20 py-0 text-5xl sm:gap-4 sm:py-32 sm:text-7xl"
+      className={cn(
+        'text flex flex-col items-center justify-center gap-2 p-20 py-0 text-5xl  sm:gap-4 sm:py-32 sm:text-7xl',
+        styles[theme]
+      )}
       href={href}
       target="_blank"
     >
-      <div className="flex text-slate-400">{logo}</div>
-      <h1 className="w-full text-center font-sans text-sm font-bold  text-slate-400">
+      <div className="flex ">{logo}</div>
+      <h1 className="w-full text-center font-sans text-sm font-bold ">
         {title}
       </h1>
     </Link>

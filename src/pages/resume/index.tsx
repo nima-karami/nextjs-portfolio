@@ -89,14 +89,27 @@ const skills = [
 
 const h1Styles = {
   light: 'text-slate-400',
-  dark: 'text-slate-300',
+  dark: 'text-neutral-300',
   candy: 'text-teal-500',
 };
 
 const h2Styles = {
   light: 'text-slate-600',
-  dark: 'text-slate-500',
+  dark: 'text-neutral-50',
   candy: 'text-teal-400',
+};
+
+const descriptionStyles: ThemeStyles = {
+  light: 'text-slate-400',
+  dark: 'text-neutral-100',
+  candy: 'text-teal-500',
+};
+
+const tagsStyles = {
+  light: 'text-slate-600 hover:bg-white hover:text-slate-800',
+  dark: 'text-neutral-300 hover:bg-white hover:text-slate-800',
+  candy:
+    'text-teal-300 bg-teal-800 border-teal-900 hover:bg-white hover:text-teal-800',
 };
 
 const ResumePage: React.FC = () => {
@@ -122,7 +135,7 @@ const ResumePage: React.FC = () => {
         <div className="flex flex-col gap-4 max-lg:pb-28">
           <ShimmerBorderCard scaleOnHover>
             <CardTitle title="About Me" />
-            <p className="font-sans text-sm text-slate-400">
+            <p className={cn('font-sans text-sm', descriptionStyles[theme])}>
               <Markdown>{aboutMe.description}</Markdown>
             </p>
           </ShimmerBorderCard>
@@ -160,7 +173,10 @@ const ResumePage: React.FC = () => {
               {technologies.map((item, index) => (
                 <div
                   key={index}
-                  className="border-grey rounded-full border-2 px-4 py-2 font-sans text-xs text-slate-400 transition-colors duration-500 hover:bg-white hover:text-slate-800 sm:text-sm"
+                  className={cn(
+                    'border-grey text-xstransition-colors rounded-full border-2 px-4 py-2 font-sans duration-500  sm:text-sm',
+                    tagsStyles[theme]
+                  )}
                 >
                   {item}
                 </div>
@@ -204,6 +220,7 @@ const CardContent: React.FC<CardContentProps> = ({
   description,
 }) => {
   const { theme } = useTheme();
+
   return (
     <div className="flex flex-col">
       {title && (
@@ -230,7 +247,12 @@ const CardContent: React.FC<CardContentProps> = ({
         <h3 className={cn('font-sans text-sm ', h1Styles[theme])}>{date}</h3>
       )}
       {description && (
-        <ul className="mb-4 mt-2 list-inside list-disc font-sans text-sm text-slate-400">
+        <ul
+          className={cn(
+            'mb-4 mt-2 list-inside list-disc font-sans text-sm',
+            descriptionStyles[theme]
+          )}
+        >
           {description.map((item, index) => (
             <li key={index}>
               <Markdown>{item}</Markdown>
@@ -252,7 +274,7 @@ const CardTitle: React.FC<CardTitleProps> = ({ title, className = '' }) => {
 
   const styles: ThemeStyles = {
     light: 'text-slate-400',
-    dark: 'text-slate-300',
+    dark: 'text-neutral-200',
     candy: 'text-teal-500',
   };
 
