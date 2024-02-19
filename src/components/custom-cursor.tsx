@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
 
-import { Theme, useTheme } from '@/contexts/theme-context';
+import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
+import { ThemeStyles } from '@/util/types';
 
-type ThemeStyles = {
-  [key in Theme]: string;
-};
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(false);

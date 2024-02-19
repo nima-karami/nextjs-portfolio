@@ -1,11 +1,8 @@
-import { Theme, useTheme } from '@/contexts/theme-context';
+import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
+import { Theme, ThemeStyles } from '@/util/types';
 
 import GradientBg from './gradient-bg';
-
-type ThemeStyles = {
-  [key in Theme]: string;
-};
 
 const DynamicBg: React.FC = () => {
   const { theme } = useTheme();
