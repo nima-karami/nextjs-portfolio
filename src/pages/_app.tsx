@@ -25,9 +25,39 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
-        <title>Nima Karami | Portfolio</title>
+        <title>Nima Karami | Fullstack Developer | UX Designer</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Nima Karami | Portfolio" />
+        <meta name="author" content="Nima Karami" />
+        <meta
+          name="keywords"
+          content="Nima Karami, Portfolio, Developer, Fullstack Developer, React Developer, NextJS Developer, User Experience Designer, Web Developer"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Nima Karami | Fullstack Developer | UX Designer"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Online Portfolio of Nima Karami, a Toronto-based Fullstack Developer and UX Designer"
+        />
+        <meta property="og:image" content="/preview.png" />
+        <meta property="og:url" content="https://www.nima-karami.com" />
+        <meta property="og:site_name" content="Nima Karami Portfolio" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@nimakarami" />
+        <meta
+          name="twitter:title"
+          content="Nima Karami | Fullstack Developer | UX Designer"
+        />
+        <meta
+          name="twitter:description"
+          content="Online Portfolio of Nima Karami, a Toronto-based Fullstack Developer and UX Designer"
+        />
+        <meta name="twitter:image" content="/preview.png" />
       </Head>
 
       <ThemeProvider>
