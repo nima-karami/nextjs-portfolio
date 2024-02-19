@@ -42,7 +42,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <meta property="og:type" content="website" />
         <meta
           property="og:description"
-          content="Online Portfolio of Nima Karami, a Toronto-based Fullstack Developer and UX Designer"
+          content="Toronto-based Fullstack Developer and UX Designer"
         />
         <meta property="og:image" content="/preview.png" />
         <meta property="og:url" content="https://www.nima-karami.com" />
@@ -55,7 +55,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         />
         <meta
           name="twitter:description"
-          content="Online Portfolio of Nima Karami, a Toronto-based Fullstack Developer and UX Designer"
+          content="Toronto-based Fullstack Developer and UX Designer"
         />
         <meta name="twitter:image" content="/preview.png" />
       </Head>
