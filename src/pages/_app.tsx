@@ -3,13 +3,13 @@ import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import Head from 'next/head';
 
-import clsx from 'clsx';
-import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import CustomCursor from '@/components/custom-cursor';
 import Layout from '@/components/layout';
 import { ThemeProvider } from '@/contexts/theme-context';
 import '@/styles/globals.css';
+import cn from '@/util/cn';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,7 +32,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 
       <ThemeProvider>
         <main
-          className={clsx(
+          className={cn(
             'bg-neutral flex h-full w-full flex-col ',
             inter.variable,
             calSans.variable
@@ -40,6 +40,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
         >
           <Layout>
             <Component {...pageProps} />
+            <SpeedInsights />
+            <Analytics />
           </Layout>
         </main>
       </ThemeProvider>
