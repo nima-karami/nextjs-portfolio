@@ -10,7 +10,7 @@ import { ThemeStyles } from '@/util/types';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
   const [hover, setHover] = useState(false);
   const router = useRouter();
 
@@ -23,6 +23,7 @@ const CustomCursor = () => {
 
   const onMouseMove = (event: MouseEvent) => {
     setPosition({ x: event.clientX, y: event.clientY });
+    if (hidden) setHidden(false);
   };
 
   const onMouseEnter = () => {
@@ -69,8 +70,14 @@ const CustomCursor = () => {
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseenter', onMouseEnter);
-      document.removeEventListener('mouseleave', onMouseLeave);
+      document.querySelectorAll('a, button').forEach(
+        (el) => {
+          el.removeEventListener('mouseenter', onMouseEnter);
+          el.removeEventListener('mouseleave', onMouseLeave);
+          el.classList.remove('cursor-none');
+        },
+        [router.route]
+      );
       document.removeEventListener('touchstart', onTouchStart);
       document.removeEventListener('touchend', onTouchEnd);
     };
