@@ -14,11 +14,6 @@ export default function GradientBg() {
     dark: ['#0a0a0a', '#ffffff'],
     candy: ['#5eead4', '#99f6e4'],
   };
-  // const colors = {
-  //   light: ['#e2e8f0', '#cbd5e1'],
-  //   dark: ['#0a0a0a', '#0a0a0a'],
-  //   candy: ['#5eead4', '#99f6e4'],
-  // };
 
   useEffect(() => {
     const canvas = canvasRef.current;

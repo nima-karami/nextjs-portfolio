@@ -70,8 +70,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         >
           <Layout>
             <Component {...pageProps} />
-            <SpeedInsights />
-            <Analytics />
+            {process.env.NODE_ENV === 'production' && (
+              <>
+                <SpeedInsights />
+                <Analytics />
+              </>
+            )}
           </Layout>
         </main>
       </ThemeProvider>

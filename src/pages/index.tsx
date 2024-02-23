@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import Particles from '@/components/particles';
 import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
 import { ThemeStyles } from '@/util/types';
@@ -17,18 +16,21 @@ export default function Home() {
     light: 'bg-slate-50',
     dark: 'bg-neutral-900',
     candy: 'bg-teal-500',
+    stripes: 'bg-white',
   };
 
   const navLinkStyles: ThemeStyles = {
     light: 'text-slate-500 hover:text-slate-700 hover:font-bold',
     dark: 'text-neutral-400 hover:text-neutral-800 hover:font-bold',
     candy: 'text-teal-400 hover:text-zinc-300 hover:font-bold',
+    stripes: 'text-white hover:text-slate-700 hover:font-bold',
   };
 
   const subTitleStyles: ThemeStyles = {
     light: 'text-slate-500',
     dark: 'text-zinc-400',
     candy: 'text-teal-400',
+    stripes: 'text-white',
   };
 
   return (

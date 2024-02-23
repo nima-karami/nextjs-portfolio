@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import { motion } from 'framer-motion';
 import Markdown from 'markdown-to-jsx';
 

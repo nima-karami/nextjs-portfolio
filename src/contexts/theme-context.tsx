@@ -32,7 +32,7 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   };
 
   const handleNextTheme = () => {
-    const themes = [Theme.Light, Theme.Dark, Theme.Candy];
+    const themes = Object.values(Theme);
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
     setTheme(themes[nextIndex]);

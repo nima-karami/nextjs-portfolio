@@ -3,6 +3,7 @@ import cn from '@/util/cn';
 import { Theme, ThemeStyles } from '@/util/types';
 
 import GradientBg from './gradient-bg';
+import MovingStripesBg from './moving-stripes-bg';
 
 const DynamicBg: React.FC = () => {
   const { theme } = useTheme();
@@ -10,12 +11,6 @@ const DynamicBg: React.FC = () => {
     light: 'bg-gradient-to-b from-slate-100 via-slate-200 to-slate-100',
     dark: 'bg-neutral-900',
     candy: 'bg-gradient-to-b from-teal-100 via-teal-200 to-teal-100',
-  };
-
-  const backgrounds: { [key in Theme]: React.ReactNode } = {
-    light: <GradientBg />,
-    dark: <GradientBg />,
-    candy: <GradientBg />,
   };
 
   return (
@@ -31,3 +26,10 @@ const DynamicBg: React.FC = () => {
 };
 
 export default DynamicBg;
+
+const backgrounds: { [key in Theme]: React.ReactNode } = {
+  light: <GradientBg />,
+  dark: <GradientBg />,
+  candy: <GradientBg />,
+  stripes: <MovingStripesBg />,
+};
