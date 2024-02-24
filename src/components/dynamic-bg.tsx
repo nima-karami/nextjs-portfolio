@@ -21,9 +21,11 @@ const DynamicBg: React.FC = () => {
         styles[theme]
       )}
     >
-      {theme !== Theme.Stripes && backgrounds[theme]}
+      {backgrounds[theme]}
 
-      <MovingStripesBg isVisible={theme === Theme.Stripes} />
+      {backgrounds[theme] !== Theme.Light && (
+        <MovingStripesBg isVisible={theme === Theme.Stripes} />
+      )}
     </div>
   );
 };
