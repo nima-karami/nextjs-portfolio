@@ -11,7 +11,7 @@ import {
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import chroma from 'chroma-js';
 import { motion } from 'framer-motion';
-import { Vector3 } from 'three';
+import * as THREE from 'three';
 
 import cn from '@/util/cn';
 
@@ -172,8 +172,8 @@ const Rectangle: React.FC<RectangleProps> = ({
     <Instance
       ref={meshRef}
       color={color}
-      position={position as any}
-      scale={size as any}
+      position={new THREE.Vector3(position[0], position[1], position[2])}
+      scale={new THREE.Vector3(size[0], size[1], size[2])}
     />
   );
 };
