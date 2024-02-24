@@ -89,18 +89,21 @@ const h1Styles = {
   light: 'text-slate-400',
   dark: 'text-neutral-300',
   candy: 'text-teal-500',
+  stripes: 'text-neutral-300',
 };
 
 const h2Styles = {
   light: 'text-slate-600',
   dark: 'text-neutral-50',
   candy: 'text-teal-400',
+  stripes: 'text-neutral-300',
 };
 
 const descriptionStyles: ThemeStyles = {
   light: 'text-slate-400',
   dark: 'text-neutral-100',
   candy: 'text-teal-500',
+  stripes: 'text-neutral-300',
 };
 
 const tagsStyles = {
@@ -108,6 +111,14 @@ const tagsStyles = {
   dark: 'text-neutral-300 hover:bg-white hover:text-slate-800',
   candy:
     'text-teal-300 bg-teal-800 border-teal-900 hover:bg-white hover:text-teal-800',
+  stripes: ' border hover:bg-white hover:text-blue-600',
+};
+
+const barStyles = {
+  light: 'bg-slate-300',
+  dark: 'bg-neutral-400',
+  candy: 'bg-teal-500',
+  stripes: 'bg-blue-300',
 };
 
 const ResumePage: React.FC = () => {
@@ -158,7 +169,7 @@ const ResumePage: React.FC = () => {
                       initial={{ width: 0 }}
                       animate={{ width: `${item.level * 20}%` }}
                       transition={{ delay: 0.5, duration: 1 }}
-                      className="h-full rounded-full bg-teal-400"
+                      className={cn('h-full rounded-full', barStyles[theme])}
                     />
                   </div>
                 </div>

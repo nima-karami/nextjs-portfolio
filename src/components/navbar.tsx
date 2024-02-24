@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import { motion } from 'framer-motion';
 
+import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
 
 import Logo from './logo';
@@ -15,9 +16,25 @@ const navigation = [
   { name: 'Contact', href: '/contact' },
 ];
 
+const styles = {
+  light: 'text-slate-500 hover:text-slate-700 hover:font-bold',
+  dark: 'text-neutral-400 hover:text-neutral-100 hover:font-bold',
+  candy: 'text-teal-400 hover:text-zinc-300 hover:font-bold',
+  stripes: 'text-neutral-300 hover:text-blue-600 hover:font-bold',
+};
+
+const activeStyles = {
+  light: 'font-bold text-slate-700',
+  dark: 'font-bold text-neutral-300',
+  candy: 'font-bold text-teal-300',
+  stripes: 'font-bold text-white',
+};
+
 const Navbar: React.FC = () => {
   const router = useRouter();
   const pathname = router.pathname;
+  const { theme } = useTheme();
+
   return (
     <motion.nav
       initial={{ opacity: 0 }}
@@ -36,10 +53,9 @@ const Navbar: React.FC = () => {
                 key={index}
                 href={item.href}
                 className={cn(
-                  ' cursor-none transition-all duration-500 hover:text-teal-300',
-                  pathname === item.href
-                    ? 'font-bold text-teal-300'
-                    : 'text-zinc-400'
+                  ' cursor-none transition-all duration-500',
+                  styles[theme],
+                  pathname === item.href ? activeStyles[theme] : ''
                 )}
               >
                 {item.name}

@@ -59,7 +59,7 @@ const CardContent: React.FC<CardContentProps> = ({ logo, title, href }) => {
   return (
     <Link
       className={cn(
-        'text flex flex-col items-center justify-center gap-2 p-20 py-0 text-5xl  sm:gap-4 sm:py-32 sm:text-7xl',
+        'text flex h-full w-full flex-col items-center justify-center gap-2 p-20 py-0 text-5xl  sm:gap-4 sm:py-32 sm:text-7xl',
         styles[theme]
       )}
       href={href}

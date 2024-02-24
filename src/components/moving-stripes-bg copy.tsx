@@ -1,69 +1,42 @@
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo, useRef } from 'react';
 
 import {
-  Bvh,
-  Center,
   Instance,
   Instances,
   OrbitControls,
   OrthographicCamera,
-  PerformanceMonitor,
 } from '@react-three/drei';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import chroma from 'chroma-js';
 import { motion } from 'framer-motion';
 
-import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
 
 const MovingStripesBg: React.FC = ({ isVisible }) => {
   const colors = ['black', 'navy', 'blue', 'cyan', 'white'];
-  const [mounted, setMounted] = useState(false);
-  const containerRef = useRef(null);
-  const [dims, setDims] = useState({ width: 0, height: 0 });
+  const [mounted, setMounted] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      setDims({
-        width: containerRef.current.clientWidth,
-        height: containerRef.current.clientHeight,
-      });
-    }
-    console.log('containerRef dims', dims);
-  }, [containerRef.current]);
-
   return (
     <motion.div
-      ref={containerRef}
       className={cn('h-full w-full ', isVisible ? 'opacity-100' : 'opacity-0')}
       style={{ backgroundColor: colors[0] }}
     >
-      {mounted && (
-        <Canvas>
-          <PerformanceMonitor
-            onIncline={(e) => console.warn('incline', e)}
-            onDecline={(e) => console.warn('decline', e)}
-          />
-          <Bvh firstHitOnly>
-            <ambientLight intensity={3} />
-
-            <Rectangles
-              cols={400}
-              rows={10}
-              colors={colors}
-              colorSteps={0}
-              gapX={0.01}
-              gapY={0.1}
-            />
-
-            <OrbitControls />
-          </Bvh>
-        </Canvas>
-      )}
+      <Canvas>
+        <ambientLight intensity={3} />
+        <Rectangles
+          cols={400}
+          rows={10}
+          colors={colors}
+          colorSteps={0}
+          gapX={0.01}
+          gapY={0.1}
+        />
+        <OrbitControls />
+      </Canvas>
     </motion.div>
   );
 };
@@ -71,8 +44,6 @@ const MovingStripesBg: React.FC = ({ isVisible }) => {
 export default MovingStripesBg;
 
 const Rectangles = ({ cols, rows, colors, colorSteps, gapX, gapY }) => {
-  const viewport = useThree((state) => state.viewport);
-
   // Create an array of positions
   const rects = useMemo(() => {
     const rects: { position: number[]; color: string; size: number[] }[] = [];
@@ -102,29 +73,19 @@ const Rectangles = ({ cols, rows, colors, colorSteps, gapX, gapY }) => {
   }, [cols, rows]);
 
   return (
-    <Center
-      onCentered={({ container, height, width }) => {
-        if (viewport.height > viewport.width) {
-          container.scale.setScalar((viewport.width / width) * 1.5);
-        } else {
-          container.scale.setScalar(viewport.width / width);
-        }
-      }}
-    >
-      <Instances limit={5000}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial transparent opacity={0.8} />
-        {rects.map((rect, index) => (
-          <Rectangle
-            key={index}
-            factor={index}
-            color={rect.color}
-            position={rect.position}
-            size={rect.size}
-          />
-        ))}
-      </Instances>
-    </Center>
+    <Instances limit={5000}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial transparent opacity={0.8} />
+      {rects.map((rect, index) => (
+        <Rectangle
+          key={index}
+          factor={index}
+          color={rect.color}
+          position={rect.position}
+          size={rect.size}
+        />
+      ))}
+    </Instances>
   );
 };
 

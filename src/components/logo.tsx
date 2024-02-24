@@ -13,6 +13,7 @@ const Logo: React.FC<LogoProps> = ({ className = '' }) => {
     light: 'fill-slate-400',
     dark: 'fill-neutral-200',
     candy: 'fill-teal-800',
+    stripes: 'fill-white',
   };
 
   return (

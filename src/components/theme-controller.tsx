@@ -52,14 +52,15 @@ const ControllerButton: React.FC<ControllerButtonProps> = ({
 }) => {
   const { theme } = useTheme();
   const styles: ThemeStyles = {
-    light: 'text-slate-400',
-    dark: 'text-neutral-300',
-    candy: 'text-teal-500',
+    light: 'text-slate-400 hover:bg-white hover:text-slate-800',
+    dark: 'text-neutral-300 hover:bg-white hover:text-slate-800',
+    candy: 'text-teal-500 hover:bg-white hover:text-slate-800',
+    stripes: ' hover:bg-white hover:text-blue-600',
   };
   return (
     <button
       className={cn(
-        'rounded-full p-2 text-sm transition-colors duration-500 hover:bg-white hover:text-slate-800',
+        'rounded-full p-2 text-sm transition-colors duration-300  ',
         styles[theme]
       )}
       onClick={onClick}

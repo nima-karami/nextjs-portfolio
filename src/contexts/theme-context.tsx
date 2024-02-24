@@ -26,6 +26,7 @@ const ThemeContext = createContext({} as ThemeContextType);
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(Theme.Light);
   const [autoplay, setAutoplay] = useLocalStorage<boolean>('autoplay', true);
+
   const router = useRouter();
   const handleThemeChange = (theme: Theme) => {
     setTheme(theme);
