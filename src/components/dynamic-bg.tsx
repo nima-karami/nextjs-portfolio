@@ -11,6 +11,7 @@ const DynamicBg: React.FC = () => {
     light: 'bg-gradient-to-b from-slate-100 via-slate-200 to-slate-100',
     dark: 'bg-neutral-900',
     candy: 'bg-gradient-to-b from-teal-100 via-teal-200 to-teal-100',
+    stripes: 'bg-transparent',
   };
 
   return (
@@ -33,5 +34,5 @@ const backgrounds: { [key in Theme]: React.ReactNode } = {
   light: <GradientBg />,
   dark: <GradientBg />,
   candy: <GradientBg />,
-  stripes: <MovingStripesBg />,
+  stripes: null,
 };

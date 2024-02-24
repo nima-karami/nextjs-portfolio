@@ -54,6 +54,7 @@ const CardContent: React.FC<CardContentProps> = ({ logo, title, href }) => {
     light: 'text-slate-400',
     dark: 'text-neutral-300',
     candy: 'text-teal-800',
+    stripes: 'text-white',
   };
 
   return (

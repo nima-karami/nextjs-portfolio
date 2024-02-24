@@ -19,6 +19,7 @@ const CustomCursor = () => {
     light: 'border-white',
     dark: 'border-teal-500',
     candy: 'border-teal-800',
+    stripes: 'border-white',
   };
 
   const onMouseMove = (event: MouseEvent) => {

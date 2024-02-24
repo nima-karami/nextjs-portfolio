@@ -285,6 +285,7 @@ const CardTitle: React.FC<CardTitleProps> = ({ title, className = '' }) => {
     light: 'text-slate-400',
     dark: 'text-neutral-200',
     candy: 'text-teal-500',
+    stripes: 'text-neutral-300',
   };
 
   return (

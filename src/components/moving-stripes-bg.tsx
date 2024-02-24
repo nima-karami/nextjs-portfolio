@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   Bvh,
@@ -6,20 +6,23 @@ import {
   Instance,
   Instances,
   OrbitControls,
-  OrthographicCamera,
   PerformanceMonitor,
 } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import chroma from 'chroma-js';
 import { motion } from 'framer-motion';
+import { Vector3 } from 'three';
 
-import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
 
-const MovingStripesBg: React.FC = ({ isVisible }) => {
+type Props = {
+  isVisible: boolean;
+};
+
+const MovingStripesBg: React.FC<Props> = ({ isVisible }) => {
   const colors = ['black', 'navy', 'blue', 'cyan', 'white'];
   const [mounted, setMounted] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -57,7 +60,6 @@ const MovingStripesBg: React.FC = ({ isVisible }) => {
               colors={colors}
               colorSteps={0}
               gapX={0.01}
-              gapY={0.1}
             />
 
             <OrbitControls />
@@ -70,7 +72,21 @@ const MovingStripesBg: React.FC = ({ isVisible }) => {
 
 export default MovingStripesBg;
 
-const Rectangles = ({ cols, rows, colors, colorSteps, gapX, gapY }) => {
+type RectanglesProps = {
+  cols: number;
+  rows: number;
+  colors: string[];
+  colorSteps: number;
+  gapX: number;
+};
+
+const Rectangles: React.FC<RectanglesProps> = ({
+  cols,
+  rows,
+  colors,
+  colorSteps,
+  gapX,
+}) => {
   const viewport = useThree((state) => state.viewport);
 
   // Create an array of positions
@@ -128,15 +144,34 @@ const Rectangles = ({ cols, rows, colors, colorSteps, gapX, gapY }) => {
   );
 };
 
-const Rectangle = ({ factor, position, color, size }) => {
-  const meshRef = useRef();
+type RectangleProps = {
+  factor: number;
+  position: number[];
+  color: string;
+  size: number[];
+};
+
+const Rectangle: React.FC<RectangleProps> = ({
+  factor,
+  position,
+  color,
+  size,
+}) => {
+  const meshRef = useRef<THREE.InstancedMesh>();
   useFrame((state) => {
     const elapsedTime = state.clock.getElapsedTime();
     // oscilate up and down over time
-    meshRef.current.position.y += Math.sin(factor + elapsedTime) * 0.003;
+    if (meshRef.current) {
+      meshRef.current.position.y += Math.sin(factor + elapsedTime) * 0.003;
+    }
   });
   return (
-    <Instance ref={meshRef} color={color} position={position} scale={size} />
+    <Instance
+      ref={meshRef}
+      color={color}
+      position={position as any}
+      scale={size as any}
+    />
   );
 };
 

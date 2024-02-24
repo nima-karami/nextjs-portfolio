@@ -13,6 +13,7 @@ export default function GradientBg() {
     light: ['#e2e8f0', '#cbd5e1'],
     dark: ['#0a0a0a', '#ffffff'],
     candy: ['#5eead4', '#99f6e4'],
+    stripes: ['#0a0a0a', '#ffffff'],
   };
 
   useEffect(() => {
