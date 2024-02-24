@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { useTheme } from '@/contexts/theme-context';
 import cn from '@/util/cn';
 import { Theme, ThemeStyles } from '@/util/types';
@@ -15,18 +17,18 @@ const DynamicBg: React.FC = () => {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className={cn(
         'fixed inset-0 -z-[999] transition-all duration-500',
         styles[theme]
       )}
     >
-      {backgrounds[theme]}
-
-      {backgrounds[theme] !== Theme.Light && (
-        <MovingStripesBg isVisible={theme === Theme.Stripes} />
-      )}
-    </div>
+      <AnimatePresence mode="wait">{backgrounds[theme]}</AnimatePresence>
+      <MovingStripesBg isVisible={theme === Theme.Stripes} />
+    </motion.div>
   );
 };
 

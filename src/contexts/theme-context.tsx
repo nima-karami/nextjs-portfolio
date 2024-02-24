@@ -33,7 +33,7 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   };
 
   const handleNextTheme = () => {
-    const themes = Object.values(Theme);
+    const themes = [Theme.Dark, Theme.Light, Theme.Stripes];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
     setTheme(themes[nextIndex]);
@@ -51,7 +51,7 @@ const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     if (autoplay) {
       const interval = setInterval(() => {
         handleNextTheme();
-      }, 5000);
+      }, 4000);
       return () => clearInterval(interval);
     }
   }, [autoplay, theme]);

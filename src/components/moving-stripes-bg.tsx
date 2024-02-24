@@ -42,7 +42,10 @@ const MovingStripesBg: React.FC<Props> = ({ isVisible }) => {
   return (
     <motion.div
       ref={containerRef}
-      className={cn('h-full w-full ', isVisible ? 'opacity-100' : 'opacity-0')}
+      className={cn(
+        'h-full w-full duration-500',
+        isVisible ? 'opacity-100' : 'opacity-0'
+      )}
       style={{ backgroundColor: colors[0] }}
     >
       {mounted && (
