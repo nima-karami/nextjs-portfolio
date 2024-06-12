@@ -111,7 +111,7 @@ const tagsStyles = {
   dark: 'text-neutral-300 hover:bg-white hover:text-slate-800',
   candy:
     'text-teal-300 bg-teal-800 border-teal-900 hover:bg-white hover:text-teal-800',
-  stripes: ' border hover:bg-white hover:text-blue-600',
+  stripes: ' hover:bg-white hover:text-blue-600',
 };
 
 const barStyles = {
@@ -128,6 +128,14 @@ const ResumePage: React.FC = () => {
     <div className="flex h-full w-full gap-6 overflow-y-auto px-8 sm:px-20 md:pt-12 lg:pt-16">
       <div className="mt-32 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
+          <div className="flex lg:hidden">
+            <ShimmerBorderCard scaleOnHover>
+              <CardTitle title="About Me" />
+              <p className={cn('font-sans text-sm', descriptionStyles[theme])}>
+                <Markdown>{aboutMe.description}</Markdown>
+              </p>
+            </ShimmerBorderCard>
+          </div>
           <ShimmerBorderCard scaleOnHover>
             <CardTitle title="Experience" />
             {experience.map((item, index) => (
@@ -142,12 +150,14 @@ const ResumePage: React.FC = () => {
           </ShimmerBorderCard>
         </div>
         <div className="flex flex-col gap-4 max-lg:pb-28">
-          <ShimmerBorderCard scaleOnHover>
-            <CardTitle title="About Me" />
-            <p className={cn('font-sans text-sm', descriptionStyles[theme])}>
-              <Markdown>{aboutMe.description}</Markdown>
-            </p>
-          </ShimmerBorderCard>
+          <div className="hidden lg:flex">
+            <ShimmerBorderCard scaleOnHover>
+              <CardTitle title="About Me" />
+              <p className={cn('font-sans text-sm', descriptionStyles[theme])}>
+                <Markdown>{aboutMe.description}</Markdown>
+              </p>
+            </ShimmerBorderCard>
+          </div>
           <ShimmerBorderCard scaleOnHover>
             <CardTitle title="Skills" />
             <div className="flex w-full flex-col gap-2">

@@ -1,7 +1,9 @@
 import React from 'react';
 
+import SwirlingColorsBg from '@/components/swirling-colors-bg';
+
 const TestPage: React.FC = () => {
-  return <h1>Test Page</h1>;
+  return <SwirlingColorsBg />;
 };
 
 export default TestPage;
