@@ -71,7 +71,7 @@ export default function Home() {
             subTitleStyles[theme]
           )}
         >
-          Full Stack Developer | UX Designer
+          Lead Full-stack Developer
         </h2>
       </div>
     </div>

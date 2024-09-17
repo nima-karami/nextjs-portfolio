@@ -25,13 +25,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
-        <title>Nima Karami | Fullstack Developer | UX Designer</title>
+        <title>Nima Karami | Lead Full-stack Developer</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Nima Karami | Portfolio" />
         <meta name="author" content="Nima Karami" />
         <meta
           name="keywords"
-          content="Nima Karami, Portfolio, Developer, Fullstack Developer, React Developer, NextJS Developer, User Experience Designer, Web Developer"
+          content="Nima Karami, Portfolio, Developer, Fullstack Developer, React Developer, NextJS Developer, Web Developer"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
