@@ -20,7 +20,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/background-wavetsx"
+    "src/components/background-wavetsx",
+    "jest.setup.ts"
   ],
   "exclude": ["node_modules"]
 }
