@@ -10,7 +10,7 @@ const experience = [
   {
     logo: 'https://via.placeholder.com/150',
     title: 'TimePlay',
-    position: 'Lead Fullstack Developer',
+    position: 'Lead Fullstack Developer | Product Engineer',
     date: '2022 - Present',
     description: [
       'Spearheaded the development of fully **accessible mobile web applications**, adhering to **WCAG 2.0 standards** and delivering seamless user experiences with **React**, **Typescript**, **WebSocket**, and **Tailwind CSS**. Leveraged **Framer Motion** to ensure smooth interactions and transitions, showcasing a meticulous **attention to detail** and commitment to **user satisfaction**.',
@@ -52,7 +52,7 @@ const education = [
 
 const aboutMe = {
   logo: 'https://via.placeholder.com/150',
-  description: `**Lead Fullstack Developer** based in **Toronto, Canada**, with a unique blend of engineering and design expertise stemming from a **Master of Architecture** degree from the **University of Waterloo**. Leveraging a diverse skill set honed through architectural innovation and hobbyist coding projects, I possess strong **communication**, **critical thinking**, and **problem-solving** abilities. From utilizing machine learning to craft emotion-aware architecture to automating video games and backtesting trading strategies, I bring **creativity** and **technical proficiency** to every project I undertake.`,
+  description: `**Lead Full-Stack Product Engineer** based in Toronto, Canada, combining expertise in **web development**, **product design**, and **architecture**. With a **Master of Architecture** from the **University of Waterloo**, I build **scalable**, **user-centric** digital products. Skilled in **JavaScript**, **TypeScript**, **React**, **Next.js**, and **Node.js**, I specialize in intuitive interfaces and technical solutions, **leading cross-functional teams** to deliver **accessible**, **high-quality** software.`,
 };
 
 const technologies = [

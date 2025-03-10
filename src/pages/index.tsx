@@ -71,7 +71,7 @@ export default function Home() {
             subTitleStyles[theme]
           )}
         >
-          Lead Full-stack Developer
+          Lead Full-stack Developer | Product Engineer
         </h2>
       </div>
     </div>
