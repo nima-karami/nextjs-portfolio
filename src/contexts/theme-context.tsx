@@ -10,10 +10,10 @@ import { useRouter } from 'next/router';
 
 import useLocalStorage from 'use-local-storage';
 
-import { Theme } from '@/util/types';
+import { Theme, ThemeType } from '@/util/types';
 
 type ThemeContextType = {
-  theme: Theme;
+  theme: ThemeType;
   handleThemeChange: (theme: Theme) => void;
   handleNextTheme: () => void;
   handleResetTheme: () => void;
@@ -24,11 +24,11 @@ type ThemeContextType = {
 const ThemeContext = createContext({} as ThemeContextType);
 
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(Theme.Light);
+  const [theme, setTheme] = useState<ThemeType>(Theme.Light);
   const [autoplay, setAutoplay] = useLocalStorage<boolean>('autoplay', true);
 
   const router = useRouter();
-  const handleThemeChange = (theme: Theme) => {
+  const handleThemeChange = (theme: ThemeType) => {
     setTheme(theme);
   };
 

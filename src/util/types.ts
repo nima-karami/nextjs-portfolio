@@ -5,6 +5,8 @@ export enum Theme {
   Stripes = 'stripes',
 }
 
+export type ThemeType = Theme.Light | Theme.Dark | Theme.Candy | Theme.Stripes;
+
 export type ThemeStyles = {
   [key in Theme]: string;
 };

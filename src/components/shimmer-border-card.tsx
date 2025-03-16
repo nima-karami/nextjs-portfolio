@@ -19,8 +19,9 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
 }) => {
   const { theme } = useTheme();
   const styles: ThemeStyles = {
-    light: 'border-slate-200 bg-slate-50/20 group-hover:bg-slate-50',
-    dark: 'border-neutral-800 bg-neutral-900/80 group-hover:bg-neutral-900',
+    light:
+      'border-slate-200 bg-slate-50/20 group-hover:bg-slate-50 text-slate-400',
+    dark: 'border-neutral-800 bg-neutral-900/80 group-hover:bg-neutral-900 text-neutral-200',
     candy: 'border-teal-50 bg-slate-50/20',
     stripes: `backdrop-blur-sm border-white bg-transparent text-white/80 group-hover:bg-black/80 `,
   };
@@ -36,7 +37,7 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
     <div
       id="shimmer-card"
       className={cn(
-        ' group relative w-full overflow-hidden rounded-lg  p-0.5 transition-all duration-500',
+        ' group relative w-full overflow-hidden rounded-lg p-0.5 transition-all duration-500',
         scaleOnHover ? 'hover:scale-[1.01]' : '',
         shimmerStyles[theme]
       )}
