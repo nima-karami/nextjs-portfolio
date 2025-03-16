@@ -13,6 +13,7 @@ import ShimmerBorderCard from './shimmer-border-card';
 
 const navigation = [
   { name: 'Resume', href: '/resume' },
+  { name: 'Portfolio', href: '/portfolio' },
   { name: 'Contact', href: '/contact' },
 ];
 

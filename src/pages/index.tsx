@@ -6,6 +6,7 @@ import { ThemeStyles } from '@/util/types';
 
 const navigation = [
   { name: 'Resume', href: '/resume' },
+  { name: 'Portfolio', href: '/portfolio' },
   { name: 'Contact', href: '/contact' },
 ];
 
