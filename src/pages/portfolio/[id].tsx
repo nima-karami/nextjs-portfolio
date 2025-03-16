@@ -1,11 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { FaArrowLeft, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 
+import ShimmerBorderCard from '@/components/shimmer-border-card';
+import { useTheme } from '@/contexts/theme-context';
 import { Project, projects } from '@/data/projects';
+import cn from '@/util/cn';
 
 interface ProjectDetailProps {
   project: Project;
@@ -13,78 +15,92 @@ interface ProjectDetailProps {
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
   const router = useRouter();
-
+  const { theme } = useTheme();
   if (router.isFallback) {
     return <div className="container mx-auto p-8">Loading...</div>;
   }
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12 md:pt-32 lg:pt-32">
-      <Link
-        href="/portfolio"
-        className="mb-8 flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+    <div className="container mx-auto max-w-4xl overflow-hidden px-4 py-12 md:pt-32 lg:pt-40">
+      <ShimmerBorderCard
+        className="h-full p-0"
+        classNames={{ wrapper: 'h-full' }}
       >
-        <FaArrowLeft size={12} />
-        Back to Portfolio
-      </Link>
+        <div className="flex flex-col items-center overflow-y-auto p-8">
+          <Link
+            href="/portfolio"
+            className="mb-8 flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <FaArrowLeft size={12} />
+            Back to Portfolio
+          </Link>
 
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold">{project.title}</h1>
-        </div>
-        <div className="flex gap-3">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 text-white hover:bg-gray-700"
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <h1 className={cn('font-display text-3xl font-bold')}>
+                {project.title}
+              </h1>
+            </div>
+            <div className="flex gap-3">
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 text-white hover:bg-gray-700"
+                >
+                  <FaGithub /> GitHub
+                </a>
+              )}
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
+                >
+                  <FaExternalLinkAlt /> Live Demo
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div className="mb-8 shrink-0 overflow-hidden rounded-xl">
+            <video
+              className="w-full"
+              controls
+              poster={project.thumbnail}
+              preload="metadata"
             >
-              <FaGithub /> GitHub
-            </a>
-          )}
-          {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
-            >
-              <FaExternalLinkAlt /> Live Demo
-            </a>
-          )}
+              <source src={project.videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div className="mb-8">
+            <h2 className="mb-4 font-display text-xl font-bold">Description</h2>
+            <p className="font-sans text-gray-700 dark:text-gray-300">
+              {project.description}
+            </p>
+          </div>
+
+          <div className="flex w-full flex-col">
+            <h2 className="mb-4 font-display text-xl font-bold">
+              Technologies
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full bg-gray-100 px-3 py-1 font-sans text-sm dark:bg-gray-800"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="relative mb-8 h-96 w-full overflow-hidden rounded-xl">
-        <Image
-          src={project.imageUrl}
-          alt={project.title}
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      <div className="mb-8">
-        <h2 className="mb-4 text-xl font-bold">Description</h2>
-        <p className="text-gray-700 dark:text-gray-300">
-          {project.description}
-        </p>
-      </div>
-
-      <div>
-        <h2 className="mb-4 text-xl font-bold">Technologies</h2>
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
+      </ShimmerBorderCard>
     </div>
   );
 };

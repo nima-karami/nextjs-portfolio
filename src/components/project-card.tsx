@@ -15,10 +15,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <ShimmerBorderCard scaleOnHover className="h-full">
       <Link href={project.href} className="block h-full w-full">
-        <div className="flex h-full flex-col p-6">
-          <div className="relative mb-4 h-48 w-full overflow-hidden rounded-lg">
+        <div className="flex h-full flex-col p-2">
+          <div className="relative mb-8 h-48 w-full overflow-hidden rounded-lg">
             <Image
-              src={project.imageUrl}
+              src={project.thumbnail}
               alt={project.title}
               fill
               className="object-cover"

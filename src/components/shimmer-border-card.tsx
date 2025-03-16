@@ -10,12 +10,18 @@ type ShimmerBorderCardProps = {
   children: React.ReactNode;
   scaleOnHover?: boolean;
   className?: string;
+  classNames?: {
+    wrapper?: string;
+  };
 };
 
 const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
   children,
   scaleOnHover = false,
   className = '',
+  classNames = {
+    wrapper: '',
+  },
 }) => {
   const { theme } = useTheme();
   const styles: ThemeStyles = {
@@ -37,9 +43,10 @@ const ShimmerBorderCard: React.FC<ShimmerBorderCardProps> = ({
     <div
       id="shimmer-card"
       className={cn(
-        ' group relative w-full overflow-hidden rounded-lg p-0.5 transition-all duration-500',
+        'group relative w-full overflow-hidden rounded-lg p-0.5 transition-all duration-500',
         scaleOnHover ? 'hover:scale-[1.01]' : '',
-        shimmerStyles[theme]
+        shimmerStyles[theme],
+        classNames.wrapper
       )}
     >
       <div
