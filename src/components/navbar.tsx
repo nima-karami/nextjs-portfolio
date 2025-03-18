@@ -46,15 +46,15 @@ const Navbar: React.FC = () => {
       <ShimmerBorderCard className="px-6 py-4">
         <div className="flex w-full justify-between">
           <Link href="/" aria-label="Home">
-            <Logo className="" />
+            <Logo className="h-6 w-20 sm:h-12 sm:w-36" />
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ">
             {navigation.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
                 className={cn(
-                  ' cursor-none transition-all duration-500',
+                  ' cursor-none text-xs transition-all duration-500 sm:text-sm',
                   styles[theme],
                   pathname === item.href ? activeStyles[theme] : ''
                 )}

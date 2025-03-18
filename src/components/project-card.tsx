@@ -13,7 +13,11 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { theme } = useTheme();
   return (
-    <ShimmerBorderCard scaleOnHover className="h-full">
+    <ShimmerBorderCard
+      scaleOnHover
+      className="h-full "
+      classNames={{ wrapper: 'shrink-0 h-[500px]' }}
+    >
       <Link href={project.href} className="block h-full w-full">
         <div className="flex h-full flex-col p-2">
           <div className="relative mb-8 h-48 w-full overflow-hidden rounded-lg">
