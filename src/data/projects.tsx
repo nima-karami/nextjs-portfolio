@@ -18,7 +18,7 @@ export const projects: Project[] = [
     thumbnail: 'https://placehold.co/600x400',
     description:
       'A modern portfolio built with Next.js and Tailwind CSS featuring smooth animations and a custom theme system.',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     imageUrl: 'https://placehold.co/600x400',
     videoUrl: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
     href: '/portfolio/deal-or-no-deal-mobile',
@@ -33,6 +33,7 @@ export const projects: Project[] = [
       'Three accessible and interactive digital scratch cards built with React, Tailwind CSS, and HeroUI. This project features unique animations, sounds, user authentication, and a custom user lobby.',
     technologies: [
       'React',
+      'Typescript',
       'HeroUI',
       'Tailwind CSS',
       'Framer Motion',
@@ -50,19 +51,26 @@ export const projects: Project[] = [
     thumbnail: '/images/generation-social-thumbnail.jpg',
     description:
       'A modern landing page designed and built for a social media marketing agency. Features a unique and playful take with custom animations, distinct navbar, and an interactive socials section.',
-    technologies: ['Figma', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    technologies: [
+      'Figma',
+      'Next.js',
+      'Typescript',
+      'Tailwind CSS',
+      'Framer Motion',
+    ],
     imageUrl: 'https://placehold.co/600x400',
     videoUrl: '/videos/generation-social.mp4',
     href: '/portfolio/generation-social',
   },
   {
     id: 'yours-ecommerce-store',
-    title: 'Yours Ecommerce Store',
-    thumbnail: 'https://placehold.co/600x400',
+    title: 'Yours Ecommerce Store (WIP)',
+    thumbnail: '/images/yours-ecommerce-store-thumbnail.jpg',
     description:
       'An interactive e-commerce store with customizable products and 3d product previews. This project intends to provide a unique shopping experience for customers.',
     technologies: [
       'React',
+      'Typescript',
       'Three.js',
       'Tailwind CSS',
       'Framer Motion',
@@ -70,8 +78,7 @@ export const projects: Project[] = [
       'Express',
     ],
     imageUrl: 'https://placehold.co/600x400',
-    videoUrl: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
+    videoUrl: '/videos/yours-ecommerce-store.mp4',
     href: '/portfolio/yours-ecommerce-store',
-    githubUrl: 'https://github.com/nima-karami/node-api',
   },
 ];
