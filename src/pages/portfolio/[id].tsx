@@ -29,7 +29,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
         <div className="flex flex-col items-center overflow-y-auto p-8">
           <Link
             href="/portfolio"
-            className="mb-8 flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+            className={cn(
+              'mb-8 flex items-center gap-2 text-sm transition-colors duration-500',
+              theme === 'light' && 'text-slate-400 hover:text-slate-600',
+              theme === 'dark' && 'text-neutral-300 hover:text-neutral-100',
+              theme === 'stripes' && 'text-white hover:text-blue-600'
+            )}
           >
             <FaArrowLeft size={12} />
             Back to Portfolio
@@ -79,9 +84,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
 
           <div className="mb-8">
             <h2 className="mb-4 font-display text-xl font-bold">Description</h2>
-            <p className="font-sans text-gray-700 dark:text-gray-300">
-              {project.description}
-            </p>
+            <p className="font-sans ">{project.description}</p>
           </div>
 
           <div className="flex w-full flex-col">
@@ -92,7 +95,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full bg-gray-100 px-3 py-1 font-sans text-sm dark:bg-gray-800"
+                  className={cn(
+                    'rounded-full px-3 py-1 font-sans text-base transition-all duration-500',
+                    theme === 'light' &&
+                      'bg-slate-200 text-slate-900 hover:bg-slate-900 hover:text-slate-200',
+                    theme === 'dark' &&
+                      'border border-white bg-transparent hover:bg-white hover:text-slate-800',
+                    theme === 'stripes' &&
+                      'border border-white bg-transparent hover:bg-white hover:text-blue-600'
+                  )}
                 >
                   {tech}
                 </span>

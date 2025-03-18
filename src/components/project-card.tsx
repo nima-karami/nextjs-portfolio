@@ -38,10 +38,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 <span
                   key={tech}
                   className={cn(
-                    'rounded-full px-2 py-1 font-sans text-xs',
+                    'rounded-full px-2 py-1 font-sans text-xs transition-all duration-500',
                     theme === 'light' && 'bg-slate-200 text-slate-900',
-                    theme === 'dark' && 'bg-gray-800',
-                    theme === 'stripes' && 'bg-blue-100'
+                    theme === 'dark' && 'border border-white bg-transparent',
+                    theme === 'stripes' && 'border border-white bg-transparent'
                   )}
                 >
                   {tech}
@@ -50,10 +50,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               {project.technologies.length > 3 && (
                 <span
                   className={cn(
-                    'rounded-full px-2 py-1 font-sans text-xs',
+                    'rounded-full px-2 py-1 font-sans text-xs transition-all duration-500',
                     theme === 'light' && 'bg-slate-200 text-slate-900',
-                    theme === 'dark' && 'bg-gray-800',
-                    theme === 'stripes' && 'bg-blue-100'
+                    theme === 'dark' && 'border border-white bg-transparent',
+                    theme === 'stripes' && 'border border-white bg-transparent'
                   )}
                 >
                   +{project.technologies.length - 3}

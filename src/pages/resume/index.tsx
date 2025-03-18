@@ -121,7 +121,7 @@ const ResumePage: React.FC = () => {
                 <div
                   key={index}
                   className={cn(
-                    'border-grey rounded-full border-2 px-4 py-2 font-sans text-xs transition-colors duration-500  sm:text-sm',
+                    'rounded-full border-2 px-4 py-2 font-sans text-xs transition-colors duration-500  sm:text-sm',
                     tagsStyles[theme]
                   )}
                 >
