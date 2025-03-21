@@ -51,7 +51,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <meta name="twitter:site" content="@nimakarami" />
         <meta
           name="twitter:title"
-          content="Nima Karami | Fullstack Developer | UX Designer"
+          content="Nima Karami | Lead Fullstack Developer | UX Designer"
         />
         <meta
           name="twitter:description"
