@@ -21,7 +21,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
   }
 
   return (
-    <div className=" w-full overflow-hidden px-8 py-12 sm:px-20 sm:pb-24 md:pt-32 lg:pt-40">
+    <div className=" w-full overflow-hidden px-8 py-28 sm:px-20 sm:pb-24 md:pt-32 lg:pt-40">
       <ShimmerBorderCard
         className="h-full justify-start overflow-y-auto p-8"
         classNames={{ wrapper: 'h-full ' }}
