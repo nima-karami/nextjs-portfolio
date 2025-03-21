@@ -15,20 +15,18 @@ export const projects: Project[] = [
   {
     id: 'deal-or-no-deal-mobile',
     title: 'Deal or No Deal Mobile',
-    thumbnail: 'https://placehold.co/600x400',
+    thumbnail: '/images/deal-or-no-deal-mobile-thumbnail.jpg',
     description:
       'A modern portfolio built with Next.js and Tailwind CSS featuring smooth animations and a custom theme system.',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     imageUrl: 'https://placehold.co/600x400',
-    videoUrl: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
+    videoUrl: '/videos/deal-or-no-deal-mobile.webm',
     href: '/portfolio/deal-or-no-deal-mobile',
-    demoUrl: 'https://www.example.com',
-    githubUrl: 'https://github.com/nima-karami/nextjs-portfolio',
   },
   {
     id: 'digital-scratch-cards',
     title: 'Digital Scratch Cards',
-    thumbnail: 'https://placehold.co/600x400',
+    thumbnail: '/images/digital-scratch-cards-thumbnail.jpg',
     description:
       'Three accessible and interactive digital scratch cards built with React, Tailwind CSS, and HeroUI. This project features unique animations, sounds, user authentication, and a custom user lobby.',
     technologies: [
@@ -40,10 +38,8 @@ export const projects: Project[] = [
       'Howler.js',
     ],
     imageUrl: 'https://placehold.co/600x400',
-    videoUrl: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
+    videoUrl: '/videos/digital-scratch-cards.webm',
     href: '/portfolio/digital-scratch-cards',
-    demoUrl: 'https://www.example.com/dashboard',
-    githubUrl: 'https://github.com/nima-karami/react-dashboard',
   },
   {
     id: 'generation-social',
@@ -59,7 +55,7 @@ export const projects: Project[] = [
       'Framer Motion',
     ],
     imageUrl: 'https://placehold.co/600x400',
-    videoUrl: '/videos/generation-social.mp4',
+    videoUrl: '/videos/generation-social.webm',
     href: '/portfolio/generation-social',
   },
   {
@@ -78,7 +74,7 @@ export const projects: Project[] = [
       'Express',
     ],
     imageUrl: 'https://placehold.co/600x400',
-    videoUrl: '/videos/yours-ecommerce-store.mp4',
+    videoUrl: '/videos/yours-ecommerce-store.webm',
     href: '/portfolio/yours-ecommerce-store',
   },
 ];

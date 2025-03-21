@@ -72,12 +72,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project }) => {
 
           <div className="mb-8 shrink-0 overflow-hidden rounded-xl">
             <video
-              className="w-full"
+              className="max-h-[60vh] w-full"
               controls
               poster={project.thumbnail}
               preload="metadata"
             >
-              <source src={project.videoUrl} type="video/mp4" />
+              <source src={project.videoUrl} type="video/webm" />
               Your browser does not support the video tag.
             </video>
           </div>
