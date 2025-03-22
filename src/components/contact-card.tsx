@@ -25,16 +25,16 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact }) => {
     <ShimmerBorderCard scaleOnHover className="max-sm:p-6">
       <Link
         className={cn(
-          'text flex h-full w-full flex-col items-center justify-center gap-2 p-20 py-0 text-5xl  sm:gap-4 sm:py-32 sm:text-7xl',
+          'flex h-full w-full flex-col items-center justify-center gap-2 p-0 py-0 text-5xl  sm:gap-4 sm:py-32 sm:text-7xl',
           styles[theme]
         )}
         href={href}
         target="_blank"
       >
-        <div className="flex ">{logo}</div>
-        <h1 className="w-full text-center font-sans text-sm font-bold ">
+        <div className="flex items-center justify-center">{logo}</div>
+        <h2 className="w-full text-center font-sans text-xs font-bold ">
           {title}
-        </h1>
+        </h2>
       </Link>
     </ShimmerBorderCard>
   );
