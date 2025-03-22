@@ -10,34 +10,34 @@ export const experience: Experience[] = [
   {
     logo: 'https://via.placeholder.com/150',
     title: 'TimePlay',
-    position: 'Lead Fullstack Developer | Product Engineer',
+    position: 'Lead Fullstack Developer & Product Designer',
     date: '2022 - Present',
     description: [
-      'Spearheaded the development of fully **accessible mobile web applications**, adhering to **WCAG 2.0 standards** and delivering seamless user experiences with **React**, **Typescript**, **WebSocket**, and **Tailwind CSS**. Leveraged **Framer Motion** to ensure smooth interactions and transitions, showcasing a meticulous **attention to detail** and commitment to **user satisfaction**.',
-      '**Directed a proficient team of developers** in the successful delivery of multiple web applications. Demonstrated exceptional **leadership and communication skills**, fostering a collaborative environment conducive to achieving project milestones and exceeding client expectations.',
-      'Exhibited expertise in **full-stack development**, seamlessly integrating front-end and back-end technologies such as **Typescript**, **React.js**, **Next.js**, **Node.js**, **MongoDB**, **Docker**, and more. Applied adept problem-solving abilities to overcome technical and design challenges, ensuring the **robustness** and **scalability** of software solutions.',
+      'Led a **team of 7 developers** in the successful delivery of a **monolithic web application**. Demonstrated exceptional **leadership** and **communication skills**.',
+
+      '**Conceptualized, wireframed, and implemented** a game store from start to finish.',
+
+      'Architected and developed a scalable monolithic React application, successfully integrating features such as **dynamic routing, state management, and performance optimization**.',
     ],
   },
   {
     logo: 'https://via.placeholder.com/150',
     title: 'Functionland',
-    position: 'Web Developer | UX Designer',
+    position: 'UX Designer & Web Developer',
     date: '2021 - 2022',
     description: [
-      'Collaborated with business and marketing teams to align website design with strategic objectives, enhancing value creation. Performed **agile-based** front-end maintenance to improve website **functionality** and **user engagement**.',
-      '**Led the design and development** of an innovative, user-friendly landing page, incorporating dynamic card components and a responsive carousel using **Svelte, JavaScript, HTML5, and CSS3**',
-      '**Directed a team of three designers** in producing high-quality media content, ensuring consistency and impact across digital platforms. **Reviewed design mockups** for technical feasibility and optimization, ensuring effective presentation on both mobile and desktop environments',
+      '**Led the design and development** of an innovative, user-friendly landing page.',
+      'Directed a **team of three designers** in producing high-quality media content, ensuring consistency and impact across digital platforms.',
     ],
   },
   {
     logo: 'https://via.placeholder.com/150',
     title: 'Diamond Schmitt',
-    position: 'Architect | Computational Designer',
+    position: 'Architect & Computational Designer',
     date: '2021 - 2022',
     description: [
       'Implemented **evolutionary algorithms** to **optimize tower placement and geometry**, enhancing urban space utilization and architectural aesthetics.',
       'Engineered an automated system for **simulating shadow impacts**, leveraging **weather data** to provide comprehensive environmental analysis.',
-      'Developed an innovative algorithm focused on **maximizing daylight access** and **minimizing heat loss**, contributing to **energy efficiency in high-rise residential buildings**.',
     ],
   },
 ];
@@ -63,7 +63,7 @@ export interface AboutMe {
 
 export const aboutMe: AboutMe = {
   logo: 'https://via.placeholder.com/150',
-  description: `**Lead Full-Stack Product Engineer** based in Toronto, Canada, combining expertise in **web development**, **product design**, and **architecture**. With a **Master of Architecture** from the **University of Waterloo**, I build **scalable**, **user-centric** digital products. Skilled in **JavaScript**, **TypeScript**, **React**, **Next.js**, and **Node.js**, I specialize in intuitive interfaces and technical solutions, **leading cross-functional teams** to deliver **accessible**, **high-quality** software.`,
+  description: `Self-driven **Lead Fullstack Developer and Product Designer** with a background in architecture, specializing in crafting **user-centric digital experiences** from **concept to launch**. Skilled in **UX/UI design, frontend development, and product strategy**, I autonomously lead **cross-functional projects**, design engaging user experiences, and deliver high-quality, scalable software used by thousands`,
 };
 
 export type Technology = string;
