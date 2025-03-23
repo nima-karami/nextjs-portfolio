@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: 'Deal or No Deal Mobile',
     thumbnail: '/images/deal-or-no-deal-mobile-thumbnail.jpg',
     description:
-      'A modern portfolio built with Next.js and Tailwind CSS featuring smooth animations and a custom theme system.',
+      'A web-based deal or no deal game designed to let audience members join the thrill of the famous Deal or No Deal game right from their phones. You could even get a chance to join the main stage or win exciting prizes! My role involved designing the user experience and interface, as well as developing the frontend of the application.',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     imageUrl: 'https://placehold.co/600x400',
     videoUrl: '/videos/deal-or-no-deal-mobile.webm',
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     title: 'Digital Scratch Cards',
     thumbnail: '/images/digital-scratch-cards-thumbnail.jpg',
     description:
-      'Three accessible and interactive digital scratch cards built with React, Tailwind CSS, and HeroUI. This project features unique animations, sounds, user authentication, and a custom user lobby.',
+      'Three accessible and interactive digital scratch cards built with React, Tailwind CSS, and HeroUI. This project features unique animations, sounds, user authentication, and a custom user lobby. My contribution involved leading a team of seven developers to implement the frontend and backend of the application.',
     technologies: [
       'React',
       'Typescript',
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     title: 'Generation Social',
     thumbnail: '/images/generation-social-thumbnail.jpg',
     description:
-      'A modern landing page designed and built for a social media marketing agency. Features a unique and playful take with custom animations, distinct navbar, and an interactive socials section.',
+      'A modern landing page designed and built for a social media marketing agency. Features a unique and playful take with custom animations, distinct navbar, and an interactive socials section. My role included designing the user experience and interface, along with frontend development of the website.',
     technologies: [
       'Figma',
       'Next.js',
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     title: 'Yours Ecommerce Store (WIP)',
     thumbnail: '/images/yours-ecommerce-store-thumbnail.jpg',
     description:
-      'An interactive e-commerce store with customizable products and 3d product previews. This project intends to provide a unique shopping experience for customers.',
+      'An interactive e-commerce store with customizable products and 3d product previews. This project intends to provide a unique shopping experience for customers. As the founder and lead developer, I am responsible for the design and development of the entire application.',
     technologies: [
       'React',
       'Typescript',
