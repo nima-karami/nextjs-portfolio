@@ -25,24 +25,26 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
-        <title>Nima Karami | Lead Full-stack Developer</title>
+        <title>
+          Nima Karami | Lead Full-stack Developer | Product Designer
+        </title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Nima Karami | Portfolio" />
         <meta name="author" content="Nima Karami" />
         <meta
           name="keywords"
-          content="Nima Karami, Portfolio, Developer, Fullstack Developer, React Developer, NextJS Developer, Web Developer"
+          content="Nima Karami, Portfolio, Developer, Fullstack Developer, React Developer, NextJS Developer, Web Developer, Product Designer, UI Designer, UX Designer, Software Engineer, Toronto Developer, Toronto Designer"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         <meta
           property="og:title"
-          content="Nima Karami | Fullstack Developer | UX Designer"
+          content="Nima Karami | Fullstack Developer | Product Designer"
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:description"
-          content="Toronto-based Fullstack Developer and UX Designer"
+          content="Toronto-based Fullstack Developer and Product Designer"
         />
         <meta property="og:image" content="/preview.png" />
         <meta property="og:url" content="https://www.nima-karami.com" />
@@ -51,11 +53,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <meta name="twitter:site" content="@nimakarami" />
         <meta
           name="twitter:title"
-          content="Nima Karami | Lead Fullstack Developer | UX Designer"
+          content="Nima Karami | Lead Fullstack Developer | Product Designer"
         />
         <meta
           name="twitter:description"
-          content="Toronto-based Fullstack Developer and UX Designer"
+          content="Toronto-based Fullstack Developer and Product Designer"
         />
         <meta name="twitter:image" content="/preview.png" />
       </Head>
