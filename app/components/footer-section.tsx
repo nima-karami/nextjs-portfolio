@@ -5,6 +5,11 @@ import Container from './container';
 function FooterSection() {
   return (
     <footer>
+      <div className="border-secondary w-full border-b">
+        <Container>
+          <div className="h-16" />
+        </Container>
+      </div>
       <section id="footer" className="border-secondary w-full border-b">
         <Container className="flex h-16 justify-between">
           <div className="border-secondary flex h-full items-center border-r px-4">
