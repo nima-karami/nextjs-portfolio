@@ -7,8 +7,10 @@ function HeroSection() {
       <Container className="animated-container flex w-full p-20">
         <div className="z-2 flex w-full flex-col items-center justify-center">
           <Headshot />
-          <h1 className="mt-6 text-4xl font-bold text-gray-200">Nima Karami</h1>
-          <p className="mt-2 text-center text-gray-400">
+          <h1 className="font-jura mt-6 text-4xl font-light text-gray-200 uppercase">
+            Nima Karami
+          </h1>
+          <p className="font-jura mt-2 text-center text-gray-400">
             Software Engineer | Web Developer | Tech Enthusiast
           </p>
           <p className="mt-4 max-w-xl text-center text-gray-300">

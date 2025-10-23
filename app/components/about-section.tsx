@@ -42,7 +42,7 @@ function AboutSection() {
 
         {/* Skills */}
         <div className="flex flex-col gap-4 p-16 text-gray-200">
-          <h3 className="text-lg font-semibold">Core Skills</h3>
+          <h3 className="font-jura text-xl font-light">Core Skills</h3>
           <ul className="">
             <li>
               <strong>Frontend:</strong> React, Next.js (App Router),

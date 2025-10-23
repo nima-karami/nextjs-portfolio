@@ -8,7 +8,7 @@ import ServicesSection from './components/services-section';
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center font-sans">
+    <div className="font-roboto flex items-center justify-center">
       <main className="flex w-full flex-col">
         <HeroSection />
         <ServicesSection />

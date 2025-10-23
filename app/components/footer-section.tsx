@@ -28,7 +28,7 @@ function FooterSection() {
           </Link>
           <div className="flex">
             <div className="border-secondary flex h-full items-center border-l px-4">
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-200">
                 © {new Date().getFullYear()} Nima Karami. All rights reserved.
               </p>
             </div>

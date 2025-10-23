@@ -44,10 +44,10 @@ type NavItemProps = {
 
 function NavItem({ href, label }: NavItemProps) {
   return (
-    <li className="hover:bg-secondary h-full w-20 transition duration-300">
+    <li className="hover:bg-secondary h-full w-24 transition duration-300">
       <Link
         href={href}
-        className="border-secondary flex h-full items-center justify-center border-l px-4 text-gray-200"
+        className="border-secondary font-jura flex h-full items-center justify-center border-l px-4 text-gray-200"
       >
         {label}
       </Link>
