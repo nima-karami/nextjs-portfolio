@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { SlSocialLinkedin } from 'react-icons/sl';
-import { VscGithubAlt } from 'react-icons/vsc';
-
+import AnimatedSocialIcon from './animated-social-icon';
 import Container from './container';
 
 function FooterSection() {
@@ -37,15 +35,21 @@ function FooterSection() {
             <div className="flex h-full items-center">
               <Link
                 href="https://www.linkedin.com/in/nima-karami/"
-                className="border-secondary hover:bg-secondary flex h-full items-center border-l px-4 text-sm text-gray-400 transition duration-300"
+                className="border-secondary hover:bg-secondary flex h-full items-center border-l text-sm text-gray-400 transition duration-300"
               >
-                <SlSocialLinkedin size={20} />
+                <AnimatedSocialIcon
+                  animationUrl="/lottie/linkedin.json"
+                  className="px-4"
+                />
               </Link>
               <Link
                 href="https://github.com/nima-karami"
-                className="border-secondary hover:bg-secondary flex h-full items-center border-l px-4 text-sm text-gray-400 transition duration-300"
+                className="border-secondary hover:bg-secondary flex h-full items-center border-l text-sm text-gray-400 transition duration-300"
               >
-                <VscGithubAlt size={20} />
+                <AnimatedSocialIcon
+                  animationUrl="/lottie/github.json"
+                  className="px-4"
+                />
               </Link>
             </div>
           </div>
