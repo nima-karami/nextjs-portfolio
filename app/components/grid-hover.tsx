@@ -6,7 +6,7 @@ const CELL_SIZE = 25;
 const FADE_DELAY = 100; // Time in ms before fade starts
 const GRID_LINE_COLOR = '#222222'; // border-neutral-900
 const GRID_LINE_WIDTH = 1;
-const ACTIVE_CELL_COLOR = 'rgba(129, 140, 248, {opacity})'; // indigo-400
+const ACTIVE_CELL_COLOR = 'rgba(34, 34, 34, {opacity})'; // indigo-400
 const ANIMATION_SPEED = 0.1;
 const MIN_OPACITY_THRESHOLD = 0.01;
 
