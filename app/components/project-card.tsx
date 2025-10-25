@@ -2,6 +2,8 @@
 
 import { useRef, useState } from 'react';
 
+import Image from 'next/image';
+
 import {
   motion,
   useMotionTemplate,
@@ -9,16 +11,23 @@ import {
   useSpring,
 } from 'motion/react';
 
-import { Service } from './services-section';
+import { Project } from './projects-section';
 
-type ServiceCardProps = Service;
+type ProjectCardProps = {
+  title: Project['title'];
+  description: Project['description'];
+  technologies: Project['technologies'];
+  thumbnail: Project['thumbnail'];
+  href: Project['href'];
+};
 
-function ServiceCard({
+function ProjectCard({
   title,
-  summary,
-  featureBullets,
-  price,
-}: ServiceCardProps) {
+  description,
+  technologies,
+  thumbnail,
+  href,
+}: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -68,18 +77,30 @@ function ServiceCard({
         transition={{ duration: 0.3 }}
       />
 
-      <div className="border-secondary relative z-10 flex h-32 flex-col border-b p-4">
+      <div className="border-secondary relative z-10 flex grow flex-col gap-4 border-b p-4">
+        <div>
+          <Image
+            src={thumbnail}
+            alt={`${title} Thumbnail`}
+            width={600}
+            height={400}
+            className="h-32 w-full object-cover"
+          />
+        </div>
         <h3 className="font-jura pb-2">{title}</h3>
-        <p className="text-sm text-gray-400">{summary}</p>
       </div>
-      <ul className="relative z-10 grow list-inside list-disc p-4 text-sm">
-        {featureBullets.map((bullet, index) => (
-          <li key={index}>{bullet}</li>
+      <ul className="flex flex-wrap gap-2 p-4 text-sm">
+        {technologies.map((technology, index) => (
+          <li
+            key={index}
+            className="border-secondary flex h-6 items-center border px-2 text-xs transition duration-300 hover:border-gray-200"
+          >
+            {technology}
+          </li>
         ))}
       </ul>
-      <p className="relative z-10 p-4 font-bold">Starting at {price}</p>
     </motion.div>
   );
 }
 
-export default ServiceCard;
+export default ProjectCard;

@@ -1,5 +1,53 @@
+import Markdown from 'markdown-to-jsx';
+
 import Container from './container';
 import SectionTitle from './section-title';
+import SoftSkillItem from './soft-skill-item';
+
+export type SoftSkill = {
+  skill: string;
+  level: 1 | 2 | 3 | 4 | 5;
+};
+
+export type TechnicalSkills = {
+  frontend: string[];
+  backend: string[];
+  design: string[];
+  other: string[];
+};
+
+type About = {
+  description: string;
+  softSkills: SoftSkill[];
+  technicalSkills: TechnicalSkills;
+};
+
+const ABOUT: About = {
+  description: `I'm **Nima Karami**, a full-stack developer based in Toronto with a background in architecture and design. I build web experiences that are fast, visually polished, and simple to use. My work focuses on **React**, **Next.js**, **Tailwind CSS**, and **Framer Motion**, combining creative design with reliable engineering.
+
+I currently lead front-end development at **TimePlay**, where I focus on performance, accessibility, and user experience. Over the years I've helped design systems, mentor developers, and ship production-grade applications for large audiences.
+
+Before becoming a developer, I studied architecture, which shaped how I think about structure, balance, and human experience. That training influences how I approach interfaces today. My goal is always to make technology feel intentional, functional, and enjoyable.
+
+Outside of work, I like exploring **interaction design**, **algorithmic trading**, and new ideas that connect design with technology.`,
+  softSkills: [
+    {
+      skill: 'Leadership',
+      level: 5,
+    },
+    {
+      skill: 'Problem-Solving',
+      level: 5,
+    },
+    { skill: 'Communication', level: 5 },
+  ],
+  technicalSkills: {
+    frontend: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    backend: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB'],
+    design: ['Figma', 'Photoshop', 'Rhinoceros 3D'],
+    other: ['Git', 'Vercel', 'Docker', 'Jest'],
+  },
+};
 
 function AboutSection() {
   return (
@@ -11,56 +59,58 @@ function AboutSection() {
         />
 
         <div className="border-secondary-dark flex flex-col gap-4 border-b p-16 text-gray-200">
-          <p>
-            I’m <strong>Nima Karami</strong>, a full-stack developer based in
-            Toronto with a background in architecture and design. I build web
-            experiences that are fast, visually polished, and simple to use. My
-            work focuses on <strong>React</strong>, <strong>Next.js</strong>,{' '}
-            <strong>Tailwind CSS</strong>, and <strong>Framer Motion</strong>,
-            combining creative design with reliable engineering.
-          </p>
-          <p>
-            I currently lead front-end development at <strong>TimePlay</strong>,
-            where I focus on performance, accessibility, and user experience.
-            Over the years I’ve helped design systems, mentor developers, and
-            ship production-grade applications for large audiences.
-          </p>
-          <p>
-            Before becoming a developer, I studied architecture, which shaped
-            how I think about structure, balance, and human experience. That
-            training influences how I approach interfaces today. My goal is
-            always to make technology feel intentional, functional, and
-            enjoyable.
-          </p>
-          <p>
-            Outside of work, I like exploring{' '}
-            <strong>interaction design</strong>,{' '}
-            <strong>algorithmic trading</strong>, and new ideas that connect
-            design with technology.
-          </p>
+          <Markdown
+            options={{
+              overrides: {
+                p: {
+                  props: {
+                    className: 'pb-4 last:pb-0',
+                  },
+                },
+              },
+            }}
+          >
+            {ABOUT.description}
+          </Markdown>
         </div>
 
-        {/* Skills */}
-        <div className="flex flex-col gap-4 p-16 text-gray-200">
-          <h3 className="font-jura text-xl font-light">Core Skills</h3>
-          <ul className="">
-            <li>
-              <strong>Frontend:</strong> React, Next.js (App Router),
-              TypeScript, Tailwind CSS, Framer Motion
-            </li>
-            <li>
-              <strong>Backend:</strong> Node.js, Express, PostgreSQL, Prisma,
-              Supabase
-            </li>
-            <li>
-              <strong>Design:</strong> UX/UI, accessibility (WCAG), responsive
-              systems, motion design
-            </li>
-            <li>
-              <strong>Other:</strong> Git, Vercel, Docker, Jest, CI/CD,
-              mentoring, system architecture
-            </li>
-          </ul>
+        <div className="flex">
+          {/* Soft Skills */}
+          <div className="border-secondary-dark flex w-1/2 flex-col gap-4 border-r p-16 text-gray-200">
+            <h3 className="font-jura text-xl font-light">Soft Skills</h3>
+            <ul className="">
+              {ABOUT.softSkills.map((skillItem, index) => (
+                <li key={index} className="pb-2">
+                  <SoftSkillItem
+                    skill={skillItem.skill}
+                    level={skillItem.level}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Technical Skills */}
+          <div className="flex w-1/2 flex-col gap-4 p-16 text-gray-200">
+            <h3 className="font-jura text-xl font-light">Technical Skills</h3>
+            <ul className="">
+              <li>
+                <strong>Frontend:</strong>{' '}
+                {ABOUT.technicalSkills.frontend.join(', ')}
+              </li>
+              <li>
+                <strong>Backend:</strong>{' '}
+                {ABOUT.technicalSkills.backend.join(', ')}
+              </li>
+              <li>
+                <strong>Design:</strong>{' '}
+                {ABOUT.technicalSkills.design.join(', ')}
+              </li>
+              <li>
+                <strong>Other:</strong> {ABOUT.technicalSkills.other.join(', ')}
+              </li>
+            </ul>
+          </div>
         </div>
       </Container>
     </section>

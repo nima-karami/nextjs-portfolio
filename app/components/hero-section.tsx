@@ -11,11 +11,12 @@ function HeroSection() {
             Nima Karami
           </h1>
           <p className="font-jura mt-2 text-center text-gray-400">
-            Software Engineer | Web Developer | Tech Enthusiast
+            Lead Full-stack Developer | UX/UI Designer
           </p>
           <p className="mt-4 max-w-xl text-center text-gray-300">
-            I build lightning-fast, design-driven frontends with React, Next.js,
-            and Framer Motion.
+            Software engineer with a background in design and architecture. I
+            specialize in building scalable web applications and crafting
+            user-centric digital experiences.
           </p>
         </div>
       </Container>

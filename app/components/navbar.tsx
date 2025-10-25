@@ -4,8 +4,8 @@ import Link from 'next/link';
 import Container from './container';
 
 const NAV_ITEMS = [
+  { href: '#experience', label: 'experience' },
   { href: '#about', label: 'about' },
-  { href: '#projects', label: 'projects' },
   { href: '#contact', label: 'contact' },
 ];
 
@@ -44,7 +44,7 @@ type NavItemProps = {
 
 function NavItem({ href, label }: NavItemProps) {
   return (
-    <li className="hover:bg-secondary h-full w-24 transition duration-300">
+    <li className="hover:bg-secondary h-full w-32 transition duration-300">
       <Link
         href={href}
         className="border-secondary font-jura flex h-full items-center justify-center border-l px-4 text-gray-200"
