@@ -21,7 +21,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Nima Karami Portfolio',
   description:
-    'Portfolio website of Nima Karami, a web developer and designer.',
+    'Portfolio Website of Nima Karami, a Lead Full-stack Developer and UX/UI Designer.',
 };
 
 export default function RootLayout({
@@ -31,6 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <meta property="og:image" content="/images/og-image.jpg" />
       <body className={`${jura.variable} ${roboto.variable} antialiased`}>
         <Navbar />
         {children}
