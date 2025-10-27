@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 import { AnimatePresence, motion } from 'motion/react';
 
-import LottieButton from './animated-hamburger-button';
 import AnimatedHamburgerButton from './animated-hamburger-button';
 import Container from './container';
 
@@ -47,11 +46,13 @@ function Navbar() {
         </ul>
 
         {/* Mobile Menu Button */}
-        <AnimatedHamburgerButton
-          isMenuOpen={isMenuOpen}
-          onClick={toggleMenu}
-          className="absolute right-4 z-51 h-12 w-12 hover:cursor-pointer md:hidden"
-        />
+        <div className="border-secondary hover:bg-secondary h-full w-20 border-l transition duration-300 md:hidden">
+          <AnimatedHamburgerButton
+            isMenuOpen={isMenuOpen}
+            onClick={toggleMenu}
+            className="absolute right-0 z-51 h-full w-20 p-4 hover:cursor-pointer md:hidden"
+          />
+        </div>
       </Container>
 
       {/* Mobile Full-Screen Menu */}
@@ -61,7 +62,7 @@ function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ delay: 0.1, duration: 0.5, ease: 'easeInOut' }}
+            transition={{ delay: 0.1, duration: 0.5 }}
             className="fixed inset-0 z-50 md:hidden"
           >
             <motion.div className="flex h-full flex-col bg-black">
