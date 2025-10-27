@@ -1,31 +1,21 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import cn from '../util/cn';
 
 interface AnimatedSocialIconProps {
-  animationUrl: string;
-  size?: number;
+  animationData: unknown;
   className?: string;
 }
 
 function AnimatedSocialIcon({
-  animationUrl,
-  size = 40,
+  animationData,
   className,
 }: AnimatedSocialIconProps) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
-  const [animationJSON, setAnimationJSON] = useState<unknown>(null);
-
-  useEffect(() => {
-    fetch(animationUrl)
-      .then((res) => res.json())
-      .then((data) => setAnimationJSON(data))
-      .catch((err) => console.error('Failed to load animation:', err));
-  }, [animationUrl]);
 
   const handleMouseEnter = () => {
     lottieRef.current?.play();
@@ -34,8 +24,6 @@ function AnimatedSocialIcon({
   const handleMouseLeave = () => {
     lottieRef.current?.stop();
   };
-
-  if (!animationJSON) return null;
 
   return (
     <div
@@ -48,7 +36,7 @@ function AnimatedSocialIcon({
     >
       <Lottie
         lottieRef={lottieRef}
-        animationData={animationJSON}
+        animationData={animationData}
         loop={true}
         autoplay={false}
       />

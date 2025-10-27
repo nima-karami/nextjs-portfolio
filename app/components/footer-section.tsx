@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import githubAnimation from '@/public/lottie/github.json';
+import linkedinAnimation from '@/public/lottie/linkedin.json';
+
 import AnimatedSocialIcon from './animated-social-icon';
 import Container from './container';
 
@@ -35,19 +38,23 @@ function FooterSection() {
             <div className="flex h-full items-center">
               <Link
                 href="https://www.linkedin.com/in/nima-karami/"
+                aria-label="LinkedIn Account"
+                target="_blank"
                 className="border-secondary hover:bg-secondary flex h-full items-center border-l text-sm text-gray-400 transition duration-300"
               >
                 <AnimatedSocialIcon
-                  animationUrl="/lottie/linkedin.json"
+                  animationData={linkedinAnimation}
                   className="px-2 md:px-4"
                 />
               </Link>
               <Link
                 href="https://github.com/nima-karami"
+                aria-label="Github Account"
+                target="_blank"
                 className="border-secondary hover:bg-secondary flex h-full items-center border-l text-sm text-gray-400 transition duration-300"
               >
                 <AnimatedSocialIcon
-                  animationUrl="/lottie/github.json"
+                  animationData={githubAnimation}
                   className="px-2 md:px-4"
                 />
               </Link>
