@@ -1,21 +1,14 @@
-'use client';
-
-import { useCallback } from 'react';
+import Link from 'next/link';
 
 function ContactButton() {
-  const onContactClick = useCallback(() => {
-    // Add your contact logic here (e.g., open modal, mailto link, etc.)
-    console.log('Contact button clicked');
-  }, []);
-
   return (
-    <button
-      onClick={onContactClick}
+    <Link
+      href="mailto:nkarami.dev@gmail.com"
       className="font-jura pointer-events-auto relative z-10 bg-gray-200 px-6 py-3 text-lg text-black shadow-md transition duration-300 hover:cursor-pointer hover:bg-blue-600 hover:text-white"
-      aria-label="Open contact form"
+      aria-label="Contact Me"
     >
       Contact Me
-    </button>
+    </Link>
   );
 }
 
