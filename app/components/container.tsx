@@ -13,7 +13,7 @@ function Container({ children, className = '', as = 'div' }: ContainerProps) {
   return (
     <Component
       className={cn(
-        'border-secondary container mx-auto border-r border-l',
+        'border-secondary mx-auto md:max-w-4xl md:border-r md:border-l lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl',
         className
       )}
     >
