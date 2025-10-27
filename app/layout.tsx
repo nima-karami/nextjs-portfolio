@@ -19,9 +19,9 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Nima Karami Portfolio',
+  title: 'Nima Karami',
   description:
-    'Portfolio Website of Nima Karami, a Lead Full-stack Developer and UX/UI Designer.',
+    'Website of Nima Karami, a Lead Full-stack Developer and UX/UI Designer.',
 };
 
 export default function RootLayout({
