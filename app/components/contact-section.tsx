@@ -9,7 +9,7 @@ function ContactSection() {
         <div className="absolute inset-0">
           <GridHover />
         </div>
-        <div className="pointer-events-none flex h-[600px] w-full flex-col items-center justify-center gap-4 p-20">
+        <div className="pointer-events-none flex h-[600px] w-full flex-col items-center justify-center gap-4 p-8 md:p-20">
           <h2 className="font-jura z-2 text-center text-4xl font-light text-white md:text-5xl lg:text-6xl">
             Get in Touch
           </h2>

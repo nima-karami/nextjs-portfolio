@@ -4,7 +4,7 @@ import Headshot from './headshot';
 function HeroSection() {
   return (
     <section id="hero" className="border-secondary w-full border-b">
-      <Container className="animated-container flex w-full p-20">
+      <Container className="animated-container flex w-full p-8 md:p-20">
         <div className="z-2 flex w-full flex-col items-center justify-center">
           <Headshot />
           <h1 className="font-jura mt-6 text-4xl font-light text-gray-200 uppercase">

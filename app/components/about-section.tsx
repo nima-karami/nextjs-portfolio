@@ -58,7 +58,7 @@ function AboutSection() {
           subtitle="Here's a brief overview of my background and skills."
         />
 
-        <div className="border-secondary-dark flex flex-col gap-4 border-b p-16 text-gray-200">
+        <div className="border-secondary-dark flex flex-col gap-4 border-b p-8 text-gray-200 md:p-16">
           <Markdown
             options={{
               overrides: {
@@ -74,9 +74,9 @@ function AboutSection() {
           </Markdown>
         </div>
 
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           {/* Soft Skills */}
-          <div className="border-secondary-dark flex w-1/2 flex-col gap-4 border-r p-16 text-gray-200">
+          <div className="border-secondary-dark flex w-full flex-col gap-4 border-b p-8 text-gray-200 md:w-1/2 md:border-r md:border-b-0 md:p-16">
             <h3 className="font-jura text-xl font-light">Soft Skills</h3>
             <ul className="">
               {ABOUT.softSkills.map((skillItem, index) => (
@@ -91,7 +91,7 @@ function AboutSection() {
           </div>
 
           {/* Technical Skills */}
-          <div className="flex w-1/2 flex-col gap-4 p-16 text-gray-200">
+          <div className="flex w-full flex-col gap-4 p-8 text-gray-200 md:w-1/2 md:p-16">
             <h3 className="font-jura text-xl font-light">Technical Skills</h3>
             <ul className="">
               <li>

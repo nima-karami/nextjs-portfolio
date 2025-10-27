@@ -28,7 +28,7 @@ function FooterSection() {
           </Link>
           <div className="flex">
             <div className="border-secondary flex h-full items-center border-l px-4">
-              <p className="text-sm text-gray-200">
+              <p className="text-xs text-gray-200 md:text-sm">
                 © {new Date().getFullYear()} Nima Karami. All rights reserved.
               </p>
             </div>
@@ -39,7 +39,7 @@ function FooterSection() {
               >
                 <AnimatedSocialIcon
                   animationUrl="/lottie/linkedin.json"
-                  className="px-4"
+                  className="px-2 md:px-4"
                 />
               </Link>
               <Link
@@ -48,7 +48,7 @@ function FooterSection() {
               >
                 <AnimatedSocialIcon
                   animationUrl="/lottie/github.json"
-                  className="px-4"
+                  className="px-2 md:px-4"
                 />
               </Link>
             </div>

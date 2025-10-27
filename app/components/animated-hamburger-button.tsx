@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
+
+import menuAnimation from '@/public/lottie/menu.json';
 
 type LottieButtonProps = {
   isMenuOpen: boolean;
@@ -10,17 +12,20 @@ type LottieButtonProps = {
   className?: string;
 };
 
-const ANIMATION_URL = '/lottie/menu.json';
-
 function AnimatedHamburgerButton({
   isMenuOpen,
   onClick,
   className,
 }: LottieButtonProps) {
   const lottieRef = useRef<LottieRefCurrentProps>(null);
-  const [animationJSON, setAnimationJSON] = useState<unknown>(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     lottieRef.current?.stop();
     if (isMenuOpen) {
       lottieRef.current?.playSegments([0, 60], true);
@@ -29,20 +34,11 @@ function AnimatedHamburgerButton({
     }
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    fetch(ANIMATION_URL)
-      .then((res) => res.json())
-      .then((data) => setAnimationJSON(data))
-      .catch((err) => console.error('Failed to load animation:', err));
-  }, []);
-
-  if (!animationJSON) return null;
-
   return (
     <button onClick={onClick} className={className} aria-label="Toggle Menu">
       <Lottie
         lottieRef={lottieRef}
-        animationData={animationJSON}
+        animationData={menuAnimation}
         loop={false}
         autoplay={false}
       />
