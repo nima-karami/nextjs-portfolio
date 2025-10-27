@@ -25,7 +25,7 @@ type About = {
 const ABOUT: About = {
   description: `I'm **Nima Karami**, a full-stack developer based in Toronto with a background in architecture and design. I build web experiences that are fast, visually polished, and simple to use. My work focuses on **React**, **Next.js**, **Tailwind CSS**, and **Framer Motion**, combining creative design with reliable engineering.
 
-I currently lead front-end development at **TimePlay**, where I focus on performance, accessibility, and user experience. Over the years I've helped design systems, mentor developers, and ship production-grade applications for large audiences.
+I currently lead front-end development at **TimePlay**, where I focus on performance, accessibility, and user experience. Over the years I've helped design systems, mentored developers, and shipped production-grade applications for large audiences.
 
 Before becoming a developer, I studied architecture, which shaped how I think about structure, balance, and human experience. That training influences how I approach interfaces today. My goal is always to make technology feel intentional, functional, and enjoyable.
 
