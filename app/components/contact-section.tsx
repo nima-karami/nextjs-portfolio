@@ -7,10 +7,12 @@ function ContactSection() {
   return (
     <section id="contact" className="border-secondary w-full border-b">
       <Container className="relative flex flex-col items-center justify-center">
-        <FadeInViewAnimation delay={0.1} duration={0.5}>
-          <div className="absolute inset-0">
-            <GridHover />
-          </div>
+        <FadeInViewAnimation
+          delay={0.1}
+          duration={0.5}
+          className="absolute inset-0"
+        >
+          <GridHover />
         </FadeInViewAnimation>
         <FadeInViewAnimation delay={0.2} duration={0.5}>
           <div className="pointer-events-none flex h-[600px] w-full flex-col items-center justify-center gap-4 p-8 md:p-20">

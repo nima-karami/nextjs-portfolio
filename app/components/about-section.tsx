@@ -81,8 +81,8 @@ function AboutSection() {
 
         <div className="flex flex-col md:flex-row">
           {/* Soft Skills */}
-          <FadeInViewAnimation delay={0.3} duration={0.5}>
-            <div className="border-secondary-dark flex w-full flex-col gap-4 border-b p-8 text-gray-200 md:w-1/2 md:border-r md:border-b-0 md:p-16">
+          <FadeInViewAnimation delay={0.3} duration={0.5} className="md:w-1/2">
+            <div className="border-secondary-dark flex w-full flex-col gap-4 border-b p-8 text-gray-200 md:border-r md:border-b-0 md:p-16">
               <h3 className="font-jura text-xl font-light">Soft Skills</h3>
               <ul className="">
                 {ABOUT.softSkills.map((skillItem, index) => (
@@ -98,8 +98,8 @@ function AboutSection() {
           </FadeInViewAnimation>
 
           {/* Technical Skills */}
-          <FadeInViewAnimation delay={0.4} duration={0.5}>
-            <div className="flex w-full flex-col gap-4 p-8 text-gray-200 md:w-1/2 md:p-16">
+          <FadeInViewAnimation delay={0.4} duration={0.5} className="md:w-1/2">
+            <div className="flex w-full flex-col gap-4 p-8 text-gray-200 md:p-16">
               <h3 className="font-jura text-xl font-light">Technical Skills</h3>
               <ul className="">
                 <li>
