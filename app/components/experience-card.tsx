@@ -11,7 +11,7 @@ function ExperienceCard({
   position,
 }: ExperienceCardProps) {
   return (
-    <div className="border-secondary-dark group flex flex-col gap-4 border-b p-8 transition duration-300 last:border-0 hover:bg-gray-200 md:p-16">
+    <div className="group flex flex-col gap-4 p-8 transition duration-300 hover:bg-gray-200 md:p-16">
       <div>
         <h3 className="font-jura text-xl font-light text-gray-100 transition duration-300 group-hover:text-gray-800">
           {position}

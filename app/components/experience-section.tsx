@@ -1,5 +1,6 @@
 import Container from './container';
 import ExperienceCard from './experience-card';
+import FadeInViewAnimation from './fade-in-view-animation';
 import SectionTitle from './section-title';
 
 export type Experience = {
@@ -46,14 +47,23 @@ function ExperienceSection() {
   return (
     <section id="experience" className="border-secondary w-full border-b">
       <Container className="flex flex-col">
-        <SectionTitle
-          title="Experience"
-          subtitle="Here's a brief overview of my professional experience:"
-        />
+        <FadeInViewAnimation delay={0.1} duration={0.5}>
+          <SectionTitle
+            title="Experience"
+            subtitle="Here's a brief overview of my professional experience:"
+          />
+        </FadeInViewAnimation>
 
         <div className="flex flex-col">
           {EXPERIENCE.map((item) => (
-            <ExperienceCard key={item.company} {...item} />
+            <FadeInViewAnimation
+              key={item.company}
+              delay={0.1}
+              duration={0.5}
+              className="border-secondary-dark border-b last:border-0"
+            >
+              <ExperienceCard {...item} />
+            </FadeInViewAnimation>
           ))}
         </div>
       </Container>
