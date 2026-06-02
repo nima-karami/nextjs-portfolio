@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Jura, Roboto } from 'next/font/google';
 
-import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import Navbar from './components/navbar';
+import { PostHogProvider } from './providers';
 import './globals.css';
 
 const jura = Jura({
@@ -32,10 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${jura.variable} ${roboto.variable} antialiased`}>
-        <Navbar />
-        {children}
-        <SpeedInsights />
-        <Analytics />
+        <PostHogProvider>
+          <Navbar />
+          {children}
+          <SpeedInsights />
+        </PostHogProvider>
       </body>
     </html>
   );
