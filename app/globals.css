@@ -9,10 +9,11 @@
   --color-canvas-via: #ddd6fe; /* violet-200 */
   --color-canvas-to: #bae6fd; /* sky-200 */
 
-  /* Frosted glass system. */
-  --color-glass-tint: oklch(1 0 0 / 0.55);
-  --color-glass-tint-2: oklch(1 0 0 / 0.35);
-  --color-glass-border: oklch(1 0 0 / 0.6);
+  /* Frosted glass system — low tint so the background reads through; the
+     backdrop blur does the frosting, not opacity. */
+  --color-glass-tint: oklch(1 0 0 / 0.16);
+  --color-glass-tint-2: oklch(1 0 0 / 0.1);
+  --color-glass-border: oklch(1 0 0 / 0.45);
   --color-glass-edge: oklch(0.7 0.05 280 / 0.4);
 
   /* Ink — readable on frost. */
@@ -21,8 +22,8 @@
   --color-accent: oklch(0.62 0.19 280);
 
   --radius-glass: 28px;
-  --shadow-glass: 0 8px 40px oklch(0.5 0.1 280 / 0.25);
-  --blur-glass: 20px;
+  --shadow-glass: 0 8px 40px oklch(0.5 0.1 280 / 0.2);
+  --blur-glass: 28px;
 }
 
 :root {
@@ -32,12 +33,19 @@
 
 body {
   min-height: 100dvh;
-  background: linear-gradient(
-    135deg,
-    var(--color-canvas-from),
-    var(--color-canvas-via),
-    var(--color-canvas-to)
-  );
+  /* Layered colour blobs so the frosted glass has something vivid to reveal.
+     This is a static stand-in for the animated background (Phase 4). */
+  background:
+    radial-gradient(40% 50% at 18% 22%, #a5b4fc 0%, transparent 60%),
+    radial-gradient(38% 45% at 82% 28%, #f5b8f0 0%, transparent 60%),
+    radial-gradient(45% 50% at 70% 82%, #7dd3fc 0%, transparent 60%),
+    radial-gradient(40% 45% at 25% 80%, #c4b5fd 0%, transparent 60%),
+    linear-gradient(
+      135deg,
+      var(--color-canvas-from),
+      var(--color-canvas-via),
+      var(--color-canvas-to)
+    );
   background-attachment: fixed;
   color: var(--color-ink);
   font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
@@ -52,7 +60,7 @@ body {
   border-radius: var(--radius-glass);
   box-shadow:
     var(--shadow-glass),
-    inset 0 1px 0 oklch(1 0 0 / 0.7);
+    inset 0 1px 0 oklch(1 0 0 / 0.4);
   color: var(--color-ink);
 }
 
