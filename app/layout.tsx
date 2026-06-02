@@ -3,7 +3,7 @@ import { Jura, Roboto } from 'next/font/google';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import Navbar from './components/navbar';
+import GlassShell from './shell/glass-shell';
 import { PostHogProvider } from './providers';
 import './globals.css';
 
@@ -30,11 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body className={`${jura.variable} ${roboto.variable} antialiased`}>
         <PostHogProvider>
-          <Navbar />
-          {children}
+          <GlassShell>{children}</GlassShell>
           <SpeedInsights />
         </PostHogProvider>
       </body>
