@@ -1,74 +1,45 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-jura: var(--font-jura);
-  --font-roboto: var(--font-roboto);
+  --font-mono: var(--font-jetbrains-mono);
 
-  /* Pastel canvas — the gradient behind the glass (also the body fallback). */
-  --color-canvas-from: #c7d2fe; /* indigo-200 */
-  --color-canvas-via: #ddd6fe; /* violet-200 */
-  --color-canvas-to: #bae6fd; /* sky-200 */
-
-  /* Frosted glass system — low tint so the background reads through; the
-     backdrop blur does the frosting, not opacity. */
-  --color-glass-tint: oklch(1 0 0 / 0.16);
-  --color-glass-tint-2: oklch(1 0 0 / 0.1);
-  --color-glass-border: oklch(1 0 0 / 0.45);
-  --color-glass-edge: oklch(0.7 0.05 280 / 0.4);
-
-  /* Ink — readable on frost. */
-  --color-ink: oklch(0.32 0.04 280);
-  --color-ink-soft: oklch(0.45 0.03 280);
-  --color-accent: oklch(0.62 0.19 280);
-
-  --radius-glass: 28px;
-  --shadow-glass: 0 8px 40px oklch(0.5 0.1 280 / 0.2);
-  --blur-glass: 28px;
+  /* Terminal palette — modern dark default (Claude-Code-ish). The `theme`
+     command swaps these at runtime via CSS vars on the terminal root. */
+  --color-term-bg: #0a0e14;
+  --color-term-fg: #c7d0d9;
+  --color-term-dim: #5c6773;
+  --color-term-accent: #59c2ff;
+  --color-term-green: #7fd962;
+  --color-term-amber: #ffb454;
+  --color-term-red: #ff6666;
+  --color-term-selection: #1f2a36;
 }
 
 :root {
-  --background: var(--color-canvas-via);
-  --foreground: var(--color-ink);
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  min-height: 100dvh;
-  /* Layered colour blobs so the frosted glass has something vivid to reveal.
-     This is a static stand-in for the animated background (Phase 4). */
-  background:
-    radial-gradient(40% 50% at 18% 22%, #a5b4fc 0%, transparent 60%),
-    radial-gradient(38% 45% at 82% 28%, #f5b8f0 0%, transparent 60%),
-    radial-gradient(45% 50% at 70% 82%, #7dd3fc 0%, transparent 60%),
-    radial-gradient(40% 45% at 25% 80%, #c4b5fd 0%, transparent 60%),
-    linear-gradient(
-      135deg,
-      var(--color-canvas-from),
-      var(--color-canvas-via),
-      var(--color-canvas-to)
-    );
-  background-attachment: fixed;
-  color: var(--color-ink);
-  font-family: var(--font-roboto), Arial, Helvetica, sans-serif;
+  background: var(--color-term-bg);
+  color: var(--color-term-fg);
+  font-family:
+    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* The primary frosted surface (the morphing shell + its silhouette fill). */
-@utility glass-surface {
-  background: var(--color-glass-tint);
-  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(140%);
-  backdrop-filter: blur(var(--blur-glass)) saturate(140%);
-  border: 1px solid var(--color-glass-border);
-  border-radius: var(--radius-glass);
-  box-shadow:
-    var(--shadow-glass),
-    inset 0 1px 0 oklch(1 0 0 / 0.4);
-  color: var(--color-ink);
+::selection {
+  background: var(--color-term-selection);
 }
 
-/* Lighter nested cards rendered inside the surface. */
-@utility glass-panel {
-  background: var(--color-glass-tint-2);
-  -webkit-backdrop-filter: blur(calc(var(--blur-glass) / 2)) saturate(130%);
-  backdrop-filter: blur(calc(var(--blur-glass) / 2)) saturate(130%);
-  border: 1px solid var(--color-glass-border);
-  border-radius: 18px;
+/* Thin terminal-style scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-term-dim) transparent;
 }
