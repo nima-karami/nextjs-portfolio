@@ -39,7 +39,7 @@ type AsciiOptions = {
 };
 
 class AsciiEffectImpl extends Effect {
-  constructor({ columns = 110, color = '#2b2926', background = '#f2efe6' }: AsciiOptions = {}) {
+  constructor({ columns = 110, color = '#59c2ff', background = '#0a0e14' }: AsciiOptions = {}) {
     const { texture, count } = buildGlyphAtlas();
     super('AsciiEffect', fragment, {
       attributes: EffectAttribute.CONVOLUTION,

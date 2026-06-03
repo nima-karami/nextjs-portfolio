@@ -14,12 +14,12 @@ export default function AsciiCanvas() {
       gl={{ antialias: false }}
       camera={{ position: [0, 0, 4], fov: 50 }}
     >
-      <color attach="background" args={['#000000']} />
+      <color attach="background" args={['#0a0e14']} />
       <Suspense fallback={null}>
         <PortraitScene />
       </Suspense>
       <EffectComposer>
-        <AsciiEffect color="#2b2926" background="#f2efe6" columns={120} />
+        <AsciiEffect color="#c7d0d9" columns={120} />
       </EffectComposer>
     </Canvas>
   );
