@@ -12,13 +12,11 @@ const projectsCmd: Command = {
             <p>
               <span className="text-term-accent font-semibold">{project.name}</span>
               {project.wip && (
-                <span className="text-term-amber ml-2 text-xs">[WIP]</span>
+                <span className="text-term-amber ml-2">[WIP]</span>
               )}
             </p>
             <p className="text-term-fg">{project.description}</p>
-            <p className="text-term-dim text-xs">
-              {project.technologies.join(' · ')}
-            </p>
+            <p className="text-term-dim">{project.technologies.join(' · ')}</p>
           </div>
         ))}
       </div>

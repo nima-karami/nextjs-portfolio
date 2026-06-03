@@ -3,9 +3,7 @@ import type { Command } from './registry';
 
 function Label({ children }: { children: string }) {
   return (
-    <p className="text-term-dim mt-3 mb-1 border-b border-term-selection pb-0.5 text-xs tracking-widest uppercase">
-      {children}
-    </p>
+    <p className="text-term-dim mt-3 mb-1 uppercase">── {children} ──</p>
   );
 }
 
@@ -17,7 +15,7 @@ const resume: Command = {
 
     print(
       <div>
-        <p className="text-term-accent text-lg font-semibold">{profile.name}</p>
+        <p className="text-term-accent font-semibold">{profile.name}</p>
         <p className="text-term-fg">{profile.title}</p>
         <p className="text-term-dim">{profile.location}</p>
         <p className="text-term-fg mt-2 max-w-2xl">{profile.tagline}</p>

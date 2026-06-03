@@ -13,7 +13,7 @@ export default function StatusLine({
 }) {
   return (
     <div
-      className={`flex items-center justify-between px-1 text-[11px] tracking-widest text-term-dim uppercase transition-opacity ${
+      className={`text-term-dim flex items-center justify-between px-1 transition-opacity ${
         reduced ? 'duration-0' : 'duration-700'
       } ${visible ? 'opacity-100' : 'opacity-0'}`}
     >

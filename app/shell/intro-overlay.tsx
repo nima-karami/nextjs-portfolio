@@ -2,23 +2,30 @@
 
 import { profile } from '../data/profile';
 
-// Pre-enter boot text. Kept in the bottom-left corner as plain terminal lines
-// (over the dark vignette) rather than a centered hero, so nothing floats on
-// top of the portrait subject.
+// Name as a figlet (Standard) banner — the terminal-authentic way to render
+// "big" text: many same-size cells forming large glyphs. Everything here is
+// one font at one size; hierarchy comes only from color/weight.
+const NAME_BANNER = String.raw`  _   _ ___ __  __    _
+ | \ | |_ _|  \/  |  / \
+ |  \| || || |\/| | / _ \
+ | |\  || || |  | |/ ___ \
+ |_| \_|___|_|  |_/_/   \_\
+  _  __    _    ____      _    __  __ ___
+ | |/ /   / \  |  _ \    / \  |  \/  |_ _|
+ | ' /   / _ \ | |_) |  / _ \ | |\/| || |
+ | . \  / ___ \|  _ <  / ___ \| |  | || |
+ |_|\_\/_/   \_\_| \_\/_/   \_\_|  |_|___|`;
+
 export default function IntroOverlay({ reduced }: { reduced: boolean }) {
   return (
-    <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-start justify-end p-4 md:p-6">
-      <p className="text-term-fg text-xl tracking-[0.2em] uppercase md:text-2xl">
-        {profile.name}
-      </p>
-      <p className="text-term-dim mt-0.5 text-[11px] tracking-[0.25em] uppercase">
-        {profile.title}
-      </p>
-      <p
-        className={`text-term-accent mt-4 text-sm tracking-widest ${reduced ? '' : 'animate-pulse'}`}
-      >
-        press any key to enter ▮
-      </p>
+    <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-start justify-end gap-3 overflow-hidden p-4 md:p-6">
+      <pre className="text-term-fg leading-none">{NAME_BANNER}</pre>
+      <div>
+        <p className="text-term-dim">{profile.title}</p>
+        <p className={`text-term-accent ${reduced ? '' : 'animate-pulse'}`}>
+          press any key to enter ▮
+        </p>
+      </div>
     </div>
   );
 }
