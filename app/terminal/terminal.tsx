@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
+import Stage from '../ascii/stage';
 import Banner from './banner';
 import InputLine from './input-line';
 import Output from './output';
@@ -31,6 +32,7 @@ export default function Terminal() {
       aria-label="Interactive terminal"
     >
       <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
+        <Stage />
         <Banner />
         <Output lines={lines} />
         <div ref={wrapRef}>
