@@ -19,7 +19,7 @@ const NAME_BANNER = String.raw`  _   _ ___ __  __    _
 export default function IntroOverlay({ reduced }: { reduced: boolean }) {
   return (
     <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-start justify-end gap-3 overflow-hidden p-4 md:p-6">
-      <pre className="text-term-fg leading-none">{NAME_BANNER}</pre>
+      <pre className="text-term-fg -ml-[2ch] leading-none">{NAME_BANNER}</pre>
       <div>
         <p className="text-term-dim">{profile.title}</p>
         <p className={`text-term-accent ${reduced ? '' : 'animate-pulse'}`}>
