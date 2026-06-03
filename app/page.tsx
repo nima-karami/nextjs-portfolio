@@ -1,5 +1,5 @@
-import Terminal from './terminal/terminal';
+import Experience from './shell/experience';
 
 export default function Home() {
-  return <Terminal />;
+  return <Experience />;
 }

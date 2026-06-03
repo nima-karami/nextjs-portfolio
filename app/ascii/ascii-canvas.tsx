@@ -2,9 +2,10 @@
 
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
+import { Suspense } from 'react';
 
 import { AsciiEffect } from './ascii-effect';
-import TorusScene from './scenes/torus';
+import PortraitScene from './scenes/portrait';
 
 export default function AsciiCanvas() {
   return (
@@ -14,11 +15,11 @@ export default function AsciiCanvas() {
       camera={{ position: [0, 0, 4], fov: 50 }}
     >
       <color attach="background" args={['#0a0e14']} />
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[2, 3, 4]} intensity={2.2} />
-      <TorusScene />
+      <Suspense fallback={null}>
+        <PortraitScene />
+      </Suspense>
       <EffectComposer>
-        <AsciiEffect />
+        <AsciiEffect color="#c7d0d9" columns={120} />
       </EffectComposer>
     </Canvas>
   );

@@ -84,7 +84,6 @@ export default function InputLine({ onRun, history }: InputLineProps) {
         autoCorrect="off"
         aria-label="terminal input"
         className="text-term-fg caret-term-accent flex-1 bg-transparent outline-none"
-        autoFocus
       />
     </div>
   );

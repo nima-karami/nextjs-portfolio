@@ -11,7 +11,7 @@ const AsciiCanvas = dynamic(() => import('./ascii-canvas'), {
 
 export default function Stage() {
   return (
-    <div className="mb-4 h-44 w-full md:h-56" aria-hidden="true">
+    <div className="h-full w-full" aria-hidden="true">
       <AsciiCanvas />
     </div>
   );

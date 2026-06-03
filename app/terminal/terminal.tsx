@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 
-import Stage from '../ascii/stage';
 import Banner from './banner';
 import InputLine from './input-line';
 import Output from './output';
 import { useTerminal } from './use-terminal';
 
+// Fills its panel; the ASCII stage lives in the sibling panel (see Experience).
 export default function Terminal() {
   const { lines, history, run } = useTerminal();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -26,19 +26,17 @@ export default function Terminal() {
   };
 
   return (
-    <main
+    <div
       onClick={focusInput}
-      className="flex h-dvh flex-col p-4 md:p-6"
+      className="flex h-full flex-col overflow-y-auto p-4"
+      ref={scrollRef}
       aria-label="Interactive terminal"
     >
-      <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
-        <Stage />
-        <Banner />
-        <Output lines={lines} />
-        <div ref={wrapRef}>
-          <InputLine onRun={run} history={history} />
-        </div>
+      <Banner />
+      <Output lines={lines} />
+      <div ref={wrapRef}>
+        <InputLine onRun={run} history={history} />
       </div>
-    </main>
+    </div>
   );
 }
