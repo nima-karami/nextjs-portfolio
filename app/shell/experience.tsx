@@ -44,13 +44,17 @@ export default function Experience() {
         gridTemplateColumns: '1fr',
       };
 
+  // Stepped (not eased) so the split snaps column-by-column like a redrawing
+  // terminal rather than gliding.
+  const gridTransition = reduced
+    ? 'none'
+    : 'grid-template-columns 700ms steps(16, end), grid-template-rows 700ms steps(16, end)';
+
   return (
     <main className="flex h-dvh flex-col gap-2 p-3 md:gap-3 md:p-4">
       <div
-        className={`grid min-h-0 flex-1 gap-3 transition-all ease-out md:gap-4 ${
-          reduced ? 'duration-0' : 'duration-700'
-        }`}
-        style={gridStyle}
+        className="grid min-h-0 flex-1 gap-3 md:gap-4"
+        style={{ ...gridStyle, transition: gridTransition }}
       >
         <section ref={terminalRef} className="min-h-0 min-w-0 overflow-hidden">
           <AsciiFrame title="terminal">
