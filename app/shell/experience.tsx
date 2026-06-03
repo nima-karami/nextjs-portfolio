@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Stage from '../ascii/stage';
 import Terminal from '../terminal/terminal';
 import { useMediaQuery, usePrefersReducedMotion } from '../util/hooks';
+import AsciiFrame from './ascii-frame';
 import IntroOverlay from './intro-overlay';
 import StatusLine from './status-line';
 
@@ -51,15 +52,16 @@ export default function Experience() {
         }`}
         style={gridStyle}
       >
-        <section
-          ref={terminalRef}
-          className="border-term-selection min-h-0 min-w-0 overflow-hidden rounded-sm border"
-        >
-          <Terminal />
+        <section ref={terminalRef} className="min-h-0 min-w-0 overflow-hidden">
+          <AsciiFrame title="terminal">
+            <Terminal />
+          </AsciiFrame>
         </section>
-        <section className="border-term-selection relative min-h-0 min-w-0 overflow-hidden rounded-sm border">
-          <Stage />
-          {!entered && <IntroOverlay reduced={reduced} />}
+        <section className="min-h-0 min-w-0 overflow-hidden">
+          <AsciiFrame title="portrait" meta="ascii" contentClassName="relative">
+            <Stage />
+            {!entered && <IntroOverlay reduced={reduced} />}
+          </AsciiFrame>
         </section>
       </div>
       <StatusLine visible={entered} reduced={reduced} />
