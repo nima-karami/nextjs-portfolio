@@ -3,20 +3,20 @@
 @theme {
   --font-mono: var(--font-jetbrains-mono);
 
-  /* Terminal palette — modern dark default (Claude-Code-ish). The `theme`
-     command swaps these at runtime via CSS vars on the terminal root. */
-  --color-term-bg: #0a0e14;
-  --color-term-fg: #c7d0d9;
-  --color-term-dim: #5c6773;
-  --color-term-accent: #59c2ff;
-  --color-term-green: #7fd962;
-  --color-term-amber: #ffb454;
-  --color-term-red: #ff6666;
-  --color-term-selection: #1f2a36;
+  /* Terminal palette — modern "paper" light default: ink-dark glyphs on warm
+     off-white. The `theme` command swaps these at runtime via CSS vars. */
+  --color-term-bg: #f2efe6;
+  --color-term-fg: #2b2926;
+  --color-term-dim: #837c6e;
+  --color-term-accent: #1f5fb0;
+  --color-term-green: #2f8a4e;
+  --color-term-amber: #b4690e;
+  --color-term-red: #c0392b;
+  --color-term-selection: #e3ddce;
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
