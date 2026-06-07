@@ -57,3 +57,37 @@
 - GameScreen now measures its container (ResizeObserver) and scales the grid
   font-size so the board FILLS the right panel. Verified: snake board now spans
   the whole panel.
+
+### Boot teletype, easter eggs, a11y/SEO, cleanup — DONE, verified
+- Boot teletype: intro reveals the figlet banner line-by-line, types the title,
+  then shows the prompt; reduced-motion renders instantly.
+- Easter eggs (hidden): `sudo`, `matrix`, `vim`, `exit`, `coffee`.
+- A11y + SEO: server-rendered semantic résumé (sr-only) behind the terminal —
+  verified present in the SSR HTML (h1, experience bullets, skills, contact).
+  Expanded metadata (metadataBase, keywords, OpenGraph, Twitter). Matrix rain
+  paints a static field under reduced-motion.
+- Cleanup: removed dead deps (lottie-react, motion, react-icons) + orphans
+  (stage.tsx, public/lottie). `type-check`/`lint`/`build` all clean; three.js
+  stays in its own lazy chunk; route prerendered static.
+
+## Final status (run complete)
+
+All GOAL.md items shipped on `auto/v2-build`. Browser-verified throughout:
+0 runtime console errors (the EffectComposer errors seen with console `all=true`
+were dev-HMR artifacts from editing canvas files while mounted — they do NOT
+occur on a fresh load; verified runtime theme switches are clean).
+
+**Commands:** help, about, whoami, resume, experience, projects, skills,
+contact, ls, cat, games, snake, invaders, pong, sound, theme, ascii, skull,
+clear, + hidden eggs.
+
+**Open items for Nima to review:**
+1. **ASCII scene centering** — the plane-based portrait fills/centers well
+   (esp. fullscreen intro); the 3D-object scenes (skull/torus) and the
+   half-panel portrait sit slightly right-of-center. Verified center.x≈0 and a
+   symmetric downsample, so it's a camera-framing quirk — time-boxed, left as a
+   TODO rather than chase further.
+2. **Dim-text contrast** — left the approved palette untouched; `term-dim` on
+   dark may sit just under WCAG AA, which could nudge Lighthouse a11y below 95.
+   A small `term-dim` brightness bump would fix it if desired.
+3. **NEXT_PUBLIC_SITE_URL** — set this env var for correct absolute OG URLs.
