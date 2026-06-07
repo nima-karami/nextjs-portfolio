@@ -40,6 +40,19 @@
   reduced-motion). ASCII portrait recolors per theme (ink/bg uniforms, effect
   keyed on theme). Verified crt-green in browser: full recolor incl. portrait.
 
+### ASCII scenes — DONE (functional), one polish caveat
+- `ascii <portrait|torus|matrix|skull>` switches the right-panel scene; `skull`
+  shortcut. Matrix = 2D canvas glyph-rain (theme-aware). Skull = CC0 model
+  (Kay Lousberg, poly.pizza, downloaded to public/models/skull.glb + CREDITS),
+  auto-fit + rotating through the ASCII shader. Flat symmetric lighting so the
+  whole silhouette renders.
+- **KNOWN ISSUE for Nima to review:** 3D-object scenes (skull/torus) render
+  slightly RIGHT-of-center and can clip on the right; the plane-based portrait
+  fills/centers fine. Verified center.x≈0 in world space, canvas fills its
+  panel, and the ASCII downsample is mathematically symmetric — so it's a
+  camera-framing quirk I time-boxed rather than chase further. Skull scaled down
+  to avoid clipping. A proper centering pass (camera/viewport) is a TODO.
+
 ### Nima feedback addressed (2026-06-02): games were too small
 - GameScreen now measures its container (ResizeObserver) and scales the grid
   font-size so the board FILLS the right panel. Verified: snake board now spans

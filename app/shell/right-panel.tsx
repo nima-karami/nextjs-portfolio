@@ -14,6 +14,10 @@ const GamePanel = dynamic(() => import('../games/game-panel'), {
   ssr: false,
   loading: () => null,
 });
+const MatrixRain = dynamic(() => import('../ascii/matrix-rain'), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function RightPanel({
   entered,
@@ -24,13 +28,16 @@ export default function RightPanel({
 }) {
   const { stage } = useShell();
   const isGame = stage.kind === 'game';
+  const isMatrix = stage.kind === 'scene' && stage.scene === 'matrix';
 
   return (
     <div className="relative h-full w-full" aria-hidden={isGame ? undefined : true}>
       {isGame ? (
         <GamePanel game={stage.game} />
+      ) : isMatrix ? (
+        <MatrixRain />
       ) : (
-        <AsciiCanvas scene={stage.scene} />
+        <AsciiCanvas scene={stage.kind === 'scene' ? stage.scene : 'portrait'} />
       )}
       {!entered && <IntroOverlay reduced={reduced} />}
     </div>

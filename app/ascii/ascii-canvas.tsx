@@ -9,11 +9,13 @@ import { ASCII_COLORS } from '../shell/themes';
 import type { SceneName } from '../shell/types';
 import { AsciiEffect } from './ascii-effect';
 import PortraitScene from './scenes/portrait';
+import SkullScene from './scenes/skull';
 import TorusScene from './scenes/torus';
 
 const SCENES: Partial<Record<SceneName, ComponentType>> = {
   portrait: PortraitScene,
   torus: TorusScene,
+  skull: SkullScene,
 };
 
 export default function AsciiCanvas({ scene = 'portrait' }: { scene?: SceneName }) {
@@ -29,8 +31,11 @@ export default function AsciiCanvas({ scene = 'portrait' }: { scene?: SceneName 
       camera={{ position: [0, 0, 4], fov: 50 }}
     >
       <color attach="background" args={['#000000']} />
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[2, 3, 4]} intensity={2.2} />
+      {/* Flat, symmetric front lighting so a 3D object's whole silhouette
+          renders evenly as glyphs (not just the lit side). */}
+      <ambientLight intensity={1.4} />
+      <directionalLight position={[2, 2, 4]} intensity={1.0} />
+      <directionalLight position={[-2, 2, 4]} intensity={1.0} />
       <Suspense fallback={null}>
         <Scene />
       </Suspense>
