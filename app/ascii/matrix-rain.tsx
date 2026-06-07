@@ -36,6 +36,22 @@ export default function MatrixRain() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
+    // Respect reduced-motion: paint a single static field, don't animate.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const fg = css('--color-term-fg', '#46ff7a');
+      ctx.fillStyle = css('--color-term-bg', '#0a0e14');
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = `${fontSize}px ui-monospace, monospace`;
+      ctx.fillStyle = fg;
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < Math.random() * 6; j++) {
+          const ch = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+          ctx.fillText(ch, i * fontSize, Math.random() * canvas.height);
+        }
+      }
+      return () => ro.disconnect();
+    }
+
     let last = performance.now();
     const loop = (t: number) => {
       const dt = t - last;

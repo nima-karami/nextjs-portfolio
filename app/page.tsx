@@ -1,10 +1,14 @@
 import Experience from './shell/experience';
 import { ShellProvider } from './shell/shell-context';
+import SeoContent from './seo-content';
 
 export default function Home() {
   return (
-    <ShellProvider>
-      <Experience />
-    </ShellProvider>
+    <>
+      <SeoContent />
+      <ShellProvider>
+        <Experience />
+      </ShellProvider>
+    </>
   );
 }
