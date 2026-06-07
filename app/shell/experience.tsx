@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import Stage from '../ascii/stage';
 import Terminal from '../terminal/terminal';
 import { useMediaQuery, usePrefersReducedMotion } from '../util/hooks';
 import AsciiFrame from './ascii-frame';
-import IntroOverlay from './intro-overlay';
+import RightPanel from './right-panel';
+import { useShell } from './shell-context';
 import StatusLine from './status-line';
 
 // Owns the boot -> split transition. Pre-enter: the portrait fills the frame
@@ -17,6 +17,10 @@ export default function Experience() {
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const reduced = usePrefersReducedMotion();
   const terminalRef = useRef<HTMLElement>(null);
+  const { stage } = useShell();
+
+  const panelTitle = stage.kind === 'game' ? stage.game : stage.scene;
+  const panelMeta = stage.kind === 'game' ? 'play' : 'ascii';
 
   useEffect(() => {
     if (entered) return;
@@ -62,9 +66,8 @@ export default function Experience() {
           </AsciiFrame>
         </section>
         <section className="min-h-0 min-w-0 overflow-hidden">
-          <AsciiFrame title="portrait" meta="ascii" contentClassName="relative">
-            <Stage />
-            {!entered && <IntroOverlay reduced={reduced} />}
+          <AsciiFrame title={panelTitle} meta={panelMeta} contentClassName="relative">
+            <RightPanel entered={entered} reduced={reduced} />
           </AsciiFrame>
         </section>
       </div>

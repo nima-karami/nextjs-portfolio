@@ -6,5 +6,23 @@
 ## Setup
 
 - Branch `auto/v2-build` created off `redesign/v2`.
-- `GOAL.md` scaffolded (DRAFT — awaiting Nima's vision + decisions).
-- No autonomous run started yet.
+- `GOAL.md` finalized (functionality-only run; keep look as-is).
+- Tooling verified end-to-end (Playwright drive + screenshot-read + console + downloads).
+
+## Run log (newest at bottom)
+
+### Shell foundation + Snake — DONE, verified
+- Added `ShellProvider`/`useShell` (stage/theme/sound state) threaded into the
+  command context (`ctx.shell`). Right panel now renders by stage:
+  portrait/scene (ASCII canvas) or game (`GamePanel`). `page.tsx` wraps in
+  `ShellProvider`.
+- Chiptune audio engine (`app/shell/audio.ts`, Web Audio, lazy, muted until
+  `sound on`). Wired `playSound` through `ctx.shell` (no-op until enabled).
+- Game framework: `useRaf`, `GameScreen`, `GamePanel` (focus mgmt, ESC/q exit).
+- **Snake**: ASCII grid, arrows/WASD, waits for first key, walls+self death,
+  game-over + R restart, score, speeds up. `snake` + `games` commands registered.
+- **BUG FOUND + FIXED (important for all games):** box-drawing glyphs (`─│┌`)
+  aren't in JetBrains Mono → fall back to a 14.3px-wide font vs 9px for normal
+  chars, so a mixed border/space grid misaligns (a "phantom" right-border line
+  floats mid-grid). Fix: games use pure ASCII borders (`+ - |`). Verified clean.
+- Verified in browser: launches, waits, steers, dies, restarts; 0 console errors.

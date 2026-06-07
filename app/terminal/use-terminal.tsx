@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 
+import { useShell } from '../shell/shell-context';
 import { captureEvent } from '../util/analytics';
 import { registry } from './commands';
 
@@ -16,6 +17,7 @@ export function useTerminal() {
   const [lines, setLines] = useState<Line[]>([]);
   const [history, setHistory] = useState<string[]>([]);
   const idRef = useRef(0);
+  const shell = useShell();
 
   const append = useCallback((kind: Line['kind'], content: ReactNode) => {
     setLines((prev) => [...prev, { id: ++idRef.current, kind, content }]);
@@ -53,9 +55,10 @@ export function useTerminal() {
         print: (node) => append('output', node),
         clear,
         registry,
+        shell,
       });
     },
-    [append, clear]
+    [append, clear, shell]
   );
 
   return { lines, history, run, clear };

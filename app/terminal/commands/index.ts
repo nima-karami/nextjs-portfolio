@@ -3,12 +3,14 @@ import cat from './cat';
 import clear from './clear';
 import contact from './contact';
 import experience from './experience';
+import games from './games';
 import help from './help';
 import ls from './ls';
 import projects from './projects';
 import type { Command, CommandRegistry } from './registry';
 import resume from './resume';
 import skills from './skills';
+import snake from './snake';
 import whoami from './whoami';
 
 const commands: Command[] = [
@@ -22,6 +24,8 @@ const commands: Command[] = [
   contact,
   ls,
   cat,
+  games,
+  snake,
   clear,
 ];
 
