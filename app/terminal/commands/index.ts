@@ -3,6 +3,7 @@ import ascii from './ascii';
 import cat from './cat';
 import clear from './clear';
 import contact from './contact';
+import { easterEggs } from './easter-eggs';
 import experience from './experience';
 import games from './games';
 import help from './help';
@@ -39,6 +40,7 @@ const commands: Command[] = [
   ascii,
   skull,
   clear,
+  ...easterEggs,
 ];
 
 export const registry: CommandRegistry = Object.fromEntries(
