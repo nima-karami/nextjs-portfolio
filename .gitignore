@@ -39,6 +39,7 @@ yarn-error.log*
 
 # playwright mcp (local QA artifacts)
 .playwright-mcp/
+tooling-check-*.png
 
 # typescript
 *.tsbuildinfo
