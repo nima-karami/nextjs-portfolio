@@ -14,6 +14,7 @@ import resume from './resume';
 import skills from './skills';
 import snake from './snake';
 import sound from './sound';
+import theme from './theme';
 import whoami from './whoami';
 
 const commands: Command[] = [
@@ -32,6 +33,7 @@ const commands: Command[] = [
   invaders,
   pong,
   sound,
+  theme,
   clear,
 ];
 

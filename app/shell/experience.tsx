@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Terminal from '../terminal/terminal';
 import { useMediaQuery, usePrefersReducedMotion } from '../util/hooks';
 import AsciiFrame from './ascii-frame';
+import CrtOverlay from './crt-overlay';
 import RightPanel from './right-panel';
 import { useShell } from './shell-context';
 import StatusLine from './status-line';
@@ -72,6 +73,7 @@ export default function Experience() {
         </section>
       </div>
       <StatusLine visible={entered} reduced={reduced} />
+      <CrtOverlay />
     </main>
   );
 }

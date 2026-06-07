@@ -187,6 +187,8 @@ export default function Pong({ onExit, playSound }: GameProps) {
   return (
     <GameScreen
       title={`pong   you ${pScore} — ${aScore} cpu`}
+      cols={W + 2}
+      rows={H + 2}
       hint={
         status === 'over' ? (
           <span className={pScore > aScore ? 'text-term-green' : 'text-term-amber'}>
@@ -197,7 +199,7 @@ export default function Pong({ onExit, playSound }: GameProps) {
         )
       }
     >
-      <pre ref={preRef} className="text-term-fg text-[15px] leading-none" />
+      <pre ref={preRef} className="text-term-fg leading-none" />
     </GameScreen>
   );
 }

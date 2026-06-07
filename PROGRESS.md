@@ -26,3 +26,21 @@
   chars, so a mixed border/space grid misaligns (a "phantom" right-border line
   floats mid-grid). Fix: games use pure ASCII borders (`+ - |`). Verified clean.
 - Verified in browser: launches, waits, steers, dies, restarts; 0 console errors.
+
+### Space Invaders, Pong, audio, discovery hint — DONE, verified
+- Invaders (fleet march/descend, shooting, bombs, lives, win/lose) and Pong
+  (paddles, ball physics, AI, first-to-7) — both ASCII, verified in browser.
+- `sound on|off` (chiptune, muted by default) + subtle typing clicks. `games`
+  command lists all three; banner nudges visitors toward `games`.
+
+### Themes + CRT — DONE, verified
+- `theme [name|list]` cycles/sets dark (default) / crt-green / crt-amber /
+  paper. CSS token overrides per `html[data-theme]`; per-theme accent.
+- CRT themes add pure-CSS scanlines + vignette + phosphor glow (flicker gated by
+  reduced-motion). ASCII portrait recolors per theme (ink/bg uniforms, effect
+  keyed on theme). Verified crt-green in browser: full recolor incl. portrait.
+
+### Nima feedback addressed (2026-06-02): games were too small
+- GameScreen now measures its container (ResizeObserver) and scales the grid
+  font-size so the board FILLS the right panel. Verified: snake board now spans
+  the whole panel.

@@ -226,6 +226,8 @@ export default function Invaders({ onExit, playSound }: GameProps) {
     <GameScreen
       title="invaders"
       score={score}
+      cols={W + 2}
+      rows={H + 2}
       hint={
         status === 'win' ? (
           <span className="text-term-green">you win — R play again · ESC quit</span>
@@ -239,7 +241,7 @@ export default function Invaders({ onExit, playSound }: GameProps) {
         )
       }
     >
-      <pre ref={preRef} className="text-term-fg text-[15px] leading-none" />
+      <pre ref={preRef} className="text-term-fg leading-none" />
     </GameScreen>
   );
 }

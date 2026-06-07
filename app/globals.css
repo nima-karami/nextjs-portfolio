@@ -43,3 +43,90 @@ body {
   scrollbar-width: thin;
   scrollbar-color: var(--color-term-dim) transparent;
 }
+
+/* ---- Themes (the `theme` command sets html[data-theme]) ---- */
+html[data-theme='crt-green'] {
+  color-scheme: dark;
+  --color-term-bg: #02160b;
+  --color-term-fg: #46ff7a;
+  --color-term-dim: #1f7a45;
+  --color-term-accent: #9bffc4;
+  --color-term-green: #46ff7a;
+  --color-term-amber: #c8ff00;
+  --color-term-red: #ff5d5d;
+  --color-term-selection: #0e4023;
+}
+html[data-theme='crt-amber'] {
+  color-scheme: dark;
+  --color-term-bg: #150d02;
+  --color-term-fg: #ffb000;
+  --color-term-dim: #8a5e1c;
+  --color-term-accent: #ffd373;
+  --color-term-green: #c8ff00;
+  --color-term-amber: #ffb000;
+  --color-term-red: #ff6a3d;
+  --color-term-selection: #3a2509;
+}
+html[data-theme='paper'] {
+  color-scheme: light;
+  --color-term-bg: #f2efe6;
+  --color-term-fg: #2b2926;
+  --color-term-dim: #837c6e;
+  --color-term-accent: #1f5fb0;
+  --color-term-green: #2f8a4e;
+  --color-term-amber: #b4690e;
+  --color-term-red: #c0392b;
+  --color-term-selection: #e3ddce;
+}
+
+/* Phosphor glow for CRT themes */
+html[data-theme^='crt'] body {
+  text-shadow: 0 0 2px color-mix(in srgb, var(--color-term-fg) 55%, transparent);
+}
+
+/* CRT scanline + vignette overlay (rendered by <CrtOverlay/> for crt themes) */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  mix-blend-mode: multiply;
+}
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 58%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
+}
+@media (prefers-reduced-motion: no-preference) {
+  .crt-overlay {
+    animation: crt-flicker 6s steps(60) infinite;
+  }
+  @keyframes crt-flicker {
+    0%,
+    95%,
+    100% {
+      opacity: 1;
+    }
+    96% {
+      opacity: 0.82;
+    }
+    97% {
+      opacity: 1;
+    }
+    98% {
+      opacity: 0.9;
+    }
+  }
+}

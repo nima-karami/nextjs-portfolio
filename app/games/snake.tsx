@@ -167,6 +167,8 @@ export default function Snake({ onExit, playSound }: GameProps) {
     <GameScreen
       title="snake"
       score={score}
+      cols={W + 2}
+      rows={H + 2}
       hint={
         status === 'over' ? (
           <span className="text-term-amber">game over — R restart · ESC quit</span>
@@ -177,7 +179,7 @@ export default function Snake({ onExit, playSound }: GameProps) {
         )
       }
     >
-      <pre ref={preRef} className="text-term-fg text-[15px] leading-none" />
+      <pre ref={preRef} className="text-term-fg leading-none" />
     </GameScreen>
   );
 }
