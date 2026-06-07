@@ -13,6 +13,7 @@ import type { Command, CommandRegistry } from './registry';
 import resume from './resume';
 import skills from './skills';
 import snake from './snake';
+import sound from './sound';
 import whoami from './whoami';
 
 const commands: Command[] = [
@@ -30,6 +31,7 @@ const commands: Command[] = [
   snake,
   invaders,
   pong,
+  sound,
   clear,
 ];
 

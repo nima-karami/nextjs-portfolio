@@ -1,7 +1,6 @@
 import { profile } from '../data/profile';
 
-// Placeholder welcome shown on load. Phase 4 replaces this with the ASCII boot
-// intro (name rendered as 3D ASCII through the renderer).
+// Terminal welcome shown on load.
 export default function Banner() {
   return (
     <div className="text-term-dim mb-4">
@@ -11,6 +10,9 @@ export default function Banner() {
       <p>
         Welcome. Type <span className="text-term-accent">help</span> to get
         started.
+      </p>
+      <p className="mt-1 opacity-80">
+        psst — bored? try <span className="text-term-accent">games</span>.
       </p>
     </div>
   );

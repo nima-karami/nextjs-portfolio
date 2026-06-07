@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 
+import { useShell } from '../shell/shell-context';
 import { registry } from './commands';
 import Prompt from './prompt';
 
@@ -15,8 +16,12 @@ export default function InputLine({ onRun, history }: InputLineProps) {
   const [value, setValue] = useState('');
   const [histIndex, setHistIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { playSound } = useShell();
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    // subtle typing click (only audible when `sound on`)
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) playSound('key');
+
     if (e.key === 'Enter') {
       onRun(value);
       setValue('');
