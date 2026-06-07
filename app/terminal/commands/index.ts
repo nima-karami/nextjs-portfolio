@@ -7,6 +7,7 @@ import games from './games';
 import help from './help';
 import invaders from './invaders';
 import ls from './ls';
+import pong from './pong';
 import projects from './projects';
 import type { Command, CommandRegistry } from './registry';
 import resume from './resume';
@@ -28,6 +29,7 @@ const commands: Command[] = [
   games,
   snake,
   invaders,
+  pong,
   clear,
 ];
 
