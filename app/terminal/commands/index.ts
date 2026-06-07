@@ -5,6 +5,7 @@ import contact from './contact';
 import experience from './experience';
 import games from './games';
 import help from './help';
+import invaders from './invaders';
 import ls from './ls';
 import projects from './projects';
 import type { Command, CommandRegistry } from './registry';
@@ -26,6 +27,7 @@ const commands: Command[] = [
   cat,
   games,
   snake,
+  invaders,
   clear,
 ];
 

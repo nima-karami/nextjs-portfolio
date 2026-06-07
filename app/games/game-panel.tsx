@@ -4,11 +4,13 @@ import { useEffect, useRef, type ComponentType } from 'react';
 
 import { useShell } from '../shell/shell-context';
 import type { GameName } from '../shell/types';
+import Invaders from './invaders';
 import Snake from './snake';
 import type { GameProps } from './types';
 
 const GAMES: Partial<Record<GameName, ComponentType<GameProps>>> = {
   snake: Snake,
+  invaders: Invaders,
 };
 
 export default function GamePanel({ game }: { game: GameName }) {
