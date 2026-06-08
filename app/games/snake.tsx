@@ -6,9 +6,6 @@ import { GameScreen } from './game-screen';
 import type { GameProps } from './types';
 import { useRaf } from './use-raf';
 
-const W = 30;
-const H = 18;
-
 type P = { x: number; y: number };
 type Dir = 'up' | 'down' | 'left' | 'right';
 
@@ -20,15 +17,17 @@ const VEC: Record<Dir, P> = {
 };
 const OPP: Record<Dir, Dir> = { up: 'down', down: 'up', left: 'right', right: 'left' };
 
-function spawnFood(snake: P[]): P {
+function spawnFood(snake: P[], w: number, h: number): P {
   let p: P;
   do {
-    p = { x: Math.floor(Math.random() * W), y: Math.floor(Math.random() * H) };
+    p = { x: Math.floor(Math.random() * w), y: Math.floor(Math.random() * h) };
   } while (snake.some((s) => s.x === p.x && s.y === p.y));
   return p;
 }
 
-export default function Snake({ onExit, playSound }: GameProps) {
+export default function Snake({ cols, rows, onExit, playSound }: GameProps) {
+  const W = cols - 2;
+  const H = rows - 2;
   const preRef = useRef<HTMLPreElement>(null);
   const [status, setStatus] = useState<'playing' | 'over'>('playing');
   const [started, setStarted] = useState(false);
@@ -50,34 +49,32 @@ export default function Snake({ onExit, playSound }: GameProps) {
     const grid: string[][] = Array.from({ length: H }, () => Array(W).fill(' '));
     grid[s.food.y][s.food.x] = '*';
     s.snake.forEach((p, i) => {
-      grid[p.y][p.x] = i === 0 ? '@' : 'o';
+      if (p.y >= 0 && p.y < H && p.x >= 0 && p.x < W) grid[p.y][p.x] = i === 0 ? '@' : 'o';
     });
-    // ASCII border only — box-drawing glyphs fall back to a wider font in
-    // JetBrains Mono and break grid alignment.
     const edge = '+' + '-'.repeat(W) + '+';
     const body = grid.map((r) => '|' + r.join('') + '|').join('\n');
     if (preRef.current) preRef.current.textContent = `${edge}\n${body}\n${edge}`;
-  }, []);
+  }, [W, H]);
 
-  // Populate the board into the ref (no React state) — safe to run in effects.
   const initBoard = useCallback(() => {
     const s = g.current;
+    const cx = Math.max(3, Math.floor(W / 3));
+    const cy = Math.floor(H / 2);
     s.snake = [
-      { x: 8, y: 9 },
-      { x: 7, y: 9 },
-      { x: 6, y: 9 },
+      { x: cx, y: cy },
+      { x: cx - 1, y: cy },
+      { x: cx - 2, y: cy },
     ];
     s.dir = 'right';
     s.nextDir = 'right';
-    s.food = spawnFood(s.snake);
+    s.food = spawnFood(s.snake, W, H);
     s.acc = 0;
     s.step = 0.12;
     s.dead = false;
     s.started = false;
     draw();
-  }, [draw]);
+  }, [W, H, draw]);
 
-  // Full restart (also resets the React state driving the hint/score/over UI).
   const reset = useCallback(() => {
     initBoard();
     setScore(0);
@@ -155,8 +152,8 @@ export default function Snake({ onExit, playSound }: GameProps) {
     if (nh.x === s.food.x && nh.y === s.food.y) {
       setScore((v) => v + 1);
       playSound('score');
-      s.step = Math.max(0.06, s.step - 0.004);
-      s.food = spawnFood(s.snake);
+      s.step = Math.max(0.05, s.step - 0.003);
+      s.food = spawnFood(s.snake, W, H);
     } else {
       s.snake.pop();
     }
@@ -167,8 +164,6 @@ export default function Snake({ onExit, playSound }: GameProps) {
     <GameScreen
       title="snake"
       score={score}
-      cols={W + 2}
-      rows={H + 2}
       hint={
         status === 'over' ? (
           <span className="text-term-amber">game over — R restart · ESC quit</span>

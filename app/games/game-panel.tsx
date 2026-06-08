@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef, type ComponentType } from 'react';
+import { useCallback, useState, type ComponentType } from 'react';
 
 import { useShell } from '../shell/shell-context';
 import type { GameName } from '../shell/types';
+import { GAME_CHAR_W, GAME_LINE_H } from './game-screen';
 import Invaders from './invaders';
 import Pong from './pong';
 import Snake from './snake';
@@ -17,34 +18,41 @@ const GAMES: Partial<Record<GameName, ComponentType<GameProps>>> = {
 
 export default function GamePanel({ game }: { game: GameName }) {
   const shell = useShell();
-  const ref = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState<{ cols: number; rows: number } | null>(null);
 
   const onExit = () => {
     shell.resetStage();
-    // hand keyboard focus back to the terminal input
     setTimeout(() => {
       document.querySelector<HTMLInputElement>('[aria-label="terminal input"]')?.focus();
     }, 0);
   };
 
-  // Take focus so game keys don't leak into the terminal input.
-  useEffect(() => {
-    ref.current?.focus();
+  // Callback ref: on mount, take focus and size the board to fill the panel at
+  // the terminal character size (more cells, not bigger glyphs).
+  const mount = useCallback((el: HTMLDivElement | null) => {
+    if (!el) return;
+    el.focus();
     const active = document.activeElement;
     if (active instanceof HTMLInputElement) active.blur();
+    const w = el.clientWidth;
+    const h = el.clientHeight;
+    const cols = Math.max(24, Math.min(120, Math.floor((w - 16) / GAME_CHAR_W)));
+    const rows = Math.max(14, Math.min(64, Math.floor((h - 64) / GAME_LINE_H)));
+    setDims({ cols, rows });
   }, []);
 
   const Game = GAMES[game];
 
   return (
-    <div ref={ref} tabIndex={-1} className="h-full w-full outline-none">
-      {Game ? (
-        <Game onExit={onExit} playSound={shell.playSound} />
-      ) : (
-        <div className="text-term-dim flex h-full items-center justify-center">
-          {game} — coming soon. ESC to quit.
-        </div>
-      )}
+    <div ref={mount} tabIndex={-1} className="h-full w-full outline-none">
+      {Game && dims ? (
+        <Game
+          cols={dims.cols}
+          rows={dims.rows}
+          onExit={onExit}
+          playSound={shell.playSound}
+        />
+      ) : null}
     </div>
   );
 }

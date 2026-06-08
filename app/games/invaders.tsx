@@ -6,27 +6,27 @@ import { GameScreen } from './game-screen';
 import type { GameProps } from './types';
 import { useRaf } from './use-raf';
 
-const W = 30;
-const H = 18;
-const PLAYER_Y = H - 1;
-const ROWS = 3;
-const COLS = 8;
-const TOTAL = ROWS * COLS;
-
 type Enemy = { x: number; y: number; alive: boolean };
 type Shot = { x: number; y: number };
 
-function makeEnemies(): Enemy[] {
-  const e: Enemy[] = [];
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      e.push({ x: 3 + c * 3, y: 1 + r * 2, alive: true });
-    }
-  }
-  return e;
-}
+export default function Invaders({ cols, rows, onExit, playSound }: GameProps) {
+  const W = cols - 2;
+  const H = rows - 2;
+  const PLAYER_Y = H - 1;
+  const ECOLS = Math.max(4, Math.min(18, Math.floor((W - 3) / 3)));
+  const EROWS = Math.max(2, Math.min(5, Math.floor(H / 8)));
+  const TOTAL = ECOLS * EROWS;
 
-export default function Invaders({ onExit, playSound }: GameProps) {
+  const makeEnemies = useCallback((): Enemy[] => {
+    const e: Enemy[] = [];
+    for (let r = 0; r < EROWS; r++) {
+      for (let c = 0; c < ECOLS; c++) {
+        e.push({ x: 2 + c * 3, y: 1 + r * 2, alive: true });
+      }
+    }
+    return e;
+  }, [ECOLS, EROWS]);
+
   const preRef = useRef<HTMLPreElement>(null);
   const [status, setStatus] = useState<'playing' | 'over' | 'win'>('playing');
   const [score, setScore] = useState(0);
@@ -63,7 +63,7 @@ export default function Invaders({ onExit, playSound }: GameProps) {
     const edge = '+' + '-'.repeat(W) + '+';
     const body = grid.map((r) => '|' + r.join('') + '|').join('\n');
     if (preRef.current) preRef.current.textContent = `${edge}\n${body}\n${edge}`;
-  }, []);
+  }, [W, H, PLAYER_Y]);
 
   const initBoard = useCallback(() => {
     const s = g.current;
@@ -80,7 +80,7 @@ export default function Invaders({ onExit, playSound }: GameProps) {
     s.cooldown = 0;
     s.over = false;
     draw();
-  }, [draw]);
+  }, [W, makeEnemies, draw]);
 
   const reset = useCallback(() => {
     initBoard();
@@ -143,14 +143,13 @@ export default function Invaders({ onExit, playSound }: GameProps) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onExit, reset, playSound]);
+  }, [onExit, reset, playSound, W, PLAYER_Y]);
 
   useRaf((dt) => {
     const s = g.current;
     if (s.over) return;
     s.cooldown = Math.max(0, s.cooldown - dt);
 
-    // projectiles move on a fast tick (rebuilt immutably each step)
     s.bulletAcc += dt;
     if (s.bulletAcc >= 0.05) {
       s.bulletAcc = 0;
@@ -184,7 +183,6 @@ export default function Invaders({ onExit, playSound }: GameProps) {
       if (bombed) loseLife();
     }
 
-    // enemy fleet step
     s.enemyAcc += dt;
     if (s.enemyAcc >= s.enemyStep) {
       s.enemyAcc = 0;
@@ -208,7 +206,6 @@ export default function Invaders({ onExit, playSound }: GameProps) {
       }
     }
 
-    // enemy fire
     s.bombAcc += dt;
     if (s.bombAcc >= 0.9) {
       s.bombAcc = 0;
@@ -226,8 +223,6 @@ export default function Invaders({ onExit, playSound }: GameProps) {
     <GameScreen
       title="invaders"
       score={score}
-      cols={W + 2}
-      rows={H + 2}
       hint={
         status === 'win' ? (
           <span className="text-term-green">you win — R play again · ESC quit</span>
