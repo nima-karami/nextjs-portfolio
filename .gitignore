@@ -41,6 +41,9 @@ yarn-error.log*
 .playwright-mcp/
 tooling-check-*
 
+# agent working docs (plans, goals, logs) — keep out of the product repo
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
