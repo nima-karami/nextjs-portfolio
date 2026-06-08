@@ -112,12 +112,47 @@ used throughout this codebase:
 
 When in doubt, mirror an existing game/scene rather than inventing a new pattern.
 
+## Project structure rules
+
+Code is organized by **feature folder under `app/`** — things that change together live
+together. Keep it that way; the rules below are how both humans and agents decide where new
+code goes. When unsure, the answer is almost always "the existing folder that owns this
+concern," not a new folder.
+
+### Where things go (each folder owns one concern)
+
+| Folder | Owns | Add here when… |
+| --- | --- | --- |
+| `app/shell/` | Global state (`ShellProvider`), the boot→split layout, status line, CRT/frame chrome | You're touching app-wide state, the stage/theme/sound surface, or the overall layout |
+| `app/terminal/` | The terminal engine, input/output, history | You're changing how input is parsed, rendered, or dispatched |
+| `app/terminal/commands/` | One file per command | You're adding or editing a command (the main extension point) |
+| `app/ascii/` | The R3F canvas + ASCII post-pass + glyph atlas; `scenes/` holds individual scenes | You're adding a scene or touching the renderer |
+| `app/games/` | The character-grid games and their shared screen/metrics/rAF helpers | You're adding or editing a game |
+| `app/data/` | Plain content data (profile, experience, projects, skills, socials) | You're changing portfolio *content* — never mix data into components |
+| `app/util/` | Cross-feature helpers (`cn`, analytics, generic hooks) | A helper is used by **two or more** features. Single-feature helpers stay in that feature |
+
+### Rules for adding code
+
+- **Pick the owning folder, don't invent one.** A new top-level folder under `app/` needs a
+  genuinely new concern (a new panel mode, a new subsystem) — not just a new file. If you think
+  you need one, say why first.
+- **Co-locate by feature.** A feature's component, its hook, and its types live in the same
+  folder (e.g. games keep `use-raf.ts`, `types.ts`, `game-screen.tsx` together). Don't scatter
+  a feature across `util/` or a global types file.
+- **Shared only when actually shared.** Promote a helper/type to `app/util/` or a feature's
+  `types.ts` only once a second caller exists. Don't pre-generalize.
+- **One unit per file, named for the unit.** Commands export a single default `Command`
+  (`commands/<name>.tsx`); scenes a single default scene component (`scenes/<name>.tsx`); games
+  a single default component (`games/<name>.tsx`). Filenames are `kebab-case`. The registry/
+  index files (`commands/index.ts`) are the *only* place that wires units together.
+- **Content lives in `app/data/`, behavior reads it.** Commands and components import from
+  `app/data/*`; never hardcode résumé/profile text inline.
+- **Registration is explicit.** New command → also add it to `commands/index.ts`. New scene/game
+  → also add it to the `SceneName`/`GameName` union in `shell/types.ts` and the relevant
+  `SCENES`/`GAMES` map. Adding the file alone does nothing.
+
 ## Conventions & hygiene
 
-- **Feature folders:** code is grouped by feature (`terminal/`, `ascii/`, `games/`, `shell/`,
-  `data/`, `util/`) — things that change together live together. Put new work in the matching
-  folder; don't add top-level dirs without reason. Co-locate a feature's component, hook, and
-  types.
 - **`'use client'`** on anything interactive; keep `three`/R3F and games behind the lazy dynamic
   imports in `right-panel.tsx` so the base bundle stays small (the `build` output is the check).
 - **Imports** are auto-sorted by prettier (`@trivago/prettier-plugin-sort-imports`); run
