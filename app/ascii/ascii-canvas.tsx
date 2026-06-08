@@ -1,6 +1,6 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
 import { Suspense, type ComponentType } from 'react';
 
@@ -18,12 +18,39 @@ const SCENES: Partial<Record<SceneName, ComponentType>> = {
   skull: SkullScene,
 };
 
+// CSS px per ASCII cell — tuned so the glyphs read at ~the terminal's character
+// size, so the whole UI feels like one terminal (not tiny dots).
+const TARGET_CELL = 16;
+
+function AsciiPass({
+  themeKey,
+  ink,
+  bg,
+}: {
+  themeKey: string;
+  ink: string;
+  bg: string;
+}) {
+  // R3F `size` is the canvas CSS size. Derive columns so each cell stays
+  // ~TARGET_CELL css px regardless of panel size (stepped to limit rebuilds).
+  const width = useThree((s) => s.size.width);
+  const columns = Math.max(
+    40,
+    Math.min(160, Math.round(width / TARGET_CELL / 4) * 4)
+  );
+  return (
+    <EffectComposer key={`${themeKey}:${columns}`}>
+      <AsciiEffect color={ink} background={bg} columns={columns} />
+    </EffectComposer>
+  );
+}
+
 export default function AsciiCanvas({ scene = 'portrait' }: { scene?: SceneName }) {
   const { theme } = useShell();
   const Scene = SCENES[scene] ?? PortraitScene;
   const c = ASCII_COLORS[theme];
-  // The torus needs lighting; the unlit portrait ignores it harmlessly. Scene
-  // background stays dark so empty cells map to the "space" glyph (= panel bg).
+  // Scene background stays dark so empty cells map to the "space" glyph (= panel
+  // bg). Flat symmetric lighting so a 3D object's whole silhouette renders.
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -31,18 +58,13 @@ export default function AsciiCanvas({ scene = 'portrait' }: { scene?: SceneName 
       camera={{ position: [0, 0, 4], fov: 50 }}
     >
       <color attach="background" args={['#000000']} />
-      {/* Flat, symmetric front lighting so a 3D object's whole silhouette
-          renders evenly as glyphs (not just the lit side). */}
       <ambientLight intensity={1.4} />
       <directionalLight position={[2, 2, 4]} intensity={1.0} />
       <directionalLight position={[-2, 2, 4]} intensity={1.0} />
       <Suspense fallback={null}>
         <Scene />
       </Suspense>
-      {/* key on theme so the effect rebuilds with new ink/bg uniforms */}
-      <EffectComposer key={theme}>
-        <AsciiEffect color={c.ink} background={c.bg} columns={120} />
-      </EffectComposer>
+      <AsciiPass themeKey={theme} ink={c.ink} bg={c.bg} />
     </Canvas>
   );
 }
