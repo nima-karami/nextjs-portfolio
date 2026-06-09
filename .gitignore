@@ -37,8 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
-# playwright mcp (local QA artifacts)
+# playwright (local QA artifacts)
 .playwright-mcp/
+.playwright-cli/
 tooling-check-*
 
 # agent working docs (plans, goals, logs) — keep out of the product repo

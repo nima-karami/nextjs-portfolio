@@ -160,28 +160,48 @@ export async function POST(req: Request) {
     { type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } },
   ];
 
+  // Abort the upstream Claude call if the visitor navigates away — stops burning
+  // tokens (and the MCP tool loop) on a request nobody is reading anymore.
+  const upstream = new AbortController();
+  if (req.signal.aborted) upstream.abort();
+  else req.signal.addEventListener('abort', () => upstream.abort());
+
   const body = new ReadableStream({
     async start(controller) {
-      const send = (obj: unknown) => controller.enqueue(line(obj));
+      let closed = false;
+      // Once the client disconnects the controller closes; guard enqueue so a
+      // late token doesn't throw "Controller is already closed".
+      const send = (obj: unknown) => {
+        if (closed) return;
+        try {
+          controller.enqueue(line(obj));
+        } catch {
+          closed = true;
+        }
+      };
       const conversation: BetaMessageParam[] = [
         ...history,
         { role: 'user', content: message },
       ];
       try {
         for (let pass = 0; pass <= MAX_PAUSE_CONTINUATIONS; pass += 1) {
-          const stream = client.beta.messages.stream({
-            model: MODEL,
-            max_tokens: MAX_TOKENS,
-            system,
-            messages: conversation,
-            // The 2025-11-20 connector revision needs both: mcp_servers declares
-            // the connection, and an mcp_toolset in `tools` enables its tools.
-            mcp_servers: [{ type: 'url', url: mcpUrl, name: MCP_SERVER_NAME }],
-            tools: [{ type: 'mcp_toolset', mcp_server_name: MCP_SERVER_NAME }],
-            betas: [MCP_BETA],
-          });
+          const stream = client.beta.messages.stream(
+            {
+              model: MODEL,
+              max_tokens: MAX_TOKENS,
+              system,
+              messages: conversation,
+              // The 2025-11-20 connector revision needs both: mcp_servers declares
+              // the connection, and an mcp_toolset in `tools` enables its tools.
+              mcp_servers: [{ type: 'url', url: mcpUrl, name: MCP_SERVER_NAME }],
+              tools: [{ type: 'mcp_toolset', mcp_server_name: MCP_SERVER_NAME }],
+              betas: [MCP_BETA],
+            },
+            { signal: upstream.signal }
+          );
 
           for await (const event of stream) {
+            if (closed) break;
             if (
               event.type === 'content_block_start' &&
               event.content_block.type === 'mcp_tool_use'
@@ -194,6 +214,7 @@ export async function POST(req: Request) {
               send({ type: 'token', text: event.delta.text });
             }
           }
+          if (closed) break;
 
           const final = await stream.finalMessage();
           // Server-side MCP tool loop hit its cap mid-turn: feed the partial
@@ -206,12 +227,22 @@ export async function POST(req: Request) {
         }
         send({ type: 'done' });
       } catch (err) {
-        // Never leak SDK internals/stack to the client.
-        console.error('[chat] stream error:', err);
-        send({ type: 'error', message: FALLBACK_ERROR });
+        // A client-disconnect abort is expected — don't log it or try to send.
+        if (!upstream.signal.aborted) {
+          console.error('[chat] stream error:', err);
+          send({ type: 'error', message: FALLBACK_ERROR });
+        }
       } finally {
-        controller.close();
+        closed = true;
+        try {
+          controller.close();
+        } catch {
+          /* already closed by the client */
+        }
       }
+    },
+    cancel() {
+      upstream.abort();
     },
   });
 

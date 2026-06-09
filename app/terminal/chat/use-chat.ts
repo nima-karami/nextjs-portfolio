@@ -1,12 +1,13 @@
 'use client';
 
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { createStreamStore, type StreamStore } from './stream-store';
 
 type ChatTurn = { role: 'user' | 'assistant'; content: string };
 
 const MAX_HISTORY = 12; // last 6 turns (user+assistant)
+const REQUEST_TIMEOUT_MS = 90_000; // hard ceiling so a turn never hangs forever
 
 // Client hook for the conversational layer. `send` echoes nothing itself — it
 // returns a StreamStore immediately so the terminal can append one StreamLine to
@@ -15,17 +16,25 @@ const MAX_HISTORY = 12; // last 6 turns (user+assistant)
 export function useChat() {
   const historyRef = useRef<ChatTurn[]>([]);
 
+  // Wake the scale-to-zero MCP once on mount so the first question is fast.
+  useEffect(() => {
+    fetch('/api/warmup', { method: 'POST' }).catch(() => {});
+  }, []);
+
   const send = useCallback((message: string): StreamStore => {
     const store = createStreamStore();
     const history = historyRef.current;
 
     void (async () => {
       let full = '';
+      const ctrl = new AbortController();
+      const timeout = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
       try {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message, history }),
+          signal: ctrl.signal,
         });
 
         if (!res.ok || !res.body) {
@@ -71,8 +80,13 @@ export function useChat() {
 
         store.finalize();
       } catch {
-        store.fail();
+        store.fail(
+          full.trim()
+            ? undefined
+            : "That took longer than expected. Give it another try, or use `/resume` for the curated version."
+        );
       } finally {
+        clearTimeout(timeout);
         if (full.trim()) {
           const turns: ChatTurn[] = [
             ...history,
