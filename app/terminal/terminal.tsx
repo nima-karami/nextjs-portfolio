@@ -9,7 +9,7 @@ import { useTerminal } from './use-terminal';
 
 // Fills its panel; the ASCII stage lives in the sibling panel (see Experience).
 export default function Terminal() {
-  const { lines, history, run } = useTerminal();
+  const { lines, history, busy, run } = useTerminal();
   const scrollRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +35,7 @@ export default function Terminal() {
       <Banner />
       <Output lines={lines} />
       <div ref={wrapRef}>
-        <InputLine onRun={run} history={history} />
+        <InputLine onRun={run} history={history} busy={busy} />
       </div>
     </div>
   );

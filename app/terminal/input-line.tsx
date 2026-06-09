@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 
 import { useShell } from '../shell/shell-context';
@@ -10,13 +10,19 @@ import Prompt from './prompt';
 type InputLineProps = {
   onRun: (input: string) => void;
   history: string[];
+  busy: boolean;
 };
 
-export default function InputLine({ onRun, history }: InputLineProps) {
+export default function InputLine({ onRun, history, busy }: InputLineProps) {
   const [value, setValue] = useState('');
   const [histIndex, setHistIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { playSound } = useShell();
+
+  // A finished chat turn re-enables the input; restore focus so typing continues.
+  useEffect(() => {
+    if (!busy) inputRef.current?.focus();
+  }, [busy]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     // subtle typing click (only audible when `sound on`)
@@ -54,10 +60,14 @@ export default function InputLine({ onRun, history }: InputLineProps) {
 
     if (e.key === 'Tab') {
       e.preventDefault();
-      const prefix = value.trim().toLowerCase();
+      const raw = value.trim();
+      if (!raw) return;
+      // Complete the command name whether or not the user led with a slash.
+      const slash = raw.startsWith('/');
+      const prefix = (slash ? raw.slice(1) : raw).toLowerCase();
       if (!prefix) return;
       const matches = Object.keys(registry).filter((n) => n.startsWith(prefix));
-      if (matches.length === 1) setValue(matches[0] + ' ');
+      if (matches.length === 1) setValue((slash ? '/' : '') + matches[0] + ' ');
       return;
     }
 
@@ -83,12 +93,14 @@ export default function InputLine({ onRun, history }: InputLineProps) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={onKeyDown}
+        disabled={busy}
         spellCheck={false}
         autoComplete="off"
         autoCapitalize="off"
         autoCorrect="off"
         aria-label="terminal input"
-        className="text-term-fg caret-term-accent flex-1 bg-transparent outline-none"
+        placeholder={busy ? 'thinking…' : undefined}
+        className="text-term-fg caret-term-accent placeholder:text-term-dim flex-1 bg-transparent outline-none disabled:opacity-60"
       />
     </div>
   );

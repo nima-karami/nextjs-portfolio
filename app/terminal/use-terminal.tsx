@@ -5,6 +5,8 @@ import type { ReactNode } from 'react';
 
 import { useShell } from '../shell/shell-context';
 import { captureEvent } from '../util/analytics';
+import { useChat } from './chat/use-chat';
+import StreamLine from './chat/stream-line';
 import { registry } from './commands';
 
 export type Line = {
@@ -16,8 +18,10 @@ export type Line = {
 export function useTerminal() {
   const [lines, setLines] = useState<Line[]>([]);
   const [history, setHistory] = useState<string[]>([]);
+  const [busy, setBusy] = useState(false);
   const idRef = useRef(0);
   const shell = useShell();
+  const chat = useChat();
 
   const append = useCallback((kind: Line['kind'], content: ReactNode) => {
     setLines((prev) => [...prev, { id: ++idRef.current, kind, content }]);
@@ -34,32 +38,39 @@ export function useTerminal() {
 
       setHistory((h) => [...h, trimmed]);
 
-      const [rawName, ...args] = trimmed.split(/\s+/);
+      // Accept-both parsing: strip a single leading '/'. If the first token is a
+      // registered command, run it (so `help` and `/help` both work). Otherwise
+      // the full raw line is a chat message for Nima's assistant.
+      const candidate = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
+      const [rawName, ...args] = candidate.split(/\s+/);
       const name = rawName.toLowerCase();
-      captureEvent('command_run', { command: name, args });
+      const command = name ? registry[name] : undefined;
 
-      const command = registry[name];
-      if (!command) {
-        append(
-          'output',
-          <span className="text-term-red">
-            command not found: {rawName}. Type{' '}
-            <span className="text-term-accent">help</span>.
-          </span>
-        );
+      if (command) {
+        captureEvent('command_run', { command: name, args });
+        await command.run({
+          args,
+          print: (node) => append('output', node),
+          clear,
+          registry,
+          shell,
+        });
         return;
       }
 
-      await command.run({
-        args,
-        print: (node) => append('output', node),
-        clear,
-        registry,
-        shell,
-      });
+      // Chat path — the full raw line becomes the message.
+      captureEvent('chat_message', { chars: trimmed.length });
+      setBusy(true);
+      const store = chat.send(trimmed);
+      append('output', <StreamLine store={store} />);
+      try {
+        await store.done;
+      } finally {
+        setBusy(false);
+      }
     },
-    [append, clear, shell]
+    [append, clear, shell, chat]
   );
 
-  return { lines, history, run, clear };
+  return { lines, history, busy, run, clear };
 }

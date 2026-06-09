@@ -7,6 +7,10 @@ export type AnalyticsEvent = {
     command: string;
     args: string[];
   };
+  // Fired whenever a visitor sends a chat message to Nima's assistant.
+  chat_message: {
+    chars: number;
+  };
 };
 
 export function captureEvent<K extends keyof AnalyticsEvent>(

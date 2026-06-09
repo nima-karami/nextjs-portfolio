@@ -8,11 +8,11 @@ export default function Banner() {
         {profile.name} — {profile.title}
       </p>
       <p>
-        Welcome. Type <span className="text-term-accent">help</span> to get
-        started.
+        Ask me anything about Nima — or type{' '}
+        <span className="text-term-accent">/help</span> for commands.
       </p>
       <p className="mt-1 opacity-80">
-        psst — bored? try <span className="text-term-accent">games</span>.
+        psst — bored? try <span className="text-term-accent">/games</span>.
       </p>
     </div>
   );
