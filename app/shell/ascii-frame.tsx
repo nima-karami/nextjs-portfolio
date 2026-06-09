@@ -27,7 +27,7 @@ export default function AsciiFrame({
   return (
     <div
       className={cn(
-        'text-term-dim grid h-full min-h-0 grid-rows-[auto_1fr_auto] leading-none',
+        'text-term-dim grid h-full min-h-0 min-w-0 grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] leading-none',
         className
       )}
     >
@@ -41,7 +41,7 @@ export default function AsciiFrame({
       </div>
 
       {/* sides + content */}
-      <div className="flex min-h-0">
+      <div className="flex min-h-0 min-w-0">
         <pre className="overflow-hidden select-none">{VBAR}</pre>
         <div className={cn('min-w-0 flex-1 overflow-hidden', contentClassName)}>
           {children}
