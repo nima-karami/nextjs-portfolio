@@ -3,6 +3,7 @@ import type { Command } from './registry';
 
 const links: [string, string, string][] = [
   ['email', socials.email, `mailto:${socials.email}`],
+  ['website', 'nima-karami.com', socials.website],
   ['github', 'github.com/nima-karami', socials.github],
   ['linkedin', 'in/nima-karami', socials.linkedin],
 ];

@@ -4,6 +4,7 @@ import cat from './cat';
 import clear from './clear';
 import contact from './contact';
 import { easterEggs } from './easter-eggs';
+import education from './education';
 import experience from './experience';
 import games from './games';
 import help from './help';
@@ -25,6 +26,7 @@ const commands: Command[] = [
   whoami,
   resume,
   experience,
+  education,
   projects,
   skills,
   contact,

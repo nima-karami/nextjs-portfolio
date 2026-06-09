@@ -1,7 +1,8 @@
+import { education } from './data/education';
 import { experience } from './data/experience';
 import { profile } from './data/profile';
 import { projects } from './data/projects';
-import { softSkills, technicalSkills } from './data/skills';
+import { technicalSkills } from './data/skills';
 import { socials } from './data/socials';
 
 const strip = (s: string) => s.replace(/\*\*/g, '');
@@ -22,7 +23,7 @@ export default function SeoContent() {
 
       <h2>Experience</h2>
       {experience.map((job) => (
-        <section key={job.company}>
+        <section key={`${job.company} ${job.position}`}>
           <h3>
             {job.position} — {job.company}
           </h3>
@@ -32,6 +33,16 @@ export default function SeoContent() {
               <li key={i}>{strip(d)}</li>
             ))}
           </ul>
+        </section>
+      ))}
+
+      <h2>Education</h2>
+      {education.map((e) => (
+        <section key={e.school}>
+          <h3>
+            {e.degree} — {e.school}
+          </h3>
+          <p>{e.date}</p>
         </section>
       ))}
 
@@ -49,17 +60,19 @@ export default function SeoContent() {
 
       <h2>Skills</h2>
       <ul>
-        <li>Frontend: {technicalSkills.frontend.join(', ')}</li>
-        <li>Backend: {technicalSkills.backend.join(', ')}</li>
-        <li>Design: {technicalSkills.design.join(', ')}</li>
-        <li>Other: {technicalSkills.other.join(', ')}</li>
-        <li>Soft skills: {softSkills.join(', ')}</li>
+        <li>Engineering: {technicalSkills.engineering.join(', ')}</li>
+        <li>Product &amp; Analytics: {technicalSkills.product.join(', ')}</li>
+        <li>AI-Native: {technicalSkills.aiNative.join(', ')}</li>
+        <li>Practice: {technicalSkills.practice.join(', ')}</li>
       </ul>
 
       <h2>Contact</h2>
       <ul>
         <li>
           <a href={`mailto:${socials.email}`}>{socials.email}</a>
+        </li>
+        <li>
+          <a href={socials.website}>Website: nima-karami.com</a>
         </li>
         <li>
           <a href={socials.github}>GitHub: github.com/nima-karami</a>

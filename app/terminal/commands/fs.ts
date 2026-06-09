@@ -3,6 +3,7 @@
 export const files: Record<string, string> = {
   'about.txt': 'about',
   'experience.md': 'experience',
+  'education.md': 'education',
   'projects.md': 'projects',
   'skills.txt': 'skills',
   'contact.txt': 'contact',

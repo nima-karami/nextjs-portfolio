@@ -3,8 +3,8 @@ import { JetBrains_Mono } from 'next/font/google';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import { PostHogProvider } from './providers';
 import './globals.css';
+import { PostHogProvider } from './providers';
 
 const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
@@ -16,13 +16,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
   ),
-  title: 'Nima Karami — Full-stack Developer & UX/UI Designer',
+  title: 'Nima Karami — Design Engineer / Product Engineer',
   description:
-    'The terminal portfolio of Nima Karami, a Toronto-based Lead Full-stack Developer and UX/UI Designer. Type a command to explore — or play a game.',
+    'The terminal portfolio of Nima Karami, a Toronto-based design engineer and product engineer who takes products from ambiguous idea to shipped experience. Type a command to explore — or play a game.',
   keywords: [
     'Nima Karami',
-    'Full-stack Developer',
-    'UX/UI Designer',
+    'Design Engineer',
+    'Product Engineer',
+    'Full-Stack Developer',
     'React',
     'Next.js',
     'Toronto',
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Nima Karami — terminal portfolio',
     description:
-      'A Toronto-based Lead Full-stack Developer & UX/UI Designer. Explore the résumé through an interactive terminal.',
+      'A Toronto-based design engineer / product engineer. Explore the résumé through an interactive terminal.',
     type: 'website',
     siteName: 'Nima Karami',
   },
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Nima Karami — terminal portfolio',
     description:
-      'Lead Full-stack Developer & UX/UI Designer. Explore via an interactive terminal.',
+      'Design Engineer / Product Engineer. Explore via an interactive terminal.',
   },
 };
 

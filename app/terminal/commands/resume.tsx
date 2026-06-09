@@ -1,6 +1,6 @@
 import { profile } from '../../data/profile';
-import { sleep } from './reveal';
 import type { Command } from './registry';
+import { sleep } from './reveal';
 
 function Label({ children }: { children: string }) {
   return <p className="text-term-dim mt-5 mb-1 uppercase">── {children} ──</p>;
@@ -8,7 +8,7 @@ function Label({ children }: { children: string }) {
 
 const resume: Command = {
   name: 'resume',
-  description: 'full résumé (about · experience · skills · contact)',
+  description: 'full résumé (experience · education · skills · contact)',
   run: async (ctx) => {
     const { print, registry } = ctx;
 
@@ -24,6 +24,10 @@ const resume: Command = {
 
     print(<Label>experience</Label>);
     await registry['experience'].run(ctx);
+    await sleep(140);
+
+    print(<Label>education</Label>);
+    await registry['education'].run(ctx);
     await sleep(140);
 
     print(<Label>skills</Label>);

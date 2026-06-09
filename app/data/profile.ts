@@ -1,13 +1,12 @@
 export const profile = {
   name: 'Nima Karami',
-  title: 'Lead Full-stack Developer & UX/UI Designer',
-  location: 'Toronto, Canada',
+  title: 'Design Engineer / Product Engineer',
+  location: 'Toronto, Ontario, Canada',
   tagline:
-    'Software engineer with a background in design and architecture. I build scalable web applications and craft user-centric digital experiences.',
+    'Design-minded engineer who takes products from ambiguous idea to shipped experience.',
   bio: [
-    "I'm a full-stack developer based in Toronto with a background in architecture and design. I build web experiences that are fast, visually polished, and simple to use.",
-    'My work focuses on React, Next.js, Tailwind CSS, and Framer Motion, combining creative design with reliable engineering. I currently lead front-end development at TimePlay.',
-    'Before becoming a developer, I studied architecture, which shaped how I think about structure, balance, and human experience. My goal is always to make technology feel intentional, functional, and enjoyable.',
+    'Design-minded engineer who takes products from ambiguous idea to shipped experience. I trained as an architect, which taught me to hold messy, multi-dimensional problems in my head until the through-line appears.',
+    'I now work where design, product, and code intersect: full-stack, AI-native, and happiest taking something from a blank file to a shipped product real users can touch.',
   ],
-  email: 'karami.nima@gmail.com',
+  email: 'karami.nima@live.com',
 } as const;
