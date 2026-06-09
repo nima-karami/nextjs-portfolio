@@ -61,8 +61,7 @@ export default function SeoContent() {
       <h2>Skills</h2>
       <ul>
         <li>Engineering: {technicalSkills.engineering.join(', ')}</li>
-        <li>Product &amp; Analytics: {technicalSkills.product.join(', ')}</li>
-        <li>AI-Native: {technicalSkills.aiNative.join(', ')}</li>
+        <li>Product &amp; AI: {technicalSkills.productAi.join(', ')}</li>
         <li>Practice: {technicalSkills.practice.join(', ')}</li>
       </ul>
 

@@ -3,14 +3,13 @@ import type { Command } from './registry';
 
 const groups: [string, readonly string[]][] = [
   ['engineering', technicalSkills.engineering],
-  ['product', technicalSkills.product],
-  ['ai-native', technicalSkills.aiNative],
+  ['product & ai', technicalSkills.productAi],
   ['practice', technicalSkills.practice],
 ];
 
 const skillsCmd: Command = {
   name: 'skills',
-  description: 'engineering, product, AI & practice',
+  description: 'engineering, product & AI, practice',
   run: ({ print }) => {
     print(
       <div className="max-w-2xl space-y-1">
