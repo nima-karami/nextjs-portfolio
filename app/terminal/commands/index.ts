@@ -14,7 +14,6 @@ import projects from './projects';
 import type { Command, CommandRegistry } from './registry';
 import resume from './resume';
 import skills from './skills';
-import skull from './skull';
 import snake from './snake';
 import sound from './sound';
 import theme from './theme';
@@ -38,7 +37,6 @@ const commands: Command[] = [
   sound,
   theme,
   ascii,
-  skull,
   clear,
   ...easterEggs,
 ];

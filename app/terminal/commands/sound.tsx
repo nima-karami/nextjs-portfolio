@@ -7,6 +7,14 @@ const sound: Command = {
   usage: 'sound [on|off]',
   run: ({ args, shell, print }) => {
     const arg = args[0]?.toLowerCase();
+    if (arg && arg !== 'on' && arg !== 'off') {
+      print(
+        <span className="text-term-red">
+          unknown option: {arg}. usage: <span className="text-term-accent">sound [on|off]</span>
+        </span>
+      );
+      return;
+    }
     const on = arg === 'on' ? true : arg === 'off' ? false : !shell.soundEnabled;
     shell.setSound(on);
     if (on) playTone('select'); // confirm beep (bypasses the just-set state)

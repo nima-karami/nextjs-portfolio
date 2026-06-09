@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { GameScreen } from './game-screen';
+import { createGrid, paint } from './grid';
 import type { GameProps } from './types';
 import { useRaf } from './use-raf';
 
@@ -37,7 +38,7 @@ export default function Pong({ cols, rows, onExit, playSound }: GameProps) {
 
   const draw = useCallback(() => {
     const s = g.current;
-    const grid: string[][] = Array.from({ length: H }, () => Array(W).fill(' '));
+    const grid = createGrid(W, H);
     for (let r = 0; r < H; r += 2) grid[r][Math.floor(W / 2)] = ':';
     for (let i = 0; i < PADDLE; i++) {
       const py = Math.round(s.py) + i;
@@ -48,9 +49,7 @@ export default function Pong({ cols, rows, onExit, playSound }: GameProps) {
     const bx = Math.round(s.bx);
     const by = Math.round(s.by);
     if (bx >= 0 && bx < W && by >= 0 && by < H) grid[by][bx] = 'O';
-    const edge = '+' + '-'.repeat(W) + '+';
-    const body = grid.map((r) => '|' + r.join('') + '|').join('\n');
-    if (preRef.current) preRef.current.textContent = `${edge}\n${body}\n${edge}`;
+    paint(preRef.current, grid);
   }, [W, H, PADDLE]);
 
   const serve = useCallback(

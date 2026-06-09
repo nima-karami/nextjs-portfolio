@@ -27,7 +27,6 @@ type Tone = {
 };
 
 const SOUNDS: Record<SoundName, Tone> = {
-  move: { freq: 180, dur: 0.04, type: 'square', vol: 0.04 },
   shoot: { freq: 720, dur: 0.09, type: 'square', vol: 0.05, sweep: -360 },
   hit: { freq: 150, dur: 0.12, type: 'sawtooth', vol: 0.07, sweep: -70 },
   score: { freq: 740, dur: 0.1, type: 'square', vol: 0.06, sweep: 240 },

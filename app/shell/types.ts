@@ -12,7 +12,6 @@ export type ThemeName = 'dark' | 'crt-green' | 'crt-amber' | 'paper';
 export const THEMES: readonly ThemeName[] = ['dark', 'crt-green', 'crt-amber', 'paper'];
 
 export type SoundName =
-  | 'move'
   | 'shoot'
   | 'hit'
   | 'score'

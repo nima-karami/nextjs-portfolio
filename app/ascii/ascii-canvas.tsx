@@ -12,6 +12,8 @@ import PortraitScene from './scenes/portrait';
 import SkullScene from './scenes/skull';
 import TorusScene from './scenes/torus';
 
+// The R3F scenes. `matrix` is intentionally absent: it's a 2D-canvas effect
+// (matrix-rain.tsx), not an R3F scene, so right-panel.tsx renders it directly.
 const SCENES: Partial<Record<SceneName, ComponentType>> = {
   portrait: PortraitScene,
   torus: TorusScene,

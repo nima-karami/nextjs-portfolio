@@ -28,6 +28,8 @@ export default function RightPanel({
 }) {
   const { stage } = useShell();
   const isGame = stage.kind === 'game';
+  // `matrix` is a 2D-canvas effect, not an R3F scene, so it's rendered here
+  // rather than through AsciiCanvas's SCENES map.
   const isMatrix = stage.kind === 'scene' && stage.scene === 'matrix';
 
   return (

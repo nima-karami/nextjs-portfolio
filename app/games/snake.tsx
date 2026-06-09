@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { GameScreen } from './game-screen';
+import { createGrid, paint } from './grid';
 import type { GameProps } from './types';
 import { useRaf } from './use-raf';
 
@@ -46,14 +47,12 @@ export default function Snake({ cols, rows, onExit, playSound }: GameProps) {
 
   const draw = useCallback(() => {
     const s = g.current;
-    const grid: string[][] = Array.from({ length: H }, () => Array(W).fill(' '));
+    const grid = createGrid(W, H);
     grid[s.food.y][s.food.x] = '*';
     s.snake.forEach((p, i) => {
       if (p.y >= 0 && p.y < H && p.x >= 0 && p.x < W) grid[p.y][p.x] = i === 0 ? '@' : 'o';
     });
-    const edge = '+' + '-'.repeat(W) + '+';
-    const body = grid.map((r) => '|' + r.join('') + '|').join('\n');
-    if (preRef.current) preRef.current.textContent = `${edge}\n${body}\n${edge}`;
+    paint(preRef.current, grid);
   }, [W, H]);
 
   const initBoard = useCallback(() => {

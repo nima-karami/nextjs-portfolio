@@ -36,7 +36,7 @@ export const easterEggs: Command[] = [
   },
   {
     name: 'vim',
-    description: '',
+    description: 'how do I exit this thing?',
     hidden: true,
     run: ({ print }) => {
       print(
@@ -49,7 +49,7 @@ export const easterEggs: Command[] = [
   },
   {
     name: 'exit',
-    description: '',
+    description: 'there is no exit',
     hidden: true,
     run: ({ print, shell }) => {
       shell.resetStage();
@@ -62,7 +62,7 @@ export const easterEggs: Command[] = [
   },
   {
     name: 'coffee',
-    description: '',
+    description: 'brew a cup',
     hidden: true,
     run: ({ print }) => {
       print(<pre className="text-term-amber leading-none">{COFFEE}</pre>);

@@ -8,7 +8,7 @@ const LIST: [string, string][] = [
 
 const games: Command = {
   name: 'games',
-  description: 'arcade easter eggs',
+  description: 'retro games — type one to play',
   run: ({ print }) => {
     print(
       <div className="space-y-1">
