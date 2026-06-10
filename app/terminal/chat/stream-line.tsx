@@ -4,6 +4,7 @@ import { useSyncExternalStore } from 'react';
 
 import Markdown from 'markdown-to-jsx';
 
+import { Spinner } from './spinner';
 import type { StreamStore } from './stream-store';
 
 // Block markdown tuned for the terminal: tight spacing, term-* colors, no prose
@@ -56,16 +57,31 @@ export default function StreamLine({ store }: { store: StreamStore }) {
     );
   }
 
-  // Streaming: plain text + a tool affordance + a blinking caret.
+  // Streaming. Before any text arrives, a single spinner is the one "thinking"
+  // indicator (label switches to the tool affordance while one runs). Once text
+  // streams in, it renders as plain text with a blinking caret — and the spinner
+  // returns inline only if a tool fires mid-answer.
+  const label = state.tool ? 'checking my records…' : 'thinking…';
+
+  if (!state.text) {
+    return (
+      <div className="text-term-dim">
+        <Spinner /> {label}
+      </div>
+    );
+  }
+
   return (
     <div className="text-term-fg whitespace-pre-wrap">
       {state.text}
-      {state.tool && (
+      {state.tool ? (
         <span className="text-term-dim">
-          {state.text ? ' ' : ''}● checking my records…
+          {' '}
+          <Spinner /> checking my records…
         </span>
+      ) : (
+        <span className="text-term-accent animate-pulse"> ▮</span>
       )}
-      <span className="text-term-accent animate-pulse"> ▮</span>
     </div>
   );
 }

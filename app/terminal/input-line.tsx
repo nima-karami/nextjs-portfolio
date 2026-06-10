@@ -99,8 +99,7 @@ export default function InputLine({ onRun, history, busy }: InputLineProps) {
         autoCapitalize="off"
         autoCorrect="off"
         aria-label="terminal input"
-        placeholder={busy ? 'thinking…' : undefined}
-        className="text-term-fg caret-term-accent placeholder:text-term-dim flex-1 bg-transparent outline-none disabled:opacity-60"
+        className="text-term-fg caret-term-accent flex-1 bg-transparent outline-none disabled:opacity-60"
       />
     </div>
   );
