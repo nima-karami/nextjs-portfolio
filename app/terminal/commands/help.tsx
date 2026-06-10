@@ -8,8 +8,8 @@ const help: Command = {
     print(
       <div className="space-y-1">
         <p className="text-term-dim">
-          Type a question to talk to Nima&apos;s assistant — or run a command
-          (with or without a leading <span className="text-term-fg">/</span>):
+          Ask me a question — or run a command (with or without a leading{' '}
+          <span className="text-term-fg">/</span>):
         </p>
         <ul className="mt-1 space-y-0.5">
           {commands.map((c) => (
@@ -21,8 +21,8 @@ const help: Command = {
         </ul>
         <p className="text-term-dim mt-2">
           Anything that isn&apos;t a command{' '}
-          <span className="text-term-fg">talks to Nima&apos;s assistant</span>,
-          grounded in his real experience.
+          <span className="text-term-fg">chats with me</span>, grounded in my
+          real experience.
         </p>
         <p className="text-term-dim mt-1">
           Tips: <span className="text-term-fg">↑/↓</span> history ·{' '}

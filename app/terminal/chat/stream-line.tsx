@@ -62,7 +62,7 @@ export default function StreamLine({ store }: { store: StreamStore }) {
       {state.text}
       {state.tool && (
         <span className="text-term-dim">
-          {state.text ? ' ' : ''}● consulting Nima&apos;s record…
+          {state.text ? ' ' : ''}● checking my records…
         </span>
       )}
       <span className="text-term-accent animate-pulse"> ▮</span>

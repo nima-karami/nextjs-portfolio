@@ -24,7 +24,7 @@ export type StreamStore = {
 };
 
 const FALLBACK =
-  "Something went sideways reaching Nima's assistant. Try `/help`, or `/resume` for the curated version.";
+  'Hmm, something went sideways on my end. Mind trying again? Or grab the curated version with `/resume`.';
 
 export function createStreamStore(): StreamStore {
   let state: StreamState = { text: '', tool: null, status: 'streaming' };

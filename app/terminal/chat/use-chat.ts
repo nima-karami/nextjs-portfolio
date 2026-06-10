@@ -83,7 +83,7 @@ export function useChat() {
         store.fail(
           full.trim()
             ? undefined
-            : "That took longer than expected. Give it another try, or use `/resume` for the curated version."
+            : "That took longer than I'd like — mind trying again? Or grab `/resume` for the quick version."
         );
       } finally {
         clearTimeout(timeout);

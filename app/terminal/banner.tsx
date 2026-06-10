@@ -8,7 +8,7 @@ export default function Banner() {
         {profile.name} — {profile.title}
       </p>
       <p>
-        Ask me anything about Nima — or type{' '}
+        Ask me anything about my work — or type{' '}
         <span className="text-term-accent">/help</span> for commands.
       </p>
       <p className="mt-1 opacity-80">
