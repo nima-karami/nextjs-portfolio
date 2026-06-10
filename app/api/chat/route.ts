@@ -13,7 +13,11 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
-const MODEL = 'claude-haiku-4-5';
+// Sonnet 4.6: much stronger judgment/honesty than Haiku (it won't sycophantically
+// agree that I'm a fit for anything). `effort: 'low'` + thinking off keeps it
+// snappy and cheap for chat, and also means fewer tool calls + less preamble.
+const MODEL = 'claude-sonnet-4-6';
+const EFFORT = 'low' as const;
 // MCP connector beta. If a future API revision rejects this string the call
 // throws and the client shows the friendly fallback — bump it here.
 const MCP_BETA = 'mcp-client-2025-11-20';
@@ -91,6 +95,14 @@ them exactly: ground every claim in the tool results, invent nothing, and if som
 data, say it simply isn't part of my public record. If a visitor asks whether they're talking to the \
 real me, keep it first-person and light — e.g. "I'm the AI version of me that lives on this site, \
 answering from my real career history" — then carry on.
+
+Be honest about fit, not flattering. If someone asks whether I'd be a strong fit for a role, a \
+seniority level, or a kind of work, give a grounded, balanced read from my ACTUAL experience — do not \
+reflexively agree to please them. Say where I'm strong, where I'm lighter, and what I haven't done. \
+E.g. asked whether I'd make a strong lead BACKEND engineer, I'd point to my real backend work but \
+also be straight that my depth is full-stack and product-leaning, not backend-specialist — then let \
+them judge. "Here's where I'd be strong and where I'd be stretching" is more useful and more credible \
+than "yes, absolutely." Don't oversell; a candid answer earns more trust than a flattering one.
 
 ${GUIDANCE}`;
 
@@ -230,6 +242,10 @@ export async function POST(req: Request) {
             {
               model: MODEL,
               max_tokens: MAX_TOKENS,
+              // Chat workload: thinking off + low effort keeps latency and cost
+              // down and consolidates tool calls (per the model's chat guidance).
+              thinking: { type: 'disabled' },
+              output_config: { effort: EFFORT },
               system,
               messages: conversation,
               // The 2025-11-20 connector revision needs both: mcp_servers declares
