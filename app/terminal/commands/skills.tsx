@@ -12,7 +12,7 @@ const skillsCmd: Command = {
   description: 'engineering, product & AI, practice',
   run: ({ print }) => {
     print(
-      <div className="max-w-2xl space-y-1">
+      <div className="space-y-1">
         {groups.map(([label, items]) => (
           <p key={label} className="flex gap-3">
             <span className="text-term-accent w-28 shrink-0">{label}</span>

@@ -9,7 +9,7 @@ const experienceCmd: Command = {
   run: async ({ print }) => {
     for (const job of experience) {
       print(
-        <div className="mt-3 max-w-[64ch] space-y-1">
+        <div className="mt-3 space-y-1">
           <p>
             <span className="text-term-accent font-semibold">{job.company}</span>
             <span className="text-term-dim"> — {job.date}</span>

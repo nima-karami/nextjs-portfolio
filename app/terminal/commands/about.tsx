@@ -7,7 +7,7 @@ const about: Command = {
   description: 'who is Nima?',
   run: async ({ print }) => {
     for (const paragraph of profile.bio) {
-      print(<p className="mt-3 max-w-[64ch]">{paragraph}</p>);
+      print(<p className="mt-3">{paragraph}</p>);
       await sleep(120);
     }
   },

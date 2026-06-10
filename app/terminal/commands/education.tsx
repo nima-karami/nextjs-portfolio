@@ -8,7 +8,7 @@ const educationCmd: Command = {
     print(
       <div className="space-y-2">
         {education.map((e) => (
-          <div key={e.school} className="max-w-[64ch]">
+          <div key={e.school}>
             <p className="text-term-accent font-semibold">{e.degree}</p>
             <p className="text-term-fg">
               {e.school}

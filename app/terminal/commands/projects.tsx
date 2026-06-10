@@ -8,7 +8,7 @@ const projectsCmd: Command = {
   run: async ({ print }) => {
     for (const project of projects) {
       print(
-        <div className="mt-3 max-w-[64ch] space-y-0.5">
+        <div className="mt-3 space-y-0.5">
           <p>
             <span className="text-term-accent font-semibold">{project.name}</span>
             {project.wip && <span className="text-term-amber ml-2">[WIP]</span>}

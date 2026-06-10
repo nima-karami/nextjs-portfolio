@@ -17,7 +17,7 @@ const resume: Command = {
         <p className="text-term-accent font-semibold">{profile.name}</p>
         <p className="text-term-fg">{profile.title}</p>
         <p className="text-term-dim">{profile.location}</p>
-        <p className="text-term-fg mt-2 max-w-[64ch]">{profile.tagline}</p>
+        <p className="text-term-fg mt-2">{profile.tagline}</p>
       </div>
     );
     await sleep(180);
