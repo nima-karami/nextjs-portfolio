@@ -1,5 +1,5 @@
 import { THEME_LABELS } from '../../shell/themes';
-import type { ThemeName } from '../../shell/types';
+import { THEMES, type ThemeName } from '../../shell/types';
 import type { Command } from './registry';
 
 const theme: Command = {
@@ -56,5 +56,22 @@ const theme: Command = {
     );
   },
 };
+
+// Each theme is also its own flat command (e.g. `/paper`) so the full set shows
+// up in the `/` palette. `theme` above stays as the lister/cycler. Registered
+// via the spread in commands/index.ts.
+export const themeCommands: Command[] = THEMES.map((t) => ({
+  name: t,
+  description: `theme: ${THEME_LABELS[t]}`,
+  run: ({ shell, print }) => {
+    shell.setTheme(t);
+    shell.playSound('select');
+    print(
+      <span className="text-term-dim">
+        theme → <span className="text-term-accent">{t}</span>
+      </span>
+    );
+  },
+}));
 
 export default theme;

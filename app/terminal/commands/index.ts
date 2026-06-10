@@ -1,6 +1,5 @@
 import about from './about';
-import ascii from './ascii';
-import cat from './cat';
+import ascii, { sceneCommands } from './ascii';
 import clear from './clear';
 import contact from './contact';
 import { easterEggs } from './easter-eggs';
@@ -9,15 +8,13 @@ import experience from './experience';
 import games from './games';
 import help from './help';
 import invaders from './invaders';
-import ls from './ls';
 import pong from './pong';
-import projects from './projects';
 import type { Command, CommandRegistry } from './registry';
 import resume from './resume';
 import skills from './skills';
 import snake from './snake';
 import sound from './sound';
-import theme from './theme';
+import theme, { themeCommands } from './theme';
 import whoami from './whoami';
 
 const commands: Command[] = [
@@ -27,18 +24,17 @@ const commands: Command[] = [
   resume,
   experience,
   education,
-  projects,
   skills,
   contact,
-  ls,
-  cat,
   games,
   snake,
   invaders,
   pong,
   sound,
   theme,
+  ...themeCommands,
   ascii,
+  ...sceneCommands,
   clear,
   ...easterEggs,
 ];

@@ -51,4 +51,20 @@ const ascii: Command = {
   },
 };
 
+// Each scene is also exposed as its own flat command (e.g. `/skull`) so the
+// whole scene set shows up in the `/` palette, Claude-Code style. `ascii` above
+// stays as the lister. Registered via the spread in commands/index.ts.
+export const sceneCommands: Command[] = SCENES.map((s) => ({
+  name: s.name,
+  description: `scene: ${s.desc}`,
+  run: ({ shell, print }) => {
+    shell.setStage({ kind: 'scene', scene: s.name });
+    print(
+      <span className="text-term-dim">
+        scene → <span className="text-term-accent">{s.name}</span>
+      </span>
+    );
+  },
+}));
+
 export default ascii;

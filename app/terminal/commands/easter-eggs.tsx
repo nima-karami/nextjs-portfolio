@@ -22,19 +22,6 @@ export const easterEggs: Command[] = [
     },
   },
   {
-    name: 'matrix',
-    description: 'there is no spoon',
-    hidden: true,
-    run: ({ shell, print }) => {
-      shell.setStage({ kind: 'scene', scene: 'matrix' });
-      print(
-        <span className="text-term-green">
-          wake up, Neo… (type <span className="text-term-accent">ascii portrait</span> to return)
-        </span>
-      );
-    },
-  },
-  {
     name: 'vim',
     description: 'how do I exit this thing?',
     hidden: true,
