@@ -178,7 +178,11 @@ function sanitizeHistory(raw: unknown): BetaMessageParam[] {
   for (const item of raw) {
     if (!item || typeof item !== 'object') continue;
     const { role, content } = item as { role?: unknown; content?: unknown };
-    if ((role !== 'user' && role !== 'assistant') || typeof content !== 'string') continue;
+    if (
+      (role !== 'user' && role !== 'assistant') ||
+      typeof content !== 'string'
+    )
+      continue;
     if (!content.trim()) continue;
     out.push({ role, content: content.slice(0, 4000) });
   }
@@ -199,15 +203,17 @@ export async function POST(req: Request) {
 
   const message =
     typeof (payload as { message?: unknown })?.message === 'string'
-      ? ((payload as { message: string }).message).trim()
+      ? (payload as { message: string }).message.trim()
       : '';
-  if (!message) return Response.json({ error: 'empty message' }, { status: 400 });
+  if (!message)
+    return Response.json({ error: 'empty message' }, { status: 400 });
   if (message.length > MAX_MESSAGE_CHARS)
     return Response.json({ error: 'message too long' }, { status: 400 });
 
   const history = sanitizeHistory((payload as { history?: unknown })?.history);
 
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const ip =
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   if (!allow(ip)) {
     return canned(
       "Whoa, you're quick — give me a moment to catch up and try again in a bit.",
@@ -257,8 +263,12 @@ export async function POST(req: Request) {
               messages: conversation,
               // The 2025-11-20 connector revision needs both: mcp_servers declares
               // the connection, and an mcp_toolset in `tools` enables its tools.
-              mcp_servers: [{ type: 'url', url: mcpUrl, name: MCP_SERVER_NAME }],
-              tools: [{ type: 'mcp_toolset', mcp_server_name: MCP_SERVER_NAME }],
+              mcp_servers: [
+                { type: 'url', url: mcpUrl, name: MCP_SERVER_NAME },
+              ],
+              tools: [
+                { type: 'mcp_toolset', mcp_server_name: MCP_SERVER_NAME },
+              ],
               betas: [MCP_BETA],
             },
             { signal: upstream.signal }
@@ -283,7 +293,10 @@ export async function POST(req: Request) {
           const final = await stream.finalMessage();
           // Server-side MCP tool loop hit its cap mid-turn: feed the partial
           // assistant turn back and continue once more. Résumé Q&A rarely reaches it.
-          if (final.stop_reason === 'pause_turn' && pass < MAX_PAUSE_CONTINUATIONS) {
+          if (
+            final.stop_reason === 'pause_turn' &&
+            pass < MAX_PAUSE_CONTINUATIONS
+          ) {
             conversation.push({ role: 'assistant', content: final.content });
             continue;
           }

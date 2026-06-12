@@ -10,7 +10,9 @@ const cat: Command = {
     const target = args[0];
 
     if (!target) {
-      print(<span className="text-term-dim">usage: cat &lt;file&gt; — see ls</span>);
+      print(
+        <span className="text-term-dim">usage: cat &lt;file&gt; — see ls</span>
+      );
       return;
     }
 

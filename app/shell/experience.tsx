@@ -67,7 +67,11 @@ export default function Experience() {
           </AsciiFrame>
         </section>
         <section className="min-h-0 min-w-0 overflow-hidden">
-          <AsciiFrame title={panelTitle} meta={panelMeta} contentClassName="relative">
+          <AsciiFrame
+            title={panelTitle}
+            meta={panelMeta}
+            contentClassName="relative"
+          >
             <RightPanel entered={entered} reduced={reduced} />
           </AsciiFrame>
         </section>

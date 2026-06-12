@@ -28,8 +28,9 @@ export const easterEggs: Command[] = [
     run: ({ print }) => {
       print(
         <span className="text-term-dim">
-          trapped in vim? press <span className="text-term-accent">ESC</span>, type{' '}
-          <span className="text-term-accent">:q!</span> and hit enter. you&apos;re welcome.
+          trapped in vim? press <span className="text-term-accent">ESC</span>,
+          type <span className="text-term-accent">:q!</span> and hit enter.
+          you&apos;re welcome.
         </span>
       );
     },
@@ -53,7 +54,9 @@ export const easterEggs: Command[] = [
     hidden: true,
     run: ({ print }) => {
       print(<pre className="text-term-amber leading-none">{COFFEE}</pre>);
-      print(<span className="text-term-dim">☕ brewed. now back to work.</span>);
+      print(
+        <span className="text-term-dim">☕ brewed. now back to work.</span>
+      );
     },
   },
 ];

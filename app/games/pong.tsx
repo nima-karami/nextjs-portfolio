@@ -9,7 +9,13 @@ import { useRaf } from './use-raf';
 
 const WIN = 7;
 
-export default function Pong({ cols, rows, onExit, playSound, onResult }: GameProps) {
+export default function Pong({
+  cols,
+  rows,
+  onExit,
+  playSound,
+  onResult,
+}: GameProps) {
   const W = cols - 2;
   const H = rows - 2;
   const PADDLE = Math.max(3, Math.min(7, Math.floor(H / 5)));
@@ -142,7 +148,12 @@ export default function Pong({ cols, rows, onExit, playSound, onResult }: GamePr
       s.vy = -Math.abs(s.vy);
     }
 
-    if (s.vx < 0 && s.bx <= 1 && s.by >= s.py - 0.5 && s.by <= s.py + PADDLE + 0.5) {
+    if (
+      s.vx < 0 &&
+      s.bx <= 1 &&
+      s.by >= s.py - 0.5 &&
+      s.by <= s.py + PADDLE + 0.5
+    ) {
       s.bx = 1;
       s.vx = Math.abs(s.vx) * 1.04;
       s.vy += (s.by - (s.py + PADDLE / 2)) * 3;
@@ -187,7 +198,9 @@ export default function Pong({ cols, rows, onExit, playSound, onResult }: GamePr
       title={`pong   you ${pScore} — ${aScore} cpu`}
       hint={
         status === 'over' ? (
-          <span className={pScore > aScore ? 'text-term-green' : 'text-term-amber'}>
+          <span
+            className={pScore > aScore ? 'text-term-green' : 'text-term-amber'}
+          >
             {pScore > aScore ? 'you win' : 'cpu wins'} — R rematch · ESC quit
           </span>
         ) : (

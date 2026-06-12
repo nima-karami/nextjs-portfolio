@@ -36,7 +36,8 @@ const ascii: Command = {
     if (!match) {
       print(
         <span className="text-term-red">
-          unknown scene: {arg}. Try <span className="text-term-accent">ascii</span>.
+          unknown scene: {arg}. Try{' '}
+          <span className="text-term-accent">ascii</span>.
         </span>
       );
       return;

@@ -8,7 +8,8 @@ const whoami: Command = {
     print(
       <p>
         <span className="text-term-accent">{profile.name}</span> —{' '}
-        {profile.title} · <span className="text-term-dim">{profile.location}</span>
+        {profile.title} ·{' '}
+        <span className="text-term-dim">{profile.location}</span>
       </p>
     );
   },

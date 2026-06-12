@@ -5,10 +5,7 @@ import { Suspense, useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import posthog from 'posthog-js';
-import {
-  PostHogProvider as PHProvider,
-  usePostHog,
-} from 'posthog-js/react';
+import { PostHogProvider as PHProvider, usePostHog } from 'posthog-js/react';
 
 const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const posthogHost =

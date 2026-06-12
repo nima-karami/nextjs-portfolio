@@ -21,8 +21,14 @@ function ChatMarkdown({ children }: { children: string }) {
           code: {
             props: { className: 'text-term-accent' },
           },
-          ul: { props: { className: 'mb-2 list-disc space-y-0.5 pl-5 last:mb-0' } },
-          ol: { props: { className: 'mb-2 list-decimal space-y-0.5 pl-5 last:mb-0' } },
+          ul: {
+            props: { className: 'mb-2 list-disc space-y-0.5 pl-5 last:mb-0' },
+          },
+          ol: {
+            props: {
+              className: 'mb-2 list-decimal space-y-0.5 pl-5 last:mb-0',
+            },
+          },
           a: {
             props: {
               className: 'text-term-accent underline underline-offset-2',

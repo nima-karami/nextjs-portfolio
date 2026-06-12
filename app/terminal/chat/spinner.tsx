@@ -22,5 +22,9 @@ export function Spinner() {
     return () => clearInterval(id);
   }, [reduced]);
 
-  return <span className="text-term-accent">{reduced ? FRAMES[0] : FRAMES[frame]}</span>;
+  return (
+    <span className="text-term-accent">
+      {reduced ? FRAMES[0] : FRAMES[frame]}
+    </span>
+  );
 }

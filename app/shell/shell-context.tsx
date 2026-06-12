@@ -1,22 +1,22 @@
 'use client';
 
 import {
+  type ReactNode,
   createContext,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
-  type ReactNode,
 } from 'react';
 
 import { captureEvent } from '../util/analytics';
 import { playTone } from './audio';
 import {
-  THEMES,
   type ShellControls,
   type SoundName,
   type Stage,
+  THEMES,
   type ThemeName,
 } from './types';
 
@@ -29,7 +29,10 @@ export function useShell(): ShellControls {
 }
 
 export function ShellProvider({ children }: { children: ReactNode }) {
-  const [stage, setStageState] = useState<Stage>({ kind: 'scene', scene: 'portrait' });
+  const [stage, setStageState] = useState<Stage>({
+    kind: 'scene',
+    scene: 'portrait',
+  });
   const [theme, setThemeState] = useState<ThemeName>('dark');
   const [soundEnabled, setSoundEnabled] = useState(false);
 
@@ -45,7 +48,11 @@ export function ShellProvider({ children }: { children: ReactNode }) {
   const setStage = useCallback((s: Stage) => {
     setStageState(s);
     if (s.kind === 'scene') {
-      captureEvent('appearance', { kind: 'scene', value: s.scene, via: 'command' });
+      captureEvent('appearance', {
+        kind: 'scene',
+        value: s.scene,
+        via: 'command',
+      });
     }
   }, []);
 
@@ -91,8 +98,20 @@ export function ShellProvider({ children }: { children: ReactNode }) {
       setSound,
       playSound,
     }),
-    [stage, setStage, resetStage, theme, setTheme, cycleTheme, soundEnabled, setSound, playSound]
+    [
+      stage,
+      setStage,
+      resetStage,
+      theme,
+      setTheme,
+      cycleTheme,
+      soundEnabled,
+      setSound,
+      playSound,
+    ]
   );
 
-  return <ShellContext.Provider value={value}>{children}</ShellContext.Provider>;
+  return (
+    <ShellContext.Provider value={value}>{children}</ShellContext.Provider>
+  );
 }

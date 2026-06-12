@@ -5,8 +5,8 @@ import type { ReactNode } from 'react';
 
 import { useShell } from '../shell/shell-context';
 import { captureEvent } from '../util/analytics';
-import { useChat } from './chat/use-chat';
 import StreamLine from './chat/stream-line';
+import { useChat } from './chat/use-chat';
 import { registry } from './commands';
 import { commandCategory } from './commands/category';
 

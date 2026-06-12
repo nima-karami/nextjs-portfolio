@@ -25,8 +25,8 @@ const help: Command = {
           real experience.
         </p>
         <p className="text-term-dim mt-1">
-          Tips: type <span className="text-term-fg">/</span> for the command menu ·{' '}
-          <span className="text-term-fg">↑/↓</span> history ·{' '}
+          Tips: type <span className="text-term-fg">/</span> for the command
+          menu · <span className="text-term-fg">↑/↓</span> history ·{' '}
           <span className="text-term-fg">Tab</span> completes ·{' '}
           <span className="text-term-fg">Ctrl+L</span> clears
         </p>

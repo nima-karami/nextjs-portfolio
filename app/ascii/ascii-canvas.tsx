@@ -1,8 +1,9 @@
 'use client';
 
+import { type ComponentType, Suspense } from 'react';
+
 import { Canvas, useThree } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
-import { Suspense, type ComponentType } from 'react';
 
 import { useShell } from '../shell/shell-context';
 import { ASCII_COLORS } from '../shell/themes';
@@ -47,7 +48,11 @@ function AsciiPass({
   );
 }
 
-export default function AsciiCanvas({ scene = 'portrait' }: { scene?: SceneName }) {
+export default function AsciiCanvas({
+  scene = 'portrait',
+}: {
+  scene?: SceneName;
+}) {
   const { theme } = useShell();
   const Scene = SCENES[scene] ?? PortraitScene;
   const c = ASCII_COLORS[theme];

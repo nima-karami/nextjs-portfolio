@@ -36,7 +36,9 @@ export default function InputLine({ onRun, history, busy }: InputLineProps) {
     afterSlash !== null && !afterSlash.includes(' ') && !dismissed && !busy;
   const prefix = (afterSlash ?? '').toLowerCase();
   const menuItems = menuActive
-    ? Object.values(registry).filter((c) => !c.hidden && c.name.startsWith(prefix))
+    ? Object.values(registry).filter(
+        (c) => !c.hidden && c.name.startsWith(prefix)
+      )
     : [];
   const menuOpen = menuItems.length > 0;
   const sel = menuOpen ? Math.min(menuIndex, menuItems.length - 1) : 0;
@@ -98,7 +100,8 @@ export default function InputLine({ onRun, history, busy }: InputLineProps) {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (history.length === 0) return;
-      const idx = histIndex === null ? history.length - 1 : Math.max(0, histIndex - 1);
+      const idx =
+        histIndex === null ? history.length - 1 : Math.max(0, histIndex - 1);
       setHistIndex(idx);
       setValue(history[idx]);
       return;

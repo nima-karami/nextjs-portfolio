@@ -16,7 +16,12 @@ const VEC: Record<Dir, P> = {
   left: { x: -1, y: 0 },
   right: { x: 1, y: 0 },
 };
-const OPP: Record<Dir, Dir> = { up: 'down', down: 'up', left: 'right', right: 'left' };
+const OPP: Record<Dir, Dir> = {
+  up: 'down',
+  down: 'up',
+  left: 'right',
+  right: 'left',
+};
 
 function spawnFood(snake: P[], w: number, h: number): P {
   let p: P;
@@ -26,7 +31,13 @@ function spawnFood(snake: P[], w: number, h: number): P {
   return p;
 }
 
-export default function Snake({ cols, rows, onExit, playSound, onResult }: GameProps) {
+export default function Snake({
+  cols,
+  rows,
+  onExit,
+  playSound,
+  onResult,
+}: GameProps) {
   const W = cols - 2;
   const H = rows - 2;
   const preRef = useRef<HTMLPreElement>(null);
@@ -50,7 +61,8 @@ export default function Snake({ cols, rows, onExit, playSound, onResult }: GameP
     const grid = createGrid(W, H);
     grid[s.food.y][s.food.x] = '*';
     s.snake.forEach((p, i) => {
-      if (p.y >= 0 && p.y < H && p.x >= 0 && p.x < W) grid[p.y][p.x] = i === 0 ? '@' : 'o';
+      if (p.y >= 0 && p.y < H && p.x >= 0 && p.x < W)
+        grid[p.y][p.x] = i === 0 ? '@' : 'o';
     });
     paint(preRef.current, grid);
   }, [W, H]);
@@ -166,11 +178,15 @@ export default function Snake({ cols, rows, onExit, playSound, onResult }: GameP
       score={score}
       hint={
         status === 'over' ? (
-          <span className="text-term-amber">game over — R restart · ESC quit</span>
+          <span className="text-term-amber">
+            game over — R restart · ESC quit
+          </span>
         ) : started ? (
           'arrows / WASD · ESC to quit'
         ) : (
-          <span className="text-term-accent">press an arrow to start · ESC to quit</span>
+          <span className="text-term-accent">
+            press an arrow to start · ESC to quit
+          </span>
         )
       }
     >

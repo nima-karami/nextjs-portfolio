@@ -1,7 +1,8 @@
 'use client';
 
-import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
+
+import { useFrame } from '@react-three/fiber';
 import type { Mesh } from 'three';
 
 // Ambient scene: a slowly tumbling torus knot. White material so lighting

@@ -39,7 +39,11 @@ type AsciiOptions = {
 };
 
 class AsciiEffectImpl extends Effect {
-  constructor({ columns = 110, color = '#59c2ff', background = '#0a0e14' }: AsciiOptions = {}) {
+  constructor({
+    columns = 110,
+    color = '#59c2ff',
+    background = '#0a0e14',
+  }: AsciiOptions = {}) {
     const { texture, count } = buildGlyphAtlas();
     super('AsciiEffect', fragment, {
       attributes: EffectAttribute.CONVOLUTION,
@@ -57,7 +61,10 @@ class AsciiEffectImpl extends Effect {
   // Keep cells square by deriving the row count from the viewport aspect.
   override setSize(width: number, height: number) {
     const columns = this.uniforms.get('uColumns')!.value as number;
-    this.uniforms.get('uRows')!.value = Math.max(1, Math.round((columns * height) / width));
+    this.uniforms.get('uRows')!.value = Math.max(
+      1,
+      Math.round((columns * height) / width)
+    );
   }
 }
 

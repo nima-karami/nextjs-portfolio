@@ -9,15 +9,14 @@ export type Stage =
   | { kind: 'game'; game: GameName };
 
 export type ThemeName = 'dark' | 'crt-green' | 'crt-amber' | 'paper';
-export const THEMES: readonly ThemeName[] = ['dark', 'crt-green', 'crt-amber', 'paper'];
+export const THEMES: readonly ThemeName[] = [
+  'dark',
+  'crt-green',
+  'crt-amber',
+  'paper',
+];
 
-export type SoundName =
-  | 'shoot'
-  | 'hit'
-  | 'score'
-  | 'die'
-  | 'key'
-  | 'select';
+export type SoundName = 'shoot' | 'hit' | 'score' | 'die' | 'key' | 'select';
 
 // Control surface handed to commands (ctx.shell) so they can drive the panel,
 // theme, and audio.

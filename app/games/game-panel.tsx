@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState, type ComponentType } from 'react';
+import {
+  type ComponentType,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { useShell } from '../shell/shell-context';
 import type { GameName } from '../shell/types';
@@ -43,7 +49,9 @@ export default function GamePanel({ game }: { game: GameName }) {
   const onExit = () => {
     shell.resetStage();
     setTimeout(() => {
-      document.querySelector<HTMLInputElement>('[aria-label="terminal input"]')?.focus();
+      document
+        .querySelector<HTMLInputElement>('[aria-label="terminal input"]')
+        ?.focus();
     }, 0);
   };
 
@@ -56,7 +64,10 @@ export default function GamePanel({ game }: { game: GameName }) {
     if (active instanceof HTMLInputElement) active.blur();
     const w = el.clientWidth;
     const h = el.clientHeight;
-    const cols = Math.max(24, Math.min(120, Math.floor((w - 16) / GAME_CHAR_W)));
+    const cols = Math.max(
+      24,
+      Math.min(120, Math.floor((w - 16) / GAME_CHAR_W))
+    );
     const rows = Math.max(14, Math.min(64, Math.floor((h - 64) / GAME_LINE_H)));
     setDims({ cols, rows });
   }, []);

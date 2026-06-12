@@ -1,9 +1,10 @@
 'use client';
 
+import { useMemo, useRef } from 'react';
+
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
-import { Box3, Vector3, type Group } from 'three';
+import { Box3, type Group, Vector3 } from 'three';
 
 // CC0 skull (Kay Lousberg, poly.pizza). Centered + scaled via a WRAPPER group
 // (so the model's own transforms are preserved), then slowly rotated. Rendered
@@ -21,7 +22,11 @@ export default function SkullScene() {
     const s = 1.7 / maxDim;
     return {
       scale: s,
-      position: [-center.x * s, -center.y * s, -center.z * s] as [number, number, number],
+      position: [-center.x * s, -center.y * s, -center.z * s] as [
+        number,
+        number,
+        number,
+      ],
     };
   }, [scene]);
 

@@ -64,7 +64,11 @@ export function createStreamStore(): StreamStore {
     fail(message) {
       if (state.status !== 'streaming') return;
       // Keep any text already streamed; otherwise show the fallback.
-      set({ status: 'error', tool: null, text: state.text || message || FALLBACK });
+      set({
+        status: 'error',
+        tool: null,
+        text: state.text || message || FALLBACK,
+      });
       settle();
     },
     done,

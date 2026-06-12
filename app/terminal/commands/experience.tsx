@@ -1,7 +1,7 @@
 import { experience } from '../../data/experience';
 import { Md } from './md';
-import { sleep } from './reveal';
 import type { Command } from './registry';
+import { sleep } from './reveal';
 
 const experienceCmd: Command = {
   name: 'experience',
@@ -11,7 +11,9 @@ const experienceCmd: Command = {
       print(
         <div className="mt-3 space-y-1">
           <p>
-            <span className="text-term-accent font-semibold">{job.company}</span>
+            <span className="text-term-accent font-semibold">
+              {job.company}
+            </span>
             <span className="text-term-dim"> — {job.date}</span>
           </p>
           <p className="text-term-fg">{job.position}</p>

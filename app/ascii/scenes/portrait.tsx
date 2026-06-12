@@ -1,8 +1,9 @@
 'use client';
 
+import { useRef } from 'react';
+
 import { useTexture } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
-import { useRef } from 'react';
 import type { Mesh } from 'three';
 
 // The headshot on a viewport-filling plane (cover). Unlit so the photo's own

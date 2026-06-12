@@ -5,7 +5,10 @@ const RAMP = ' .:-=+*#%@';
 
 // Draws the ramp as a horizontal strip of square cells into a canvas texture.
 // The ASCII shader indexes into it by luminance.
-export function buildGlyphAtlas(cell = 64): { texture: Texture; count: number } {
+export function buildGlyphAtlas(cell = 64): {
+  texture: Texture;
+  count: number;
+} {
   const count = RAMP.length;
   const canvas = document.createElement('canvas');
   canvas.width = cell * count;

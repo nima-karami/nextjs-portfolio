@@ -10,7 +10,13 @@ import { useRaf } from './use-raf';
 type Enemy = { x: number; y: number; alive: boolean };
 type Shot = { x: number; y: number };
 
-export default function Invaders({ cols, rows, onExit, playSound, onResult }: GameProps) {
+export default function Invaders({
+  cols,
+  rows,
+  onExit,
+  playSound,
+  onResult,
+}: GameProps) {
   const W = cols - 2;
   const H = rows - 2;
   const PLAYER_Y = H - 1;
@@ -228,9 +234,13 @@ export default function Invaders({ cols, rows, onExit, playSound, onResult }: Ga
       score={score}
       hint={
         status === 'win' ? (
-          <span className="text-term-green">you win — R play again · ESC quit</span>
+          <span className="text-term-green">
+            you win — R play again · ESC quit
+          </span>
         ) : status === 'over' ? (
-          <span className="text-term-amber">game over — R restart · ESC quit</span>
+          <span className="text-term-amber">
+            game over — R restart · ESC quit
+          </span>
         ) : (
           <>
             ←/→ move · space fire · ESC quit · lives{' '}

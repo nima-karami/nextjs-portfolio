@@ -33,13 +33,18 @@ export default function RightPanel({
   const isMatrix = stage.kind === 'scene' && stage.scene === 'matrix';
 
   return (
-    <div className="relative h-full w-full" aria-hidden={isGame ? undefined : true}>
+    <div
+      className="relative h-full w-full"
+      aria-hidden={isGame ? undefined : true}
+    >
       {isGame ? (
         <GamePanel game={stage.game} />
       ) : isMatrix ? (
         <MatrixRain />
       ) : (
-        <AsciiCanvas scene={stage.kind === 'scene' ? stage.scene : 'portrait'} />
+        <AsciiCanvas
+          scene={stage.kind === 'scene' ? stage.scene : 'portrait'}
+        />
       )}
       {!entered && <IntroOverlay reduced={reduced} />}
     </div>

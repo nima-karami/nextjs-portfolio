@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 import { captureEvent } from '../../util/analytics';
-import { createStreamStore, type StreamStore } from './stream-store';
+import { type StreamStore, createStreamStore } from './stream-store';
 
 type ChatTurn = { role: 'user' | 'assistant'; content: string };
 
@@ -64,7 +64,12 @@ export function useChat() {
             buffer = buffer.slice(nl + 1);
             if (!raw) continue;
 
-            let evt: { type: string; text?: string; name?: string; message?: string };
+            let evt: {
+              type: string;
+              text?: string;
+              name?: string;
+              message?: string;
+            };
             try {
               evt = JSON.parse(raw);
             } catch {

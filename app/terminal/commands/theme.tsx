@@ -31,7 +31,8 @@ const theme: Command = {
       if (!shell.themes.includes(arg as ThemeName)) {
         print(
           <span className="text-term-red">
-            unknown theme: {arg}. Try <span className="text-term-accent">theme list</span>.
+            unknown theme: {arg}. Try{' '}
+            <span className="text-term-accent">theme list</span>.
           </span>
         );
         return;

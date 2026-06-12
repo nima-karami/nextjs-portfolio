@@ -12,7 +12,9 @@ const games: Command = {
   run: ({ print }) => {
     print(
       <div className="space-y-1">
-        <p className="text-term-dim">a few games I grew up with — type one to play:</p>
+        <p className="text-term-dim">
+          a few games I grew up with — type one to play:
+        </p>
         <ul className="mt-1 space-y-0.5">
           {LIST.map(([name, desc]) => (
             <li key={name} className="flex gap-3">

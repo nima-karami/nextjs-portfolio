@@ -1,6 +1,6 @@
-import { readFile } from 'node:fs/promises';
-
 import { ImageResponse } from 'next/og';
+
+import { readFile } from 'node:fs/promises';
 
 import { profile } from './data/profile';
 
@@ -40,7 +40,14 @@ export default async function OpengraphImage() {
             <span style={{ color: '#59c2ff' }}>&gt;&nbsp;</span>
             {profile.name.toLowerCase()}
           </div>
-          <div style={{ display: 'flex', fontSize: 32, color: '#59c2ff', marginTop: 18 }}>
+          <div
+            style={{
+              display: 'flex',
+              fontSize: 32,
+              color: '#59c2ff',
+              marginTop: 18,
+            }}
+          >
             {profile.title}
           </div>
           <div
@@ -65,7 +72,9 @@ export default async function OpengraphImage() {
     ),
     {
       ...size,
-      fonts: [{ name: 'JetBrains Mono', data: mono, weight: 400, style: 'normal' }],
+      fonts: [
+        { name: 'JetBrains Mono', data: mono, weight: 400, style: 'normal' },
+      ],
     }
   );
 }

@@ -23,7 +23,8 @@ export default function MatrixRain() {
     let acc = 0;
 
     const css = (v: string, fallback: string) =>
-      getComputedStyle(document.documentElement).getPropertyValue(v).trim() || fallback;
+      getComputedStyle(document.documentElement).getPropertyValue(v).trim() ||
+      fallback;
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();

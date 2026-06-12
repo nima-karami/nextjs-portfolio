@@ -1,6 +1,6 @@
 import { projects } from '../../data/projects';
-import { sleep } from './reveal';
 import type { Command } from './registry';
+import { sleep } from './reveal';
 
 const projectsCmd: Command = {
   name: 'projects',
@@ -10,7 +10,9 @@ const projectsCmd: Command = {
       print(
         <div className="mt-3 space-y-0.5">
           <p>
-            <span className="text-term-accent font-semibold">{project.name}</span>
+            <span className="text-term-accent font-semibold">
+              {project.name}
+            </span>
             {project.wip && <span className="text-term-amber ml-2">[WIP]</span>}
           </p>
           <p className="text-term-fg">{project.description}</p>

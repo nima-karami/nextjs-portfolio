@@ -16,13 +16,25 @@ export const projects: Project[] = [
     name: 'Digital Scratch Cards',
     description:
       'Three accessible, interactive digital scratch cards with custom animations, sound, authentication, and a player lobby. I led a team of seven across frontend and backend.',
-    technologies: ['React', 'TypeScript', 'HeroUI', 'Tailwind CSS', 'Howler.js'],
+    technologies: [
+      'React',
+      'TypeScript',
+      'HeroUI',
+      'Tailwind CSS',
+      'Howler.js',
+    ],
   },
   {
     name: 'Generation Social',
     description:
       'A playful landing page for a social media marketing agency, featuring custom animations, a distinct navbar, and an interactive socials section. I designed and built the site.',
-    technologies: ['Figma', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    technologies: [
+      'Figma',
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Framer Motion',
+    ],
   },
   {
     name: 'Yours Ecommerce Store',

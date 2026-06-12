@@ -1,6 +1,6 @@
 import { profile } from '../../data/profile';
-import { sleep } from './reveal';
 import type { Command } from './registry';
+import { sleep } from './reveal';
 
 const about: Command = {
   name: 'about',

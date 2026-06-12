@@ -5,4 +5,6 @@ const prefersReduced = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export const sleep = (ms: number) =>
-  new Promise<void>((resolve) => setTimeout(resolve, prefersReduced() ? 0 : ms));
+  new Promise<void>((resolve) =>
+    setTimeout(resolve, prefersReduced() ? 0 : ms)
+  );
