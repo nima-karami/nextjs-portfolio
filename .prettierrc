@@ -9,7 +9,7 @@
   "jsxBracketSameLine": false,
   "arrowParens": "always",
   "bracketSpacing": true,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "importOrder": [

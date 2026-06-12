@@ -12,19 +12,17 @@ layer, not a router. Branch `redesign/v2` is the active rebuild (`main` is the o
 ## Commands
 
 ```bash
+npm run verify       # the one gate: format-check + lint + type-check + fallow audit (dead-code/dupes/complexity on changed files) + dep audit
 npm run dev          # Next dev server with Turbopack (http://localhost:3000)
 npm run build        # production build — also the real gate for the R3F/lazy-chunk split
-npm run type-check   # tsc --noEmit
-npm run lint         # eslint (next core-web-vitals + the React Compiler plugin)
-npm run format       # prettier --write . (import sorting + tailwind class sorting)
 ```
 
-There is **no test runner** in this project — verification is `type-check` + `lint` + `build`,
+There is **no test runner** in this project — verification is `npm run verify` + `npm run build`,
 then visual checking on the dev server. Do not add a test framework unasked.
 
-The lint config runs the **React Compiler ESLint rules**, which are strict and the most common
-source of failures here (see "React Compiler constraints" below). Always run `lint` before
-considering work done.
+`verify` runs the **React Compiler ESLint rules**, which are strict and the most common source
+of failures here (see "React Compiler constraints" below). Run it before considering work done.
+(`format`/`lint`/`type-check` still exist as standalone scripts.)
 
 ## Big-picture architecture
 
@@ -34,6 +32,7 @@ The whole app is one client experience mounted from `app/page.tsx`, which render
 subsystems:
 
 ### 1. Shell state — the spine (`app/shell/`)
+
 `ShellProvider` (`shell-context.tsx`) holds the single source of truth: the **stage** (what
 the right panel shows), the **theme**, and **sound** on/off. It exposes `ShellControls`
 (`shell/types.ts`) via `useShell()`. Everything else reads/drives state through this.
@@ -48,8 +47,9 @@ the right panel shows), the **theme**, and **sound** on/off. It exposes `ShellCo
   terminal instead of gliding — keep that stepped feel if you touch it.
 
 ### 2. Terminal engine (`app/terminal/`)
+
 `useTerminal()` (`use-terminal.tsx`) owns the scrollback buffer and history, parses input
-(`name args...`), fires a PostHog `command_run` event, and dispatches to the command registry.
+(`name args...`), fires PostHog `command`/`chat` analytics events, and dispatches to the registry.
 Commands are the extension point:
 
 - A `Command` is `{ name, description, usage?, hidden?, run(ctx) }` (`commands/registry.ts`).
@@ -58,11 +58,13 @@ Commands are the extension point:
   changes the panel/theme/sound, e.g. `snake` calls `ctx.shell.setStage({kind:'game',game:'snake'})`).
 - **To add a command:** create `commands/<name>.tsx` exporting a default `Command`, then
   register it in `commands/index.ts`. Mark `hidden: true` for easter eggs. Content commands
-  (`resume`, `projects`, …) read from `app/data/*`. `ls`/`cat` read a virtual filesystem in
-  `commands/fs.ts`. Output is rich JSX, styled with the `text-term-*` utilities — never
-  hardcode colors.
+  (`resume`, `experience`, …) read from `app/data/*`. Output is rich JSX, styled with the
+  `text-term-*` utilities — never hardcode colors. (`projects`, `ls`, `cat` and the
+  `commands/fs.ts` virtual filesystem still exist but are currently **unregistered/disabled** in
+  `index.ts` — re-add them to the array to bring them back.)
 
 ### 3. ASCII renderer (`app/ascii/`)
+
 The right panel's centerpiece, lazy-loaded client-only (`right-panel.tsx` dynamic-imports it
 with `ssr:false` so `three`/R3F stay out of the base bundle). An R3F `<Canvas>` renders a 3D
 scene, then a **custom post-processing Effect** (`ascii-effect.ts`) asciifies it: the GLSL pass
@@ -75,6 +77,7 @@ a CC0 `.glb` in `public/models/`, `torus`). `matrix` is a separate 2D-canvas eff
 (`matrix-rain.tsx`), not an R3F scene — `right-panel.tsx` branches to it specially.
 
 ### 4. Games (`app/games/`)
+
 Character-grid games (`snake`, `invaders`, `pong`) rendered by writing strings to a `<pre>`'s
 `textContent` on each `requestAnimationFrame` tick (`use-raf.ts`) — not React re-renders.
 Key design points:
@@ -83,9 +86,9 @@ Key design points:
   Compiler constraints) and computes `cols`/`rows` so the **board fills the panel at the
   terminal character size** (more cells, not bigger glyphs). Games receive `cols`/`rows` props
   and derive `W = cols - 2; H = rows - 2`.
-- `game-screen.tsx` exports `GAME_FONT`/`GAME_CHAR_W`/`GAME_LINE_H` — the shared metrics that
-  keep games the same character size as the terminal and ASCII panels. Changing the font there
-  changes the whole cohesion story.
+- `game-screen.tsx` exports `GAME_CHAR_W`/`GAME_LINE_H` (derived from a module-local `GAME_FONT`)
+  — the shared metrics that keep games the same character size as the terminal and ASCII panels.
+  Changing `GAME_FONT` there changes the whole cohesion story.
 - Borders are **ASCII `+ - |` only**. Box-drawing glyphs (`─│┌`) are NOT in JetBrains Mono and
   fall back to a wider font, which misaligns the grid — do not use them.
 
@@ -121,15 +124,15 @@ concern," not a new folder.
 
 ### Where things go (each folder owns one concern)
 
-| Folder | Owns | Add here when… |
-| --- | --- | --- |
-| `app/shell/` | Global state (`ShellProvider`), the boot→split layout, status line, CRT/frame chrome | You're touching app-wide state, the stage/theme/sound surface, or the overall layout |
-| `app/terminal/` | The terminal engine, input/output, history | You're changing how input is parsed, rendered, or dispatched |
-| `app/terminal/commands/` | One file per command | You're adding or editing a command (the main extension point) |
-| `app/ascii/` | The R3F canvas + ASCII post-pass + glyph atlas; `scenes/` holds individual scenes | You're adding a scene or touching the renderer |
-| `app/games/` | The character-grid games and their shared screen/metrics/rAF helpers | You're adding or editing a game |
-| `app/data/` | Plain content data (profile, experience, projects, skills, socials) | You're changing portfolio *content* — never mix data into components |
-| `app/util/` | Cross-feature helpers (`cn`, analytics, generic hooks) | A helper is used by **two or more** features. Single-feature helpers stay in that feature |
+| Folder                   | Owns                                                                                 | Add here when…                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `app/shell/`             | Global state (`ShellProvider`), the boot→split layout, status line, CRT/frame chrome | You're touching app-wide state, the stage/theme/sound surface, or the overall layout      |
+| `app/terminal/`          | The terminal engine, input/output, history                                           | You're changing how input is parsed, rendered, or dispatched                              |
+| `app/terminal/commands/` | One file per command                                                                 | You're adding or editing a command (the main extension point)                             |
+| `app/ascii/`             | The R3F canvas + ASCII post-pass + glyph atlas; `scenes/` holds individual scenes    | You're adding a scene or touching the renderer                                            |
+| `app/games/`             | The character-grid games and their shared screen/metrics/rAF helpers                 | You're adding or editing a game                                                           |
+| `app/data/`              | Plain content data (profile, experience, projects, skills, socials)                  | You're changing portfolio _content_ — never mix data into components                      |
+| `app/util/`              | Cross-feature helpers (`cn`, analytics, generic hooks)                               | A helper is used by **two or more** features. Single-feature helpers stay in that feature |
 
 ### Rules for adding code
 
@@ -144,7 +147,7 @@ concern," not a new folder.
 - **One unit per file, named for the unit.** Commands export a single default `Command`
   (`commands/<name>.tsx`); scenes a single default scene component (`scenes/<name>.tsx`); games
   a single default component (`games/<name>.tsx`). Filenames are `kebab-case`. The registry/
-  index files (`commands/index.ts`) are the *only* place that wires units together.
+  index files (`commands/index.ts`) are the _only_ place that wires units together.
 - **Content lives in `app/data/`, behavior reads it.** Commands and components import from
   `app/data/*`; never hardcode résumé/profile text inline.
 - **Registration is explicit.** New command → also add it to `commands/index.ts`. New scene/game

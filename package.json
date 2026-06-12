@@ -11,7 +11,10 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "type-check": "tsc --noEmit"
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "analyze": "fallow audit",
+    "verify": "prettier --check . && eslint && tsc --noEmit && fallow audit && npm audit --audit-level=high"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.104.0",
@@ -21,8 +24,9 @@
     "@vercel/speed-insights": "1.2.0",
     "clsx": "2.1.1",
     "markdown-to-jsx": "7.7.16",
-    "next": "16.0.10",
+    "next": "16.2.9",
     "posthog-js": "1.378.1",
+    "postprocessing": "6.39.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tailwind-merge": "3.3.1",
@@ -36,7 +40,8 @@
     "@types/react-dom": "19",
     "@types/three": "0.184.1",
     "eslint": "9",
-    "eslint-config-next": "16.0.0",
+    "eslint-config-next": "16.2.9",
+    "fallow": "2.95.0",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "0.7.1",
     "tailwindcss": "4",
