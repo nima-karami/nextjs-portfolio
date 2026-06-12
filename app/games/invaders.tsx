@@ -10,7 +10,7 @@ import { useRaf } from './use-raf';
 type Enemy = { x: number; y: number; alive: boolean };
 type Shot = { x: number; y: number };
 
-export default function Invaders({ cols, rows, onExit, playSound }: GameProps) {
+export default function Invaders({ cols, rows, onExit, playSound, onResult }: GameProps) {
   const W = cols - 2;
   const H = rows - 2;
   const PLAYER_Y = H - 1;
@@ -46,6 +46,7 @@ export default function Invaders({ cols, rows, onExit, playSound }: GameProps) {
     bombAcc: 0,
     cooldown: 0,
     over: false,
+    score: 0,
   });
 
   const draw = useCallback(() => {
@@ -78,6 +79,7 @@ export default function Invaders({ cols, rows, onExit, playSound }: GameProps) {
     s.bombAcc = 0;
     s.cooldown = 0;
     s.over = false;
+    s.score = 0;
     draw();
   }, [W, makeEnemies, draw]);
 
@@ -93,8 +95,9 @@ export default function Invaders({ cols, rows, onExit, playSound }: GameProps) {
       g.current.over = true;
       setStatus(result);
       playSound(result === 'win' ? 'score' : 'die');
+      onResult?.(g.current.score);
     },
-    [playSound]
+    [playSound, onResult]
   );
 
   const loseLife = useCallback(() => {
@@ -160,7 +163,8 @@ export default function Invaders({ cols, rows, onExit, playSound }: GameProps) {
         const hit = s.enemies.find((e) => e.alive && e.x === b.x && e.y === ny);
         if (hit) {
           hit.alive = false;
-          setScore((v) => v + 10);
+          s.score += 10;
+          setScore(s.score);
           playSound('hit');
         } else {
           nextShots.push({ x: b.x, y: ny });

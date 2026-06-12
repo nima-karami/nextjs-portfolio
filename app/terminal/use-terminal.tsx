@@ -8,6 +8,7 @@ import { captureEvent } from '../util/analytics';
 import { useChat } from './chat/use-chat';
 import StreamLine from './chat/stream-line';
 import { registry } from './commands';
+import { commandCategory } from './commands/category';
 
 export type Line = {
   id: number;
@@ -47,7 +48,12 @@ export function useTerminal() {
       const command = name ? registry[name] : undefined;
 
       if (command) {
-        captureEvent('command_run', { command: name, args });
+        captureEvent('command', {
+          status: 'run',
+          command_name: name,
+          command_category: commandCategory(name),
+          command_args: args,
+        });
         await command.run({
           args,
           print: (node) => append('output', node),
@@ -58,8 +64,22 @@ export function useTerminal() {
         return;
       }
 
+      // Unmatched. A leading slash means they aimed for a command that doesn't
+      // exist — a friction signal — but we still route the text to chat.
+      if (trimmed.startsWith('/')) {
+        captureEvent('command', {
+          status: 'miss',
+          command_name: name,
+          command_args: args,
+        });
+      }
+
       // Chat path — the full raw line becomes the message.
-      captureEvent('chat_message', { chars: trimmed.length });
+      captureEvent('chat', {
+        status: 'sent',
+        question_text: trimmed.slice(0, 200),
+        question_chars: trimmed.length,
+      });
       setBusy(true);
       const store = chat.send(trimmed);
       append('output', <StreamLine store={store} />);

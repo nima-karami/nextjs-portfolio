@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from 'react';
 
+import { captureEvent } from '../util/analytics';
 import { playTone } from './audio';
 import {
   THEMES,
@@ -28,7 +29,7 @@ export function useShell(): ShellControls {
 }
 
 export function ShellProvider({ children }: { children: ReactNode }) {
-  const [stage, setStage] = useState<Stage>({ kind: 'scene', scene: 'portrait' });
+  const [stage, setStageState] = useState<Stage>({ kind: 'scene', scene: 'portrait' });
   const [theme, setThemeState] = useState<ThemeName>('dark');
   const [soundEnabled, setSoundEnabled] = useState(false);
 
@@ -38,8 +39,18 @@ export function ShellProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
+  // A user-chosen scene is an `appearance` event; the implicit reset-to-portrait
+  // on game exit is NOT (it isn't a customization choice) — so resetStage writes
+  // state directly, bypassing the instrumented setter.
+  const setStage = useCallback((s: Stage) => {
+    setStageState(s);
+    if (s.kind === 'scene') {
+      captureEvent('appearance', { kind: 'scene', value: s.scene, via: 'command' });
+    }
+  }, []);
+
   const resetStage = useCallback(
-    () => setStage({ kind: 'scene', scene: 'portrait' }),
+    () => setStageState({ kind: 'scene', scene: 'portrait' }),
     []
   );
 
@@ -50,10 +61,14 @@ export function ShellProvider({ children }: { children: ReactNode }) {
       next = THEMES[(i + 1) % THEMES.length];
       return next;
     });
+    captureEvent('appearance', { kind: 'theme', value: next, via: 'cycle' });
     return next;
   }, []);
 
-  const setTheme = useCallback((t: ThemeName) => setThemeState(t), []);
+  const setTheme = useCallback((t: ThemeName) => {
+    setThemeState(t);
+    captureEvent('appearance', { kind: 'theme', value: t, via: 'command' });
+  }, []);
   const setSound = useCallback((on: boolean) => setSoundEnabled(on), []);
 
   const playSound = useCallback(
@@ -76,7 +91,7 @@ export function ShellProvider({ children }: { children: ReactNode }) {
       setSound,
       playSound,
     }),
-    [stage, resetStage, theme, setTheme, cycleTheme, soundEnabled, setSound, playSound]
+    [stage, setStage, resetStage, theme, setTheme, cycleTheme, soundEnabled, setSound, playSound]
   );
 
   return <ShellContext.Provider value={value}>{children}</ShellContext.Provider>;

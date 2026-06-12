@@ -1,4 +1,5 @@
 import { socials } from '../../data/socials';
+import { captureEvent } from '../../util/analytics';
 import type { Command } from './registry';
 
 const links: [string, string, string][] = [
@@ -24,6 +25,9 @@ const contact: Command = {
               href={href}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                captureEvent('link', { link_label: label, link_href: href })
+              }
               className="text-term-fg underline underline-offset-2"
             >
               {text}

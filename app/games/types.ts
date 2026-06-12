@@ -7,4 +7,6 @@ export type GameProps = {
   rows: number;
   onExit: () => void;
   playSound: ShellControls['playSound'];
+  // Called once when the game reaches a final state, with the player's score.
+  onResult?: (score: number) => void;
 };

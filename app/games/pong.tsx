@@ -9,7 +9,7 @@ import { useRaf } from './use-raf';
 
 const WIN = 7;
 
-export default function Pong({ cols, rows, onExit, playSound }: GameProps) {
+export default function Pong({ cols, rows, onExit, playSound, onResult }: GameProps) {
   const W = cols - 2;
   const H = rows - 2;
   const PADDLE = Math.max(3, Math.min(7, Math.floor(H / 5)));
@@ -166,6 +166,7 @@ export default function Pong({ cols, rows, onExit, playSound }: GameProps) {
       if (s.a >= WIN) {
         s.over = true;
         setStatus('over');
+        onResult?.(s.p);
       } else serve(-1);
     } else if (s.bx > W) {
       s.p += 1;
@@ -174,6 +175,7 @@ export default function Pong({ cols, rows, onExit, playSound }: GameProps) {
       if (s.p >= WIN) {
         s.over = true;
         setStatus('over');
+        onResult?.(s.p);
       } else serve(1);
     }
 

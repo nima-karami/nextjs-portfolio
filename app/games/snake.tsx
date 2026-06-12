@@ -26,7 +26,7 @@ function spawnFood(snake: P[], w: number, h: number): P {
   return p;
 }
 
-export default function Snake({ cols, rows, onExit, playSound }: GameProps) {
+export default function Snake({ cols, rows, onExit, playSound, onResult }: GameProps) {
   const W = cols - 2;
   const H = rows - 2;
   const preRef = useRef<HTMLPreElement>(null);
@@ -144,6 +144,7 @@ export default function Snake({ cols, rows, onExit, playSound }: GameProps) {
       s.dead = true;
       setStatus('over');
       playSound('die');
+      onResult?.(s.snake.length - 3);
       return;
     }
 

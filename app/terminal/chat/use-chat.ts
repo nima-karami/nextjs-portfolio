@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef } from 'react';
 
+import { captureEvent } from '../../util/analytics';
 import { createStreamStore, type StreamStore } from './stream-store';
 
 type ChatTurn = { role: 'user' | 'assistant'; content: string };
@@ -27,6 +28,10 @@ export function useChat() {
 
     void (async () => {
       let full = '';
+      let toolUsed: string | null = null;
+      let outcome: 'completed' | 'failed' = 'completed';
+      let failReason: string | undefined;
+      const t0 = performance.now();
       const ctrl = new AbortController();
       const timeout = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
       try {
@@ -38,6 +43,8 @@ export function useChat() {
         });
 
         if (!res.ok || !res.body) {
+          outcome = 'failed';
+          failReason = `http_${res.status}`;
           store.fail();
           return;
         }
@@ -68,8 +75,11 @@ export function useChat() {
               full += evt.text;
               store.pushToken(evt.text);
             } else if (evt.type === 'tool' && evt.name) {
+              toolUsed = evt.name;
               store.setTool(evt.name);
             } else if (evt.type === 'error') {
+              outcome = 'failed';
+              failReason = evt.message ?? 'stream_error';
               store.fail(evt.message);
               return;
             } else if (evt.type === 'done') {
@@ -80,6 +90,8 @@ export function useChat() {
 
         store.finalize();
       } catch {
+        outcome = 'failed';
+        failReason = 'network_or_timeout';
         store.fail(
           full.trim()
             ? undefined
@@ -87,6 +99,13 @@ export function useChat() {
         );
       } finally {
         clearTimeout(timeout);
+        captureEvent('chat', {
+          status: outcome,
+          response_chars: full.length,
+          tool_used: toolUsed,
+          duration_ms: Math.round(performance.now() - t0),
+          ...(outcome === 'failed' ? { fail_reason: failReason } : {}),
+        });
         if (full.trim()) {
           const turns: ChatTurn[] = [
             ...history,

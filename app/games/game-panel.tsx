@@ -1,9 +1,10 @@
 'use client';
 
-import { useCallback, useState, type ComponentType } from 'react';
+import { useCallback, useEffect, useRef, useState, type ComponentType } from 'react';
 
 import { useShell } from '../shell/shell-context';
 import type { GameName } from '../shell/types';
+import { captureEvent } from '../util/analytics';
 import { GAME_CHAR_W, GAME_LINE_H } from './game-screen';
 import Invaders from './invaders';
 import Pong from './pong';
@@ -19,6 +20,25 @@ const GAMES: Partial<Record<GameName, ComponentType<GameProps>>> = {
 export default function GamePanel({ game }: { game: GameName }) {
   const shell = useShell();
   const [dims, setDims] = useState<{ cols: number; rows: number } | null>(null);
+  const startRef = useRef(0);
+
+  // One `game:start` per opened game; resets the clock for duration on over.
+  useEffect(() => {
+    startRef.current = performance.now();
+    captureEvent('game', { status: 'start', game_name: game });
+  }, [game]);
+
+  const onResult = useCallback(
+    (score: number) => {
+      captureEvent('game', {
+        status: 'over',
+        game_name: game,
+        game_score: score,
+        duration_ms: Math.round(performance.now() - startRef.current),
+      });
+    },
+    [game]
+  );
 
   const onExit = () => {
     shell.resetStage();
@@ -51,6 +71,7 @@ export default function GamePanel({ game }: { game: GameName }) {
           rows={dims.rows}
           onExit={onExit}
           playSound={shell.playSound}
+          onResult={onResult}
         />
       ) : null}
     </div>
