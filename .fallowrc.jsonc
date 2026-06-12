@@ -1,0 +1,14 @@
+{
+  // Fallow config — drives `npm run verify` (fallow audit) and `npm run analyze`.
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "health": {
+    // This project has NO test runner, by design (see CLAUDE.md). CRAP score is
+    // complexity x (1 - coverage)^2, so with zero coverage it is mathematically
+    // inflated for every branchy function and is NOT a meaningful gate here.
+    // Neutralize CRAP and gate on raw cyclomatic / cognitive complexity at
+    // standard ceilings instead (matches the values fallow uses by default).
+    "maxCyclomatic": 20,
+    "maxCognitive": 15,
+    "maxCrap": 100000,
+  },
+}

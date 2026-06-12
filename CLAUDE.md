@@ -59,9 +59,7 @@ Commands are the extension point:
 - **To add a command:** create `commands/<name>.tsx` exporting a default `Command`, then
   register it in `commands/index.ts`. Mark `hidden: true` for easter eggs. Content commands
   (`resume`, `experience`, …) read from `app/data/*`. Output is rich JSX, styled with the
-  `text-term-*` utilities — never hardcode colors. (`projects`, `ls`, `cat` and the
-  `commands/fs.ts` virtual filesystem still exist but are currently **unregistered/disabled** in
-  `index.ts` — re-add them to the array to bring them back.)
+  `text-term-*` utilities — never hardcode colors.
 
 ### 3. ASCII renderer (`app/ascii/`)
 

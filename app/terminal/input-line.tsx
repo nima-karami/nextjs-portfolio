@@ -57,59 +57,50 @@ export default function InputLine({ onRun, history, busy }: InputLineProps) {
     inputRef.current?.focus();
   };
 
-  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    // subtle typing click (only audible when `sound on`)
-    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) playSound('key');
-
-    // While the palette is open it owns the arrows/Enter/Tab/Esc.
-    if (menuOpen) {
-      if (e.key === 'ArrowDown') {
+  // While the palette is open it owns the arrows/Enter/Tab/Esc. Returns true if
+  // the key was consumed (so onKeyDown stops).
+  const handlePaletteKey = (e: KeyboardEvent<HTMLInputElement>): boolean => {
+    if (!menuOpen) return false;
+    switch (e.key) {
+      case 'ArrowDown':
         e.preventDefault();
         setMenuIndex(Math.min(sel + 1, menuItems.length - 1));
-        return;
-      }
-      if (e.key === 'ArrowUp') {
+        return true;
+      case 'ArrowUp':
         e.preventDefault();
         setMenuIndex(Math.max(sel - 1, 0));
-        return;
-      }
-      if (e.key === 'Enter') {
+        return true;
+      case 'Enter':
         e.preventDefault();
         runItem(menuItems[sel].name);
-        return;
-      }
-      if (e.key === 'Tab') {
+        return true;
+      case 'Tab':
         e.preventDefault();
         completeItem(menuItems[sel].name);
-        return;
-      }
-      if (e.key === 'Escape') {
+        return true;
+      case 'Escape':
         e.preventDefault();
         setDismissed(true);
-        return;
-      }
+        return true;
+      default:
+        return false;
     }
+  };
 
-    if (e.key === 'Enter') {
-      onRun(value);
-      setValue('');
-      setHistIndex(null);
-      return;
-    }
-
+  // ↑/↓ recall through history when the palette is closed. Returns true if consumed.
+  const handleHistoryKey = (e: KeyboardEvent<HTMLInputElement>): boolean => {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (history.length === 0) return;
+      if (history.length === 0) return true;
       const idx =
         histIndex === null ? history.length - 1 : Math.max(0, histIndex - 1);
       setHistIndex(idx);
       setValue(history[idx]);
-      return;
+      return true;
     }
-
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (histIndex === null) return;
+      if (histIndex === null) return true;
       const idx = histIndex + 1;
       if (idx >= history.length) {
         setHistIndex(null);
@@ -118,19 +109,39 @@ export default function InputLine({ onRun, history, busy }: InputLineProps) {
         setHistIndex(idx);
         setValue(history[idx]);
       }
+      return true;
+    }
+    return false;
+  };
+
+  // Tab-completion of a command name, with or without a leading slash.
+  const completeCommand = () => {
+    const raw = value.trim();
+    if (!raw) return;
+    const slash = raw.startsWith('/');
+    const word = (slash ? raw.slice(1) : raw).toLowerCase();
+    if (!word) return;
+    const matches = Object.keys(registry).filter((n) => n.startsWith(word));
+    if (matches.length === 1) setValue((slash ? '/' : '') + matches[0] + ' ');
+  };
+
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    // subtle typing click (only audible when `sound on`)
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) playSound('key');
+
+    if (handlePaletteKey(e)) return;
+    if (handleHistoryKey(e)) return;
+
+    if (e.key === 'Enter') {
+      onRun(value);
+      setValue('');
+      setHistIndex(null);
       return;
     }
 
     if (e.key === 'Tab') {
       e.preventDefault();
-      const raw = value.trim();
-      if (!raw) return;
-      // Complete the command name whether or not the user led with a slash.
-      const slash = raw.startsWith('/');
-      const word = (slash ? raw.slice(1) : raw).toLowerCase();
-      if (!word) return;
-      const matches = Object.keys(registry).filter((n) => n.startsWith(word));
-      if (matches.length === 1) setValue((slash ? '/' : '') + matches[0] + ' ');
+      completeCommand();
       return;
     }
 
