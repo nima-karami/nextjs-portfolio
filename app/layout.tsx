@@ -16,14 +16,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
   ),
-  title: 'Nima Karami — Design Engineer / Product Engineer',
+  // Trimmed to the first two segments of the positioning line: the whole headline
+  // runs past what a browser tab or a search result will actually show.
+  title: 'Nima Karami · Senior Software Engineer · Full-stack product engineer',
   description:
-    'The terminal portfolio of Nima Karami, a Toronto-based design engineer and product engineer who takes products from ambiguous idea to shipped experience. Type a command to explore — or play a game.',
+    'The terminal portfolio of Nima Karami, a Toronto-based senior software engineer and full-stack product engineer who takes things from ambiguous idea to shipped software. Type a command to explore, or play a game.',
   keywords: [
     'Nima Karami',
-    'Design Engineer',
+    'Senior Software Engineer',
     'Product Engineer',
     'Full-Stack Developer',
+    'Design Engineer',
+    'AI-native',
     'React',
     'Next.js',
     'Toronto',
@@ -31,17 +35,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Nima Karami' }],
   openGraph: {
-    title: 'Nima Karami — terminal portfolio',
+    title: 'Nima Karami · terminal portfolio',
     description:
-      'A Toronto-based design engineer / product engineer. Explore the résumé through an interactive terminal.',
+      'A Toronto-based senior software engineer and full-stack product engineer. Explore the résumé through an interactive terminal.',
     type: 'website',
     siteName: 'Nima Karami',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nima Karami — terminal portfolio',
+    title: 'Nima Karami · terminal portfolio',
     description:
-      'Design Engineer / Product Engineer. Explore via an interactive terminal.',
+      'Senior Software Engineer · Full-stack product engineer · AI-native · Architect by training. Explore via an interactive terminal.',
   },
 };
 

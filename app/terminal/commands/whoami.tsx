@@ -7,7 +7,7 @@ const whoami: Command = {
   run: ({ print }) => {
     print(
       <p>
-        <span className="text-term-accent">{profile.name}</span> —{' '}
+        <span className="text-term-accent">{profile.name}</span> ·{' '}
         {profile.title} ·{' '}
         <span className="text-term-dim">{profile.location}</span>
       </p>
