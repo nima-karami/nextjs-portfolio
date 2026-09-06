@@ -4,7 +4,7 @@
 export const profile = {
   name: 'Nima Karami',
   title:
-    'Senior Software Engineer · Full-stack product engineer · AI-native · Architect by training',
+    'Senior Full-stack Software Engineer · Architect by training',
   location: 'Toronto, Ontario, Canada',
   tagline:
     'Product engineer who takes things from ambiguous idea to shipped software, across the whole stack.',

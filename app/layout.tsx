@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ),
   // Trimmed to the first two segments of the positioning line: the whole headline
   // runs past what a browser tab or a search result will actually show.
-  title: 'Nima Karami · Senior Software Engineer · Full-stack product engineer',
+  title: 'Nima Karami · Senior Full-stack Software Engineer',
   description:
     'The terminal portfolio of Nima Karami, a Toronto-based senior software engineer and full-stack product engineer who takes things from ambiguous idea to shipped software. Type a command to explore, or play a game.',
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Nima Karami · terminal portfolio',
     description:
-      'Senior Software Engineer · Full-stack product engineer · AI-native · Architect by training. Explore via an interactive terminal.',
+      'Senior Full-stack Software Engineer · Architect by training. Explore via an interactive terminal.',
   },
 };
 
