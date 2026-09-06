@@ -3,8 +3,7 @@
 // positioning line and is kept in sync with LinkedIn and the career MCP corpus.
 export const profile = {
   name: 'Nima Karami',
-  title:
-    'Senior Full-stack Software Engineer · Architect by training',
+  title: 'Senior Full-stack Software Engineer · Architect by training',
   location: 'Toronto, Ontario, Canada',
   tagline:
     'Product engineer who takes things from ambiguous idea to shipped software, across the whole stack.',
